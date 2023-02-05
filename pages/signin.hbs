@@ -1,0 +1,50 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link rel='stylesheet' href='../src/style/main.css' />
+    <title>Sign in</title>
+  </head>
+  <body>
+    <div class='page-layout'>
+      <div class='card card_el-1 card-signin'>
+        <div class='card__header'>
+          <h3>Вход</h3>
+        </div>
+        <div class='card__body'>
+          <form class='form-layout'>
+            <div class='field-group'>
+              <label class='form-label' for='login-signin'>Логин</label>
+              <input
+                class='form-element'
+                type='text'
+                name='login'
+                id='login-signin'
+                placeholder='Введите ваш логин'
+              />
+            </div>
+            <div class='field-group'>
+              <label class='form-label' for='login-signin'>Пароль</label>
+              <input
+                class='form-element'
+                type='password'
+                name='password'
+                id='password-signin'
+                placeholder='••••••••••'
+              />
+            </div>
+            <div class='btn-group'>
+              <button
+                type='submit'
+                class='btn btn_regular btn_primary'
+              >Авторизоваться</button>
+              <button class='btn btn_regular btn_link' type='button'>Нет
+                аккаунта?</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

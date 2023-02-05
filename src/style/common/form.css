@@ -1,0 +1,48 @@
+input[type='text'].form-element,
+input[type='password'].form-element,
+input[type='tel'].form-element,
+input[type='search'].form-element,
+input[type='email'].form-element {
+  border: 1px solid transparent;
+  padding: 0.625rem 1rem;
+  line-height: 1.125rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  background-color: #F5F5F5;
+
+  &::placeholder {
+    color: #A3A3A3;
+    font-weight: 400;
+    opacity: 1;
+  }
+   &:focus, &:focus-visible {
+    border: 1px solid #D4D4D4;
+    outline: none;
+  }
+}
+
+form {
+  margin: 0;
+}
+
+.form-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-label {
+  font-size: 0.75rem;
+  color: #737373;
+}
+
+

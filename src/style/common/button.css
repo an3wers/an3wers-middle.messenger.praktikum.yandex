@@ -1,0 +1,52 @@
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  font-weight: 500;
+  gap: 0.25rem;
+  align-items: center;
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  &_regular {
+    padding: .625rem 1rem;
+  }
+
+  &_small {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  &_primary {
+    background-color: #171717;
+    color: #ffffff;
+    line-height: 1.125rem;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &_light {
+    color: #a3a3a3;
+
+    &:hover {
+      background-color: #e5e5e5;
+    }
+  }
+  &_link {
+    background-color: transparent;
+    color: #171717;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
