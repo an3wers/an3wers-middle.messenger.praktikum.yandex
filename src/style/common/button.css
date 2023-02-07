@@ -13,6 +13,12 @@
 
   &_regular {
     padding: .625rem 1rem;
+    line-height: 1.125rem;
+  }
+
+  &_icon {
+    padding: .5rem;
+    line-height: 1;
   }
 
   &_small {
@@ -23,9 +29,18 @@
   &_primary {
     background-color: #171717;
     color: #ffffff;
-    line-height: 1.125rem;
     &:hover {
       opacity: 0.85;
+    }
+  }
+
+  &_secondary {
+    background-color: transparent;
+    color: #171717;
+    border-color: #D4D4D4;
+
+    &:hover {
+      background-color: #FAFAFA;
     }
   }
 
@@ -36,12 +51,16 @@
       background-color: #e5e5e5;
     }
   }
+
   &_link {
     background-color: transparent;
     color: #171717;
     &:hover {
       opacity: 0.85;
     }
+  }
+  &_round-full {
+    border-radius: 9999px;
   }
 }
 

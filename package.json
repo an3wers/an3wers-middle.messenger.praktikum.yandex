@@ -4,19 +4,21 @@
   "description": "---",
   "scripts": {
     "dev": "parcel index.hbs",
-    "build": "parcel build indes.hbs"
+    "build": "parcel build index.hbs",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/an3wers/middle.messenger.praktikum.yandex.git"
   },
-  "author": " <an3wer@yandex.ru>",
+  "author": "Artem Zhuravlev <an3wer@yandex.ru>",
   "license": "ISC",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "parcel": "^2.8.3"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "postcss-nested": "^6.0.0"
   },
   "bugs": {

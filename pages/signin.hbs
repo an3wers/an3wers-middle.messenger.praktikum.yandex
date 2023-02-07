@@ -14,33 +14,11 @@
         </div>
         <div class='card__body'>
           <form class='form-layout'>
-            <div class='field-group'>
-              <label class='form-label' for='login-signin'>Логин</label>
-              <input
-                class='form-element'
-                type='text'
-                name='login'
-                id='login-signin'
-                placeholder='Введите ваш логин'
-              />
-            </div>
-            <div class='field-group'>
-              <label class='form-label' for='login-signin'>Пароль</label>
-              <input
-                class='form-element'
-                type='password'
-                name='password'
-                id='password-signin'
-                placeholder='••••••••••'
-              />
-            </div>
-            <div class='btn-group'>
-              <button
-                type='submit'
-                class='btn btn_regular btn_primary'
-              >Авторизоваться</button>
-              <button class='btn btn_regular btn_link' type='button'>Нет
-                аккаунта?</button>
+              {{> UI/TextField/Field id="login-signin" type="text" label="Логин" name="login" placeholder="Введите ваш логин" }}
+              {{> UI/TextField/Field id="password-signin" type="password" label="Пароль" name="password" placeholder="••••••••••"}}
+            <div class='btn-group mt-2'>
+              {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Авторизоваться"}}
+              {{> UI/Button/Button type="button" style="btn_regular btn_link" label="Нет аккаунта?"}}
             </div>
           </form>
         </div>
