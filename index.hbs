@@ -188,8 +188,24 @@
         </div>
       </div>
       <div class='app-layout__main app-main'>
-        <div class='app-main__empty'>
-          <p class='text-lightgray'>Выберите чат чтобы отправить сообщение</p>
+        <div class="app-main__selected">
+          <div class="app-main__header chat-header">
+            <div class="chat-header__preview">
+              <span class="chat-header__icon chat-header__icon_default"></span>
+            </div>
+            <div class="chat-header__title">Илья</div>
+            <div class="chat-header__edit">
+              <button class="btn btn_icon btn_light">
+                {{> UI/Icons/24/More color="#A3A3A3"}}
+              </button>
+            </div>
+          </div>
+          <div class="app-main__feed chat-feed">
+            <div class="chat-feed__item chat-feed__item_text"></div>
+            <div class="chat-feed__item chat-feed__item_img"></div>
+            <div class="chat-feed__item chat-feed__item_text chat-feed__item_self"></div>
+          </div>
+          <div class="app-main__footer"></div>
         </div>
       </div>
     </div>

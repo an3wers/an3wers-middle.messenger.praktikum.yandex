@@ -6,7 +6,7 @@
 @import './common/card.css';
 @import './modules/menu.css';
 @import './modules/profile.css';
-@import './modules/messenger.css';
+@import './modules/chat.css';
 
 /* Global */
 body {
@@ -49,4 +49,3 @@ h3 {
   align-self: center;
   text-align: center;
 }
-
