@@ -7,6 +7,7 @@
     <title>Sign in</title>
   </head>
   <body>
+    {{> AppMenu}}
     <div class='page-layout'>
       <div class='card card_el-1 card-signin'>
         <div class='card__header'>
@@ -18,7 +19,7 @@
               {{> UI/TextField/Field id="password-signin" type="password" label="Пароль" name="password" placeholder="••••••••••"}}
             <div class='btn-group mt-2'>
               {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Авторизоваться"}}
-              {{> UI/Button/Button type="button" style="btn_regular btn_link" label="Нет аккаунта?"}}
+              <a href="/pages/signup.hbs" class="btn btn_regular btn_link">Нет аккаунта?</a>
             </div>
           </form>
         </div>

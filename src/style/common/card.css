@@ -14,3 +14,15 @@
     text-align: center;
   }
 }
+
+.card-signin {
+  width: 340px;
+  min-width: 340px;
+  align-self: center;
+}
+
+.card-signup {
+  width: 340px;
+  min-width: 340px;
+  align-self: center;
+}

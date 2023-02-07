@@ -4,15 +4,13 @@
   background-color: rgba(169, 169, 169, 0.2);
   top: 0.75rem;
   padding: 0.25rem 0.5rem;
-  left: 50%;
-  width: 320px;
+  right: 3.5rem;
 
   &__list {
     display: flex;
     gap: 0.5rem;
     list-style: none;
     padding: 0;
-    justify-content: space-between;
   }
 
   &__item {

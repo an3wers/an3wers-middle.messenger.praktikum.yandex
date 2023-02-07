@@ -8,11 +8,12 @@
     <title>500</title>
 </head>
 <body>
+    {{> AppMenu}}
     <div class="page-layout">
         <div class="error-container">
             <h1>500</h1>
             <p class="text-large">Мы уже фиксим</p>
-            {{> UI/Button/Button type="button" style="btn_regular btn_secondary mt-4" label="Назад к чатам"}}
+            <a class="btn btn_regular btn_secondary mt-4" href="/">Назад к чатам</a>
         </div>
     </div>
 </body>

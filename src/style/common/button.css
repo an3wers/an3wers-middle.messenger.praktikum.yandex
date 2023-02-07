@@ -10,6 +10,8 @@
   border-radius: 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
+  color: #171717;
+  text-decoration: none;
 
   &_regular {
     padding: .625rem 1rem;

@@ -7,8 +7,9 @@
     <title>Sign up</title>
   </head>
   <body>
+    {{> AppMenu}}
     <div class='page-layout'>
-      <div class='card card_el-1 card-signin'>
+      <div class='card card_el-1 card-signup'>
         <div class='card__header'>
           <h3>Регистрация</h3>
         </div>
@@ -23,7 +24,7 @@
               {{> UI/TextField/Field id="password-to-signup" type="password" label="Пароль (еще раз)" name="password-to" placeholder="••••••••••"}}
             <div class='btn-group mt-2'>
               {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Зарегистрироваться"}}
-              {{> UI/Button/Button type="button" style="btn_regular btn_link" label="Войти"}}
+              <a class="btn btn_regular btn_link" href="/pages/signin.hbs">Войти</a>
             </div>
           </form>
         </div>
