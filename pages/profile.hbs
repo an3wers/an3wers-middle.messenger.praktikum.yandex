@@ -12,51 +12,30 @@
       <div class='profile-sidebar'>
         <div class='profile-sidebar__back'>
           <a href="/" class='btn btn_icon btn_primary btn_round-full'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='#ffffff'
-              height='20'
-              width='20'
-            ><path
-                d='M10 16.083 3.917 10 10 3.917l1.229 1.229L7.25 9.125h8.833v1.75H7.25l3.979 3.979Z'
-              ></path></svg>
+            {{> UI/Icons/20/ArrowBack color='#ffffff'}}
           </a>
         </div>
       </div>
       <div class='profile-main'>
         <div class='profile-container'>
           <div class='profile-header'>
-            <div class='profile-header__avatar'>
+            
+            <div class='profile-header__avatar profile-avatar'>
               <img src="/static/images/default-avatar-profile.jpg" alt="default-avatar">
+              <div class="profile-avatar__overlay">
+                Поменять аватар
+              </div>
             </div>
             <div class='profile-header__name'>Иван</div>
           </div>
           <div class='profile-info'>
             <ul class='profile-info__list'>
-              <li class='profile-info__item'>
-                <span class="profile-info__title">Почта</span>
-                <span class="profile-info__value">pochta@yandex.ru</span>
-              </li>
-              <li class='profile-info__item'>
-                <span class="profile-info__title">Логин</span>
-                <span class="profile-info__value">ivanivanov</span>
-              </li>
-              <li class='profile-info__item'>
-                <span class="profile-info__title">Имя</span>
-                <span class="profile-info__value">Иван</span>
-              </li>
-              <li class='profile-info__item'>
-                <span class="profile-info__title">Фамилия</span>
-                <span class="profile-info__value">Иванов</span>
-              </li>
-              <li class='profile-info__item'>
-                <span class="profile-info__title">Имя в чате</span>
-                <span class="profile-info__value">Иван</span>
-              </li>
-              <li class='profile-info__item'>
-                <span class="profile-info__title">Телефон</span>
-                <span class="profile-info__value">+7 (909) 967-30-30</span>
-              </li>
+              {{#each userProfile}}
+                <li class='profile-info__item'>
+                  <span class="profile-info__title"><strong>{{this.title}}</strong></span>
+                  <span class="profile-info__value">{{this.value}}</span>
+                </li>
+              {{/each}}
             </ul>
           </div>
           <div class='profile-controls'>

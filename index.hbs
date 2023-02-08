@@ -30,155 +30,27 @@
           />
         </div>
         <div class='app-sidebar__contacts contacts-sidebar'>
-          <div class='contacts-sidebar__item contacts-item'>
+          
+          {{#each contacts}}
+          <div class='contacts-sidebar__item contacts-item contacts-item_{{this.isActive}}'>
             <div class='contacts-item__icon'>
               <span class='contacts-item__icon_default'></span>
             </div>
             <div class='contacts-item__body'>
               <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Андрей</div>
-                <div class='contacts-item__date'>10:49</div>
+                <div class='contacts-item__title'>{{this.name}}</div>
+                <div class='contacts-item__date'>{{this.lastMessege.date}}</div>
               </div>
               <div class='contacts-item__content'>
                 <div class='contacts-item__text'>
-                  <span class='text-600 text-base'>Вы:</span>
-                  Стикер
+                  <span class='text-600 text-base contacts-item__isSelf contacts-item__isSelf_{{this.lastMessege.isSelf}}'>Вы:</span>
+                  {{this.lastMessege.text}}
                 </div>
-                <div class='contacts-item__badge'>2</div>
+                <div class='contacts-item__badge contacts-item__badge_{{this.unread.isBadge}}'>{{this.unread.count}}</div>
               </div>
             </div>
           </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Киноклуб</div>
-                <div class='contacts-item__date'>09:35</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  Друзья, у меня для вас особенный выпуск новостей!...
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item contacts-item_selected'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Илья</div>
-                <div class='contacts-item__date'>пн</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  <span class='text-600 text-base'>Вы:</span>
-                  Круто!
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Вадим</div>
-                <div class='contacts-item__date'>ср</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  И Human Interface Guidelines и Material Design рекомендуют...
-                </div>
-                <div class='contacts-item__badge'>6</div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Design Destroyer</div>
-                <div class='contacts-item__date'>пт</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  Миллионы россиян ежедневно проводят десятки часов свое...
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>тет-а-теты</div>
-                <div class='contacts-item__date'>сб</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  Изображение
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>1, 2, 3</div>
-                <div class='contacts-item__date'>вс</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  В 2008 году художник Jon Rafman  начал собирать...
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Day.</div>
-                <div class='contacts-item__date'>20 апр 2022</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  Изображение
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='contacts-sidebar__item contacts-item'>
-            <div class='contacts-item__icon'>
-              <span class='contacts-item__icon_default'></span>
-            </div>
-            <div class='contacts-item__body'>
-              <div class='contacts-item__header'>
-                <div class='contacts-item__title'>Евгений</div>
-                <div class='contacts-item__date'>23 апр 2022</div>
-              </div>
-              <div class='contacts-item__content'>
-                <div class='contacts-item__text'>
-                  <span class='text-600 text-base'>Вы:</span>
-                  Изображение
-                </div>
-              </div>
-            </div>
-          </div>
+          {{/each}}
         </div>
         <div class='app-sidebar__new-chat'>
           <button type='button' class='btn btn_small btn_light'>
@@ -214,7 +86,6 @@
                   </button>
                 </div>
               </div>
-              
             </div>
           </div>
           <div class="app-main__feed chat-feed">
