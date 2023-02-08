@@ -21,11 +21,13 @@
   &_icon {
     padding: .25rem;
     line-height: 1;
+    border-radius: 0.5rem;
   }
 
   &_small {
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
+    line-height: 22px;
   }
 
   &_primary {
@@ -58,8 +60,11 @@
     background-color: transparent;
     color: #171717;
     &:hover {
-      opacity: 0.85;
+      opacity: 0.75;
     }
+  }
+  &_danger {
+    color: #EF4444;
   }
   &_round-full {
     border-radius: 9999px;

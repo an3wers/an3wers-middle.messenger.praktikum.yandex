@@ -2,9 +2,9 @@
   position: fixed;
   border-radius: 9999px;
   background-color: rgba(169, 169, 169, 0.2);
-  top: 0.75rem;
+  top: 1rem;
   padding: 0.25rem 0.5rem;
-  right: 3.5rem;
+  right: 3.75rem;
 
   &__list {
     display: flex;

@@ -7,6 +7,7 @@
 @import './modules/menu.css';
 @import './modules/profile.css';
 @import './modules/chat.css';
+@import './common/dropdown.css';
 
 /* Global */
 body {

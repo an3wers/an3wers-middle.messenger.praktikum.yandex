@@ -64,7 +64,7 @@
               </div>
             </div>
           </div>
-          <div class='contacts-sidebar__item contacts-item'>
+          <div class='contacts-sidebar__item contacts-item contacts-item_selected'>
             <div class='contacts-item__icon'>
               <span class='contacts-item__icon_default'></span>
             </div>
@@ -195,9 +195,26 @@
             </div>
             <div class="chat-header__title">Илья</div>
             <div class="chat-header__edit">
-              <button class="btn btn_icon btn_light">
-                {{> UI/Icons/24/More color="#A3A3A3"}}
-              </button>
+              <div class="dropdown">
+                <button class="btn btn_icon btn_light">
+                  {{> UI/Icons/24/More color="#A3A3A3"}}
+                </button>
+                <div class="dropdown__body dropdown__body_left dropdown__body_bottom">
+                  <button class="dropdown__item btn btn_small btn_link">
+                    <span>{{> UI/Icons/20/Plus color="#171717"}}</span>
+                    Добавить пользователя
+                  </button>
+                  <button class="dropdown__item btn btn_small btn_link">
+                    <span>{{> UI/Icons/20/Edit color="#171717"}}</span>
+                    Редактировать чат
+                  </button>
+                  <button class="dropdown__item btn btn_small btn_link btn_danger">
+                    <span>{{> UI/Icons/20/Delete color="#EF4444"}}</span>
+                    Удалить чат
+                  </button>
+                </div>
+              </div>
+              
             </div>
           </div>
           <div class="app-main__feed chat-feed">
@@ -205,7 +222,38 @@
             <div class="chat-feed__item chat-feed__item_img"></div>
             <div class="chat-feed__item chat-feed__item_text chat-feed__item_self"></div>
           </div>
-          <div class="app-main__footer"></div>
+          <div class="app-main__footer chat-footer">
+            <div class="chat-footer__attach">
+              <div class="dropdown">
+                <button class="btn btn_icon btn_light">
+                {{> UI/Icons/24/Attach color="#A3A3A3"}}
+              </button>
+              <div class="dropdown__body dropdown__body_right dropdown__body_top">
+                <button class="dropdown__item btn btn_small btn_link">
+                    <span>{{> UI/Icons/20/PhotoFile color="#171717"}}</span>
+                    Фото или видео
+                  </button>
+                  <button class="dropdown__item btn btn_small btn_link">
+                    <span>{{> UI/Icons/20/File color="#171717"}}</span>
+                    Файл
+                  </button>
+                  <button class="dropdown__item btn btn_small btn_link">
+                    <span>{{> UI/Icons/20/Location color="#171717"}}</span>
+                    Локация
+                  </button>
+              </div>
+              </div>
+              
+            </div>
+            <div class="chat-footer__input">
+              <input type="text" class="form-element form-element_round-full" placeholder="Сообщение">
+            </div>
+            <div class="chat-footer__send">
+              <button class="btn btn_primary btn_icon btn_round-full">
+                {{> UI/Icons/24/ArrowForward color="#ffffff"}}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

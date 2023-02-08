@@ -1,0 +1,38 @@
+.dropdown {
+  position: relative;
+
+  &__body {
+    display: none;
+    position: absolute;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.12);
+    border-radius: 0.5rem;
+    /* width: 240px; */
+
+    &_right {
+      left: 0;
+    }
+    &_left {
+      right: 0;
+    }
+    &_top {
+      bottom: 34px;
+    }
+    &_bottom {
+      top: 34px;
+    }
+  }
+
+  &__item {
+    white-space: nowrap;
+  }
+
+  &:hover &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+}
