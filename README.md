@@ -1,6 +1,7 @@
 ## Описание
 Приложение мессенджер, проект первого модуля на курсе "Мидл фронтенд-разработчик".\
-Проект пишется на JavaScript и TypeScript, сборка parcel -> webpack, шаблонизатор handlebars.
+Проект пишется на JavaScript и TypeScript, сборка parcel -> webpack, шаблонизатор handlebars.\
+[Макет приложения в фигме](https://www.figma.com/file/p73N28DmfMmzgD87akcncF/YP_Module_1_Messenger?node-id=0%3A1&t=tNHhcvWJ2xAAoIw6-1)
 
 ## Запуск
 `npm i` - установить зависимости в проект\
