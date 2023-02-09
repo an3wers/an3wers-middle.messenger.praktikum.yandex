@@ -1,6 +1,6 @@
 .dropdown {
   position: relative;
-
+  line-height: 1;
   &__body {
     display: none;
     position: absolute;
