@@ -8,6 +8,7 @@
 @import './modules/profile.css';
 @import './modules/chat.css';
 @import './common/dropdown.css';
+@import './common/modal.css';
 
 /* Global */
 body {
@@ -33,6 +34,10 @@ h2 {
 }
 h3 {
   font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.125rem;
 }
 
 /* Page layout */

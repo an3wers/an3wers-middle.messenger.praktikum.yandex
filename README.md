@@ -8,6 +8,5 @@
 `npm run build` - сборка проекта для продакшена\
 `npm run start` - запуск продакшен версии\
 
-## pull request
-
-## Опубликованное проложение
+## Опубликованное приложение
+[Ссылка на netlify](https://famous-queijadas-5c87ae.netlify.app/)

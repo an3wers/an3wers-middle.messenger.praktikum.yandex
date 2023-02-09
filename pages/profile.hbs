@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -39,13 +40,18 @@
             </ul>
           </div>
           <div class='profile-controls'>
-            {{> UI/Button/Button type="button"  style="btn_regular btn_secondary" label="Изменить данные"}}
-            {{> UI/Button/Button type="button"  style="btn_regular btn_secondary" label="Изменить пароль"}}
+            {{> UI/Button/Button type="button" id="btn_edit_profile" style="btn_regular btn_secondary" label="Изменить данные"}}
+            {{> UI/Button/Button type="button" id="btn_edit_password" style="btn_regular btn_secondary" label="Изменить пароль"}}
             {{> UI/Button/Button type="button"  style="btn_regular btn_light" label="Выйти"}}
           </div>
         </div>
-
       </div>
     </div>
+    
+    {{> Modal/ModalEditProfile}}
+    {{> Modal/ModalEditPassword}}
+    
+    <div class="overlay hidden"></div>
+    <script type="module" src="/src/app.js"></script>
   </body>
 </html>
