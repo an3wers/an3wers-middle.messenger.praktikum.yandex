@@ -6,7 +6,7 @@
 `npm i` - установить зависимости в проект\
 `npm run dev` - запуск проекта в dev режиме\
 `npm run build` - сборка проекта для продакшена\
-`npm run start` - запуск продакшен версии\
+`npm run start` - запуск продакшен версии
 
 ## Опубликованное приложение
 [Ссылка на netlify](https://famous-queijadas-5c87ae.netlify.app/)
