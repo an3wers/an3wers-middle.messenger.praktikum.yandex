@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import './common/variables.css';
+@import './common/reboot.css';
+@import './common/button.css';
+@import './common/helpers.css';
+@import './common/form.css';
+@import './common/card.css';
+@import './modules/menu.css';
+@import './modules/profile.css';
+@import './modules/chat.css';
+@import './common/dropdown.css';
+@import './common/modal.css';
+
+/* Global */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--color-base);
+  background-color: var(--color-bg-gray);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+/* Page layout */
+
+.page-layout {
+  padding: 1.25rem;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Error */
+
+.error-container {
+  align-self: center;
+  text-align: center;
+}

@@ -7,10 +7,12 @@
 `npm i` - установить зависимости в проект\
 `npm run dev` - запуск проекта в dev режиме\
 `npm run build` - сборка проекта для продакшена\
-`npm run start` - запуск продакшен версии\
+
+`npm run start` - запуск продакшен версии
 
 ## pull request
 [#1](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/1)
+
 
 ## Опубликованное приложение
 [Ссылка на netlify](https://famous-queijadas-5c87ae.netlify.app/)

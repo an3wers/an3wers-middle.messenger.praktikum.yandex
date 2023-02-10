@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messenger</title>
+  <link rel="stylesheet" href="../src/style/main.css" />
+</head>
+
+<body>
+  {{> AppMenu}}
+  <main class="app-layout">
+    <div class="app-layout__sidebar app-sidebar">
+      <div class="app-sidebar__profile">
+        <a class="btn btn_small btn_light" href="/pages/profile.hbs">
+          {{> UI/Icons/20/Settings style="btn-icon btn-icon_light"}}
+          Профиль
+        </a>
+      </div>
+      <div class="app-sidebar__search search-sidebar">
+        {{> UI/Icons/20/Search style="search-sidebar__icon"}}
+        <input type="search" name="search" class="form-element search-sidebar__input" id="sidebar-search"
+          placeholder="Поиск" />
+      </div>
+      <div class="app-sidebar__contacts contacts-sidebar">
+        {{#each contacts}}
+        <div class="contacts-sidebar__item contacts-item">
+          <div class="contacts-item__icon">
+            <span class="contacts-item__icon_default"></span>
+          </div>
+          <div class="contacts-item__body">
+            <div class="contacts-item__header">
+              <div class="contacts-item__title">{{this.name}}</div>
+              <div class="contacts-item__date">{{this.lastMessege.date}}</div>
+            </div>
+            <div class="contacts-item__content">
+              <div class="contacts-item__text">
+                <span
+                  class="text-600 text-base contacts-item__isSelf contacts-item__isSelf_{{this.lastMessege.isSelf}}">Вы:</span>
+                {{this.lastMessege.text}}
+              </div>
+              <div class="contacts-item__badge contacts-item__badge_{{this.unread.isBadge}}">{{this.unread.count}}</div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <div class="app-sidebar__new-chat">
+        <button type="button" class="btn btn_small btn_light">
+          {{> UI/Icons/20/Plus style="btn-icon btn-icon_light"}}
+          Создать чат
+        </button>
+      </div>
+    </div>
+    <div class="app-layout__main app-main">
+      <div class="app-main__empty">
+        <p class="text-lightgray">Выберите чат чтобы отправить сообщение</p>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

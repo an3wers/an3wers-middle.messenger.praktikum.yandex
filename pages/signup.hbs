@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../src/style/main.css" />
+  <title>Sign up</title>
+</head>
+
+<body>
+  {{> AppMenu}}
+  <main class="page-layout">
+    <div class="card card_el-1 card-signup">
+      <div class="card__header">
+        <h3>Регистрация</h3>
+      </div>
+      <div class="card__body">
+        <form class="form-layout">
+          {{> UI/TextField/Field id="email-signup" type="email" label="Почта" name="email" placeholder="Введите вашу почту" }}
+          {{> UI/TextField/Field id="login-signup" type="text" label="Логин" name="login" placeholder="Придумайте логин"}}
+          {{> UI/TextField/Field id="first-name-signup" type="text" label="Имя" name="first_name" placeholder="Введите ваше имя"}}
+          {{> UI/TextField/Field id="second-name-signup" type="text" label="Фамилия" name="second_name"
+          placeholder="Введите вашу фамилию"}}
+          {{> UI/TextField/Field id="phone-signup" type="tel" label="Телефон" name="phone" placeholder="Например: +7 (999) 123-45-67"}}
+          {{> UI/TextField/Field id="password-signup" type="password" label="Пароль" name="password"
+          placeholder="••••••••••"}}
+          {{> UI/TextField/Field id="password-to-signup" type="password" label="Пароль (еще раз)" name="password-to"
+          placeholder="••••••••••"}}
+          <div class="btn-group mt-2">
+            {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Зарегистрироваться"}}
+            <a class="btn btn_regular btn_link" href="/pages/signin.hbs">Войти</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

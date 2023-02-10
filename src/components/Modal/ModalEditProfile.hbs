@@ -1,0 +1,21 @@
+<div id="modal_edit_profile" class="modal hidden">
+    <div class="modal__header">
+    <button type="button" class="modal__close">
+        {{> UI/Icons/24/Close style="btn-icon btn-icon_light"}}
+    </button>
+    <h4>Изменить данные</h4>
+    </div>
+    <div class="modal__body">
+        <form class='form-layout'>
+              {{> UI/TextField/Field id="email-modal" type="email" label="Почта" value="pochta@yandex.ru" name="email" placeholder="" }}
+              {{> UI/TextField/Field id="login-modal" type="text" label="Логин" value="ivanivanov" name="login" placeholder=""}}
+              {{> UI/TextField/Field id="first-name-modal" type="text" label="Имя" value="Иван" name="first_name" placeholder=""}}
+              {{> UI/TextField/Field id="second-name-modal" type="text" label="Фамилия" value="Иванов" name="second_name" placeholder=""}}
+              {{> UI/TextField/Field id="display-name-modal" type="text" label="Имя в чате" value="Иван" name="display_name" placeholder=""}}
+              {{> UI/TextField/Field id="phone-modal" type="tel" label="Телефон" name="phone" value="+7 (909) 967 30 30" placeholder=""}}
+            <div class='btn-group mt-2'>
+              {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Сохранить"}}
+            </div>
+        </form>
+    </div>
+</div>

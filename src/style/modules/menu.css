@@ -1,0 +1,28 @@
+.menu {
+  position: fixed;
+  border-radius: 9999px;
+  background-color: rgba(169, 169, 169, 0.2);
+  top: 1rem;
+  padding: 0.25rem 0.5rem;
+  right: 3.75rem;
+
+  &__list {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    font-size: 0.75rem;
+    font-weight: 400;
+
+    > a {
+      color: var(--color-text-lightgray);
+      text-decoration: none;
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+.text-lightgray {
+  color: var(--color-text-lightgray) !important;
+}
+
+.text-base {
+  color: var(--color-base) !important;
+}
+
+.text-large {
+  font-size: 1.25rem !important;
+}
+
+.text-gary {
+  color: var(--color-text-gray) !important;
+}
+
+.text-500 {
+  font-weight: 500 !important;
+}
+.text-600 {
+  font-weight: 600 !important;
+}
+.text-700 {
+  font-weight: 700 !important;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mt-4 {
+  margin-top: 4rem;
+}
+
+.hidden {
+  display: none !important;
+}
