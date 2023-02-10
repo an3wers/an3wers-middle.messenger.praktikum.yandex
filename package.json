@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
-    "dev": "parcel index.hbs",
+    "dev": "parcel index.hbs --open",
     "build": "parcel build index.hbs",
     "start": "parcel build index.hbs && node server/server.js"
   },
@@ -14,12 +14,12 @@
   "author": "Artem Zhuravlev <an3wer@yandex.ru>",
   "license": "ISC",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "parcel": "^2.8.3"
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "parcel": "2.8.3"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "postcss-nested": "^6.0.0"
+    "express": "4.18.2",
+    "postcss-nested": "6.0.0"
   },
   "bugs": {
     "url": "https://github.com/an3wers/middle.messenger.praktikum.yandex/issues"

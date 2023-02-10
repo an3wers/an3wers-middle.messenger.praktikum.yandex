@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='UTF-8' />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <link rel='stylesheet' href='../src/style/main.css' />
-    <title>Sign in</title>
-  </head>
-  <body>
-    {{> AppMenu}}
-    <div class='page-layout'>
-      <div class='card card_el-1 card-signin'>
-        <div class='card__header'>
-          <h3>Вход</h3>
-        </div>
-        <div class='card__body'>
-          <form class='form-layout'>
-              {{> UI/TextField/Field id="login-signin" type="text" label="Логин" name="login" placeholder="Введите ваш логин" }}
-              {{> UI/TextField/Field id="password-signin" type="password" label="Пароль" name="password" placeholder="••••••••••"}}
-            <div class='btn-group mt-2'>
-              {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Авторизоваться"}}
-              <a href="/pages/signup.hbs" class="btn btn_regular btn_link">Нет аккаунта?</a>
-            </div>
-          </form>
-        </div>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../src/style/main.css" />
+  <title>Sign in</title>
+</head>
+
+<body>
+  {{> AppMenu}}
+  <main class="page-layout">
+    <div class="card card_el-1 card-signin">
+      <div class="card__header">
+        <h3>Вход</h3>
+      </div>
+      <div class="card__body">
+        <form class="form-layout">
+          {{> UI/TextField/Field id="login-signin" type="text" label="Логин" name="login" placeholder="Введите ваш логин" }}
+          {{> UI/TextField/Field id="password-signin" type="password" label="Пароль" name="password"
+          placeholder="••••••••••"}}
+          <div class="btn-group mt-2">
+            {{> UI/Button/Button type="submit" style="btn_regular btn_primary" label="Авторизоваться"}}
+            <a href="/pages/signup.hbs" class="btn btn_regular btn_link">Нет аккаунта?</a>
+          </div>
+        </form>
       </div>
     </div>
-  </body>
+  </main>
+</body>
+
 </html>

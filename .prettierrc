@@ -1,6 +1,15 @@
 {
   "semi": false,
   "singleQuote": true,
+  "overrides": [
+    {
+      "files": "*.hbs",
+      "options": {
+        "singleQuote": false,
+        "endOfLine": "auto"
+      }
+    }
+  ],
   "arrowParens": "avoid",
   "trailingComma": "none",
   "endOfLine": "auto",

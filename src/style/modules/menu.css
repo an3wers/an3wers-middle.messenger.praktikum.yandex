@@ -18,7 +18,7 @@
     font-weight: 400;
 
     > a {
-      color: #a3a3a3;
+      color: var(--color-text-lightgray);
       text-decoration: none;
       &:hover {
         opacity: 0.75;

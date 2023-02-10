@@ -1,9 +1,9 @@
 .text-lightgray {
-  color: #a3a3a3 !important;
+  color: var(--color-text-lightgray) !important;
 }
 
 .text-base {
-  color: #171717 !important;
+  color: var(--color-base) !important;
 }
 
 .text-large {
@@ -11,7 +11,7 @@
 }
 
 .text-gary {
-  color: #737373 !important;
+  color: var(--color-text-gray) !important;
 }
 
 .text-500 {
@@ -25,7 +25,7 @@
 }
 
 .mt-2 {
-  margin-top: 2rem; 
+  margin-top: 2rem;
 }
 
 .mt-4 {

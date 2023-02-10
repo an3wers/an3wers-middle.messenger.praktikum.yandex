@@ -5,10 +5,10 @@
     display: none;
     position: absolute;
     padding: 1rem;
-    background-color: #ffffff;
+    background-color: var(--color-white);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.12);
     border-radius: 0.5rem;
-    /* width: 240px; */
+    z-index: 5;
 
     &_right {
       left: 0;
@@ -34,5 +34,4 @@
     align-items: flex-start;
     gap: 0.25rem;
   }
-
 }

@@ -6,12 +6,12 @@
   min-height: 100vh;
 
   &__sidebar {
-    border-right: 1px solid #d4d4d4;
+    border-right: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
   }
   &__main {
-    background-color: #ffffff;
+    background-color: var(--color-white);
   }
 }
 
@@ -26,7 +26,7 @@
   &__search {
     position: relative;
     padding: 1rem 1rem;
-    border-bottom: 1px solid #d4d4d4;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .search-sidebar {
@@ -34,9 +34,10 @@
       position: absolute;
       top: 26px;
       left: 26px;
+      fill: var(--color-text-lightgray);
     }
     &__input {
-      background-color: #ededed !important;
+      background-color: var(--color-bg-darkgray) !important;
       padding-left: 40px !important;
     }
   }
@@ -50,7 +51,7 @@
   }
 
   &__new-chat {
-    border-top: 1px solid #d4d4d4;
+    border-top: 1px solid var(--color-border);
     display: flex;
     justify-content: end;
     padding: 0.75rem 1rem;
@@ -58,7 +59,7 @@
   .contacts-sidebar {
     &__item {
       padding: 0.75rem 1rem;
-      border-bottom: 1px solid #d4d4d4;
+      border-bottom: 1px solid var(--color-border);
       display: flex;
       align-items: start;
       gap: 0.75rem;
@@ -75,7 +76,7 @@
           width: 48px;
           height: 48px;
           border-radius: 9999px;
-          background-color: #d9d9d9;
+          background-color: var(--color-bg-darkgray);
         }
       }
       &__body {
@@ -94,7 +95,7 @@
         flex-grow: 1;
       }
       &__date {
-        color: #737373;
+        color: var(--color-text-gray);
         font-size: 0.625rem;
         text-align: right;
       }
@@ -105,7 +106,7 @@
       &__text {
         font-size: 0.75rem;
         flex-grow: 1;
-        color: #737373;
+        color: var(--color-text-gray);
       }
       &__isSelf {
         display: none;
@@ -116,10 +117,10 @@
       }
       &__badge {
         display: none;
-        color: #ffffff;
+        color: var(--color-white);
         line-height: 1;
         padding: 0.25rem 0.375rem;
-        background-color: #171717;
+        background-color: var(--color-base);
         border-radius: 9999px;
         font-size: 0.75rem;
 
@@ -129,7 +130,7 @@
       }
 
       &_active {
-        background-color: #faddb9;
+        background-color: var(--color-lightorange);
       }
     }
   }
@@ -145,7 +146,7 @@
   &__header {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #d4d4d4;
+    border-bottom: 1px solid var(--color-border);
     padding: 0.75rem 1.25rem;
     gap: 1rem;
   }
@@ -157,7 +158,7 @@
   &__footer {
     display: flex;
     align-items: center;
-    border-top: 1px solid #d4d4d4;
+    border-top: 1px solid var(--color-border);
     padding: 0.5rem 1.25rem;
     gap: 1rem;
   }
@@ -181,7 +182,7 @@
     &_default {
       width: 100%;
       height: 100%;
-      background-color: #d9d9d9;
+      background-color: var(--color-bg-darkgray);
       display: block;
       border-radius: 9999px;
     }
@@ -209,7 +210,7 @@
 
   &__date {
     align-self: center;
-    color: #a3a3a3;
+    color: var(--color-text-lightgray);
     font-size: 0.75rem;
     font-weight: 500;
   }
@@ -225,22 +226,22 @@
     min-width: 80px;
 
     &_text {
-      background-color: #F5F5F5;
+      background-color: var(--color-bg-gray);
     }
-    
+
     &_contact {
       align-self: flex-start;
       border-top-left-radius: 0;
     }
-    
+
     &_self {
       align-self: flex-end;
       border-bottom-right-radius: 0;
-      background-color: #FADDB9;
+      background-color: var(--color-lightorange);
     }
 
     &_img {
-      border: 1px solid #EAEAEA;
+      border: 1px solid var(--color-lightborder);
     }
   }
 }
@@ -255,15 +256,13 @@
     align-self: flex-end;
     font-weight: 500;
     display: inline-flex;
-    color:#a3a3a3;
+    color: var(--color-text-lightgray);
 
     &_self {
-      color: #F97316;
+      color: var(--color-orange);
     }
   }
-
-  /* &__item_self &__time{
-    color: #F97316;
-  } */
+  &__icon-check {
+      fill: var(--color-orange);
+  }
 }
-

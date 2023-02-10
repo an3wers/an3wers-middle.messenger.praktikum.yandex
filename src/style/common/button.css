@@ -10,16 +10,16 @@
   border-radius: 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: #171717;
+  color: var(--color-base);
   text-decoration: none;
 
   &_regular {
-    padding: .625rem 1rem;
+    padding: 0.625rem 1rem;
     line-height: 1.125rem;
   }
 
   &_icon {
-    padding: .25rem;
+    padding: 0.25rem;
     line-height: 1;
     border-radius: 0.5rem;
   }
@@ -31,8 +31,8 @@
   }
 
   &_primary {
-    background-color: #171717;
-    color: #ffffff;
+    background-color: var(--color-base);
+    color: var(--color-white);
     &:hover {
       opacity: 0.85;
     }
@@ -40,31 +40,31 @@
 
   &_secondary {
     background-color: transparent;
-    color: #171717;
-    border-color: #D4D4D4;
+    color: var(--color-base);
+    border-color: var(--color-border);
 
     &:hover {
-      background-color: #FAFAFA;
+      background-color: var(--color-bg-lightgray);
     }
   }
 
   &_light {
-    color: #a3a3a3;
+    color: var(--color-text-lightgray);
 
     &:hover {
-      background-color: #e5e5e5;
+      background-color: var(--color-bg-darkgray);
     }
   }
 
   &_link {
     background-color: transparent;
-    color: #171717;
+    color: var(--color-base);
     &:hover {
       opacity: 0.75;
     }
   }
   &_danger {
-    color: #EF4444;
+    color: var(--color-text-red);
   }
   &_round-full {
     border-radius: 9999px;
@@ -75,4 +75,19 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.btn-icon {
+  &_dark {
+    fill: var(--color-base);
+  }
+  &_light {
+    fill: var(--color-text-lightgray);
+  }
+  &_danger {
+    fill: var(--color-text-red);
+  }
+  &_white {
+    fill: var(--color-white);
+  }
 }
