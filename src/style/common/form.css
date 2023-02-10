@@ -7,7 +7,7 @@
   background-color: var(--color-bg-gray);
 
   &::placeholder {
-    color: #a3a3a3;
+    color: var(--color-text-lightgray);
     font-weight: 400;
     opacity: 1;
   }
