@@ -1,4 +1,4 @@
-[
+const data = [
   {
     "name": "Андрей",
     "avatar": "",
@@ -126,3 +126,5 @@
     }
   }
 ]
+
+export default data

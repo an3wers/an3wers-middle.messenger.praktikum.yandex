@@ -1,3 +1,9 @@
+import { renderDom } from "./core/router.ts";
+
+window.addEventListener('DOMContentLoaded', () => {
+    renderDom('#root', 'home')
+})
+
 // import { Modal } from './components/Modal/modal'
 
 // // const Modal = require('./components/Modal/modal')
