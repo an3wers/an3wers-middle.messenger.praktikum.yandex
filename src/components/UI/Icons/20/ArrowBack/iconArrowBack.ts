@@ -1,12 +1,12 @@
 import Block from '../../../../../core/block.ts'
 import template from './template.hbs'
 
-interface IconDeleteProps {
+interface IconArrowBackProps {
   styles?: string
 }
 
-export class IconDelete extends Block {
-  constructor(props: IconDeleteProps) {
+export class IconArrowBack extends Block {
+  constructor(props: IconArrowBackProps) {
     super(props)
   }
   protected render(): DocumentFragment {

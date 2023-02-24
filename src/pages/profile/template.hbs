@@ -1,0 +1,29 @@
+<main class="profile-layout">
+  <div class="profile-sidebar">
+    <div class="profile-sidebar__back">
+      {{{GoBackButton}}}
+    </div>
+  </div>
+  <div class="profile-main">
+    <div class="profile-container">
+
+      <div class="profile-header">
+        {{{ProfileAvatar}}}
+        {{{ProfileName}}}
+      </div>
+
+      <div class="profile-info">
+        {{{ProfileInfo}}}
+      </div>
+
+      <div class="profile-controls">
+        {{{EditProfileButton}}}
+        {{{EditPasswordButton}}}
+        {{{LogoutButton}}}
+      </div>
+    </div>
+  </div>
+  {{!-- {{> Modal/ModalEditProfile}}
+  {{> Modal/ModalEditPassword}} --}}
+  <div class="overlay hidden"></div>
+</main>

@@ -1,10 +1,10 @@
 import { HomePage } from '../pages/home/home.ts'
-// import { AboutPage } from "../pages/About/index";
-
+import { ProfilePage } from '../pages/profile/profile.ts'
 // import Block from './block.ts'
 
 const routes = {
-  home: HomePage
+  home: HomePage,
+  profile: ProfilePage
   //   about: AboutPage,
 }
 

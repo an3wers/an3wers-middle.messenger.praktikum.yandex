@@ -1,5 +1,5 @@
 import Block from '../../../core/block.ts'
-import { Contact } from '../types/types.ts'
+import { Contact } from '../types.ts'
 import template from './temaplte.hbs'
 
 interface ContactsListProps {
