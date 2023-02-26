@@ -6,6 +6,7 @@ import { IconPhotoFile } from '../../UI/Icons/20/PhotoFile/iconPhotoFile.ts'
 import { IconArrowForward } from '../../UI/Icons/24/ArrowForward/iconArrowForward.ts'
 import { IconAttach } from '../../UI/Icons/24/Attach/iconAttach.ts'
 import { Input } from '../../UI/Input/input.ts'
+import { ChatSelectedForm } from '../ChatSelectedForm/chatSelectedForm.ts'
 import template from './template.hbs'
 
 export class ChatSelectedFooter extends Block {
@@ -35,17 +36,9 @@ export class ChatSelectedFooter extends Block {
         styles: 'btn-icon btn-icon_dark'
       })
     })
-    this.children.SendButton = new Button({
-      styles: 'btn btn_primary btn_icon btn_round-full',
-      icon: new IconArrowForward({
-        styles: 'btn-icon btn-icon_white'
-      })
-    })
-    this.children.ChatInput = new Input({
-      styles: 'form-element form-element_round-full',
-      placeholder: 'Сообщение',
-      type: 'text'
-    })
+
+    this.children.ChatForm = new ChatSelectedForm({})
+    
   }
 
   protected render(): DocumentFragment {

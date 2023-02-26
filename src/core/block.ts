@@ -121,9 +121,9 @@ abstract class Block<Props extends { [key: string]: any } = any> {
   private _componentDidMount() {
     this.componentDidMount()
 
-    Object.values(this.children).forEach(child => {
-      child.dispatchComponentDidMount()
-    })
+    // Object.values(this.children).forEach(child => {
+    //   child.dispatchComponentDidMount()
+    // })
   }
 
   protected componentDidMount() {}
@@ -148,12 +148,15 @@ abstract class Block<Props extends { [key: string]: any } = any> {
     return true
   }
 
-  protected setProps = (nextProps: Props) => {
+  public setProps = (nextProps: Props) => {
     if (!nextProps) {
       return
     }
     Object.assign(this.props, nextProps)
   }
+
+  public getProps = () =>  this.props
+  
 
   get element() {
     return this._element

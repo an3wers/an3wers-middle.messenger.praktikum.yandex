@@ -195,6 +195,15 @@
 }
 
 .chat-footer {
+  
+  &__form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-grow: 1;
+
+  }
+  
   &__input {
     flex-grow: 1;
   }

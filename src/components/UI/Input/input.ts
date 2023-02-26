@@ -15,10 +15,11 @@ interface IputProps {
 
 export class Input extends Block {
   constructor(props: IputProps) {
+    props = 'type' in props ? props : {...props, type: 'text'}
     super(props)
   }
 
   protected render(): DocumentFragment {
-    return this.compile(template, { ...this.props, type: 'text' })
+    return this.compile(template, this.props)
   }
 }

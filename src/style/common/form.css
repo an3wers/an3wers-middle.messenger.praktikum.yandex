@@ -5,7 +5,7 @@
   width: 100%;
   border-radius: 0.75rem;
   background-color: var(--color-bg-gray);
-
+ 
   &::placeholder {
     color: var(--color-text-lightgray);
     font-weight: 400;
@@ -19,6 +19,9 @@
 
   &_round-full {
     border-radius: 9999px;
+  }
+  &_error {
+    background-color: var(--color-bg-error);
   }
 }
 
@@ -36,6 +39,13 @@ form {
   flex-direction: column;
   gap: 0.25rem;
   margin-bottom: 1rem;
+
+  &__error-message {
+    font-size: 0.625rem;
+    color: var(--color-text-red);
+    font-weight: 500;
+  }
+
 }
 
 .form-label {

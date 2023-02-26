@@ -1,11 +1,13 @@
 import { HomePage } from '../pages/home/home.ts'
 import { ProfilePage } from '../pages/profile/profile.ts'
-// import Block from './block.ts'
+import { SigninPage } from '../pages/signin/signin.ts'
+import { SignupPage } from '../pages/signup/signup.ts'
 
 const routes = {
   home: HomePage,
-  profile: ProfilePage
-  //   about: AboutPage,
+  profile: ProfilePage,
+  signin: SigninPage,
+  signup: SignupPage
 }
 
 export function renderDom(query: string, block: string) {

@@ -2,18 +2,19 @@ import Block from '../../../core/block.ts'
 import template from './template.hbs'
 
 interface ButtonProps {
-  id?: string,
+  id?: string
   label?: string
   styles: string
   type?: string
   events?: {
-    [key: string]: () => void
+    [key: string]: (e: Event | undefined) => void
   }
   icon?: Block
 }
 
 export class Button extends Block {
   constructor(props: ButtonProps) {
+    props = 'type' in props ? props : { ...props, type: 'button' }
     super(props)
   }
 
@@ -22,6 +23,6 @@ export class Button extends Block {
   // }
 
   protected render(): DocumentFragment {
-    return this.compile(template, { ...this.props, type: 'button' })
+    return this.compile(template, this.props)
   }
 }

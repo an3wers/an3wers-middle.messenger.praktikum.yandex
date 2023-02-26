@@ -9,9 +9,12 @@ import { Button } from '../../components/UI/Button/button.ts'
 import { ChatSelected } from '../../components/Chat/ChatSelected/chatSelected.ts'
 import { Input } from '../../components/UI/Input/input.ts'
 import { renderDom } from '../../core/router.ts'
+import { Navigation } from '../../components/Navigation/navigation.ts'
 
 export class HomePage extends Block {
   protected init(): void {
+    this.children.Navigation = new Navigation({})
+
     this.children.ProfileButton = new Button({
       styles: 'btn btn_small btn_light',
       icon: new IconSettings({ styles: 'btn-icon btn-icon_light' }),
