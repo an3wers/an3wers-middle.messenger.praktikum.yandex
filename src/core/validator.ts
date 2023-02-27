@@ -1,11 +1,3 @@
-// const enum formsNames {
-//   'LOGIN' = 'login',
-//   'PASSWORD' = 'password',
-//   'FIRST_NAME' = 'password',
-//   'SECOND_NAME' = 'password',
-//   'PHONE' = 'password'
-// }
-
 type Value = {
   value: string
   type: string
@@ -18,9 +10,12 @@ const ERROR_MESSAGES: { [key: string]: string } = {
     'Логин должен быть от 3 до 20 символов на латинице, без пробелов, без спецсимволов, может содержать цифры',
   password:
     'Пароль должен быть от 8 до 40 символов, обязательно одна заглавная буква и цифра',
-  first_name: '',
-  second_name: '',
-  phone: ''
+  first_name:
+    'Имя должно быть на латинице или кириллице, первая буква заглавная, без пробелов и цифр',
+  second_name:
+    'Фамилия должна быть на латинице или кириллице, первая буква заглавная, без пробелов и цифр',
+  phone: 'Введите номер телефона правильно',
+  email: 'Введите email правильно'
 }
 
 export class Validator {
@@ -48,30 +43,58 @@ export class Validator {
   private _validateValue(value: string, type: string) {
     switch (type) {
       case 'login':
-        if (value.length < 3 || value.length > 20) {
-          this.errors[type] = ERROR_MESSAGES[type]
-        } else {
+        if (
+          /^[0-9a-zA-Z_-]{3,20}$/.test(value) &&
+          (value.match(/[a-z]/g) || []).length
+        ) {
           delete this.errors[type]
+        } else {
+          this.errors[type] = ERROR_MESSAGES[type]
         }
         break
 
       case 'password':
-        if (value.length < 3 || value.length > 20) {
-          this.errors[type] = ERROR_MESSAGES[type]
-        } else {
+        if (
+          /^[0-9a-zA-Z_-]{8,40}$/.test(value) &&
+          (value.match(/[A-Z]/g) || []).length &&
+          (value.match(/[0-9]/g) || []).length
+        ) {
           delete this.errors[type]
+        } else {
+          this.errors[type] = ERROR_MESSAGES[type]
         }
         break
       case 'email':
+        if (/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(value)) {
+          delete this.errors[type]
+        } else {
+          this.errors[type] = ERROR_MESSAGES[type]
+        }
+
         break
       case 'first_name':
+        if (/^[A-ZА-Я]+[a-zа-я\\-]+$/.test(value)) {
+          delete this.errors[type]
+        } else {
+          this.errors[type] = ERROR_MESSAGES[type]
+        }
+        break
       case 'second_name':
+        if (/^[A-ZА-Я]+[a-zа-я\\-]+$/.test(value)) {
+          delete this.errors[type]
+        } else {
+          this.errors[type] = ERROR_MESSAGES[type]
+        }
         break
 
       case 'phone':
-        break
-
-      case 'message':
+        if (
+          /^((8|\+7)[\\-]?)?(\(?\d{3}\)?[\\- ]?)?[\d\- ]{7,10}$/.test(value)
+        ) {
+          delete this.errors[type]
+        } else {
+          this.errors[type] = ERROR_MESSAGES[type]
+        }
         break
       default:
         this.errors = {}
