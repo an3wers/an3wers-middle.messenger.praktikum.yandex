@@ -1,9 +1,9 @@
-import Block from '../../../core/block.ts'
-import { Button } from '../../UI/Button/button.ts'
-import { IconDelete } from '../../UI/Icons/20/Delete/iconDelete.ts'
-import { IconEdit } from '../../UI/Icons/20/Edit/iconEdit.ts'
-import { IconPlus } from '../../UI/Icons/20/Plus/iconPlus.ts'
-import { IconMore } from '../../UI/Icons/24/More/iconMore.ts'
+import Block from '../../../core/block'
+import { Button } from '../../UI/Button/button'
+import { IconDelete } from '../../UI/Icons/20/Delete/iconDelete'
+import { IconEdit } from '../../UI/Icons/20/Edit/iconEdit'
+import { IconPlus } from '../../UI/Icons/20/Plus/iconPlus'
+import { IconMore } from '../../UI/Icons/24/More/iconMore'
 import template from './template.hbs'
 
 interface ChatSelectedHeaderProps {

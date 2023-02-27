@@ -1,16 +1,17 @@
 import { v4 as makeId } from 'uuid'
 import { TemplateDelegate } from 'handlebars'
-import { EventBus } from './eventBus.ts'
+import { EventBus } from './eventBus'
 
-// interface Props {
-//   [key: string]: any
-// }
+interface Props {
+  [key: string]: any
+}
 
-interface Children {
+interface Children{
   [key: string]: Block
 }
 
-abstract class Block<Props extends { [key: string]: any } = any> {
+// abstract class Block<Props extends { [key: string]: any } = any> {
+abstract class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -24,7 +25,8 @@ abstract class Block<Props extends { [key: string]: any } = any> {
   protected props: Props
   private eventBus: () => EventBus
 
-  constructor(propsAndChildren: { [key: string]: any } = {}) {
+  // constructor(propsAndChildren: { [key: string]: any } = {}) {
+  constructor(propsAndChildren: Props = {}) {
     const eventBus = new EventBus()
     const { children, props } = this._getChildren(propsAndChildren)
 

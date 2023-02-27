@@ -4,9 +4,9 @@
       "es2016": true,
       "node": true
     },
-    "extends": ["airbnb-base", "prettier"],
+    "extends": ["airbnb-base", "prettier", "plugin:import/typescript"],
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint", "prettier"],
+    "plugins": ["@typescript-eslint", "prettier", "import"],
     "rules": {
       "@typescript-eslint/no-unused-vars": 1,
       "no-unused-vars": 1,
@@ -19,7 +19,15 @@
       "no-underscore-dangle":"off",
       "no-use-before-define":"off",
       "no-param-reassign":"off",
-      "no-useless-constructor":"off"
-      // "@typescript-eslint/ban-ts-comment": "off"
+      "no-useless-constructor":"off",
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "ts": "never"
+        }
+     ],
+    "import/no-cycle": [2, { "ignoreExternal": true, "allowImportingTsExtensions": true }]
     }
   }

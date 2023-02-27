@@ -1,4 +1,4 @@
-import Block from '../../../../../core/block.ts'
+import Block from '../../../../../core/block'
 import template from './template.hbs'
 
 interface IconCheckProps {

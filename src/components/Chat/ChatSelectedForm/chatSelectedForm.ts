@@ -1,8 +1,8 @@
-import Block from '../../../core/block.ts'
+import Block from '../../../core/block'
 import template from './template.hbs'
-import { Input } from '../../UI/Input/input.ts'
-import { Button } from '../../UI/Button/button.ts'
-import { IconArrowForward } from '../../UI/Icons/24/ArrowForward/iconArrowForward.ts'
+import { Input } from '../../UI/Input/input'
+import { Button } from '../../UI/Button/button'
+import { IconArrowForward } from '../../UI/Icons/24/ArrowForward/iconArrowForward'
 
 export class ChatSelectedForm extends Block {
   protected init(): void {

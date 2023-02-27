@@ -1,11 +1,21 @@
-import Block from '../../../core/block.ts'
-import { renderDom } from '../../../core/router.ts'
-import { Button } from '../../UI/Button/button.ts'
-import { Input } from '../../UI/Input/input.ts'
-import { TextField } from '../../UI/TextField/textField.ts'
+import Block from '../../../core/block'
+import { renderDom } from '../../../core/router'
+import { Button } from '../../UI/Button/button'
+import { Input } from '../../UI/Input/input'
+import { TextField } from '../../UI/TextField/textField'
+import { Validator } from '../../../core/validator'
 import template from './template.hbs'
 
 export class SignupForm extends Block {
+  private validator: Validator
+  errors: { [key: string]: string }
+
+  constructor(){
+    super()
+    this.validator = new Validator()
+    this.errors = {}
+  }
+
   protected init(): void {
     this.children.EmailField = new TextField({
       for: 'email-signup',
@@ -132,6 +142,32 @@ export class SignupForm extends Block {
         }
       }
     })
+  }
+
+  protected validateHandler(node: HTMLInputElement, field: Block) {
+    const filedName = (field.children.input.getContent() as HTMLInputElement)
+      .name
+
+    const errorContainer = field
+      .getContent()
+      .querySelector('.field-group__error-message')
+
+    const errors = this.validator.validateValue({
+      value: node.value,
+      type: filedName
+    })
+
+    if (filedName in errors) {
+      errorContainer.classList.remove('hidden')
+      errorContainer.textContent = errors[filedName]
+
+      node.classList.add('form-element_error')
+    } else {
+      errorContainer.classList.add('hidden')
+      errorContainer.textContent = ''
+      node.classList.remove('form-element_error')
+    }
+    this.errors = errors
   }
 
   protected render(): DocumentFragment {

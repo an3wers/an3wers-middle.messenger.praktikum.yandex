@@ -1,13 +1,13 @@
-import { Button } from '../../components/UI/Button/button.ts'
-import { IconArrowBack } from '../../components/UI/Icons/20/ArrowBack/iconArrowBack.ts'
-import Block from '../../core/block.ts'
+import { Button } from '../../components/UI/Button/button'
+import { IconArrowBack } from '../../components/UI/Icons/20/ArrowBack/iconArrowBack'
+import Block from '../../core/block'
 import template from './template.hbs'
-import { renderDom } from '../../core/router.ts'
-import { ProfileName } from '../../components/Profile/ProfileName/profileName.ts'
-import { ProfileAvatar } from '../../components/Profile/ProfileAvatar/profileAvatar.ts'
+import { renderDom } from '../../core/router'
+import { ProfileName } from '../../components/Profile/ProfileName/profileName'
+import { ProfileAvatar } from '../../components/Profile/ProfileAvatar/profileAvatar'
 import avatar from '../../../static/images/default-avatar-profile.jpg'
 import profileData from '../../markup/data/userProfile'
-import { ProfileInfo } from '../../components/Profile/ProfileInfo/profileInfo.ts'
+import { ProfileInfo } from '../../components/Profile/ProfileInfo/profileInfo'
 
 export class ProfilePage extends Block {
   /*

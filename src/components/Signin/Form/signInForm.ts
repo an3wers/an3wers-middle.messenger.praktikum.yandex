@@ -1,10 +1,10 @@
-import Block from '../../../core/block.ts'
+import Block from '../../../core/block'
 import template from './temaplet.hbs'
-import { Button } from '../../UI/Button/button.ts'
-import { TextField } from '../../UI/TextField/textField.ts'
-import { Input } from '../../UI/Input/input.ts'
-import { Validator } from '../../../core/validator.ts'
-import { renderDom } from '../../../core/router.ts'
+import { Button } from '../../UI/Button/button'
+import { TextField } from '../../UI/TextField/textField'
+import { Input } from '../../UI/Input/input'
+import { Validator } from '../../../core/validator'
+import { renderDom } from '../../../core/router'
 
 
 export class SigninForm extends Block {

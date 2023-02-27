@@ -1,5 +1,5 @@
-import { SignupForm } from "../../components/Signup/Form/signupForm.ts";
-import Block from "../../core/block.ts";
+import { SignupForm } from "../../components/Signup/Form/signupForm";
+import Block from "../../core/block";
 import template from './template.hbs'
 
 export class SignupPage extends Block {

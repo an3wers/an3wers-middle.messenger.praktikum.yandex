@@ -1,5 +1,5 @@
-import Block from '../../../core/block.ts'
-import { Profile } from '../types.ts'
+import Block from '../../../core/block'
+import { Profile } from '../types'
 import template from './template.hbs'
 
 interface ProfileInfoProps {

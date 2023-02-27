@@ -1,6 +1,5 @@
-import Block from '../../core/block.ts'
-import { renderDom } from '../../core/router.ts'
-// import { Button } from "../UI/Button/button.ts";
+import Block from '../../core/block'
+import { renderDom } from '../../core/router'
 import template from './temaplate.hbs'
 
 export class Navigation extends Block {
