@@ -65,7 +65,7 @@ abstract class Block {
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
   }
 
-  private _getChildren(propsAndChildren: { [key: string]: any }) {
+  private _getChildren(propsAndChildren: Props) {
     const children = {}
     const props = {}
 
@@ -195,12 +195,12 @@ abstract class Block {
     return this.element
   }
 
-  private _makePropsProxy(props: { [key: string]: any }) {
+  private _makePropsProxy(props: Props) {
     // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this
 
     return new Proxy(props, {
-      get(target: { [key: string]: any }, prop: string) {
+      get(target: Props, prop: string) {
         const value = target[prop]
         return typeof value === 'function' ? value.bind(target) : value
       },

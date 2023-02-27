@@ -4,7 +4,7 @@
       "es2016": true,
       "node": true
     },
-    "extends": ["airbnb-base", "prettier", "plugin:import/typescript"],
+    "extends": ["airbnb-base", "prettier", "import/typescript"],
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint", "prettier", "import"],
     "rules": {
@@ -27,7 +27,7 @@
           "js": "never",
           "ts": "never"
         }
-     ],
-    "import/no-cycle": [2, { "ignoreExternal": true, "allowImportingTsExtensions": true }]
+     ]
+    // "import/no-cycle": [2, { "ignoreExternal": true, "allowImportingTsExtensions": true }]
     }
   }

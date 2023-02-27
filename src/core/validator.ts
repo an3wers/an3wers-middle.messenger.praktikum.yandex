@@ -10,6 +10,8 @@ const ERROR_MESSAGES: { [key: string]: string } = {
     'Логин должен быть от 3 до 20 символов на латинице, без пробелов, без спецсимволов, может содержать цифры',
   password:
     'Пароль должен быть от 8 до 40 символов, обязательно одна заглавная буква и цифра',
+  password_to:
+    'Пароли должны совпадать и быть от 8 до 40 символов',
   first_name:
     'Имя должно быть на латинице или кириллице, первая буква заглавная, без пробелов и цифр',
   second_name:
@@ -54,6 +56,7 @@ export class Validator {
         break
 
       case 'password':
+      case 'password_to':
         if (
           /^[0-9a-zA-Z_-]{8,40}$/.test(value) &&
           (value.match(/[A-Z]/g) || []).length &&
@@ -73,12 +76,6 @@ export class Validator {
 
         break
       case 'first_name':
-        if (/^[A-ZА-Я]+[a-zа-я\\-]+$/.test(value)) {
-          delete this.errors[type]
-        } else {
-          this.errors[type] = ERROR_MESSAGES[type]
-        }
-        break
       case 'second_name':
         if (/^[A-ZА-Я]+[a-zа-я\\-]+$/.test(value)) {
           delete this.errors[type]
@@ -86,6 +83,13 @@ export class Validator {
           this.errors[type] = ERROR_MESSAGES[type]
         }
         break
+      // case 'second_name':
+      //   if (/^[A-ZА-Я]+[a-zа-я\\-]+$/.test(value)) {
+      //     delete this.errors[type]
+      //   } else {
+      //     this.errors[type] = ERROR_MESSAGES[type]
+      //   }
+      //   break
 
       case 'phone':
         if (
@@ -97,7 +101,7 @@ export class Validator {
         }
         break
       default:
-        this.errors = {}
+        this.errors = {...this.errors}
         break
     }
   }

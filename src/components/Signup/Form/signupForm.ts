@@ -10,7 +10,7 @@ export class SignupForm extends Block {
   private validator: Validator
   errors: { [key: string]: string }
 
-  constructor(){
+  constructor() {
     super()
     this.validator = new Validator()
     this.errors = {}
@@ -27,7 +27,11 @@ export class SignupForm extends Block {
         type: 'email',
         placeholder: 'Введите вашу почту',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.EmailField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.EmailField)
+          }
         }
       })
     })
@@ -42,7 +46,11 @@ export class SignupForm extends Block {
         type: 'text',
         placeholder: 'Придумайте логин',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.LoginField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.LoginField)
+          }
         }
       })
     })
@@ -57,7 +65,11 @@ export class SignupForm extends Block {
         type: 'text',
         placeholder: 'Введите ваше имя',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.FirstNameField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.FirstNameField)
+          }
         }
       })
     })
@@ -72,7 +84,11 @@ export class SignupForm extends Block {
         type: 'text',
         placeholder: 'Введите вашу фамилию',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.SecondNameField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.SecondNameField)
+          }
         }
       })
     })
@@ -85,9 +101,13 @@ export class SignupForm extends Block {
         id: 'phone-signup',
         styles: 'form-element',
         type: 'tel',
-        placeholder: 'Например: +7 (999) 123-45-67',
+        placeholder: 'Например: +7(999)123-45-67',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.PhoneField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.PhoneField)
+          }
         }
       })
     })
@@ -102,7 +122,11 @@ export class SignupForm extends Block {
         type: 'password',
         placeholder: '••••••••••',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.PasswordField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.PasswordField)
+          }
         }
       })
     })
@@ -111,13 +135,17 @@ export class SignupForm extends Block {
       for: 'password-to-signup',
       label: 'Пароль (еще раз)',
       input: new Input({
-        name: 'password-to',
+        name: 'password_to',
         id: 'password-to-signup',
         styles: 'form-element',
         type: 'password',
         placeholder: '••••••••••',
         events: {
-          blur: () => {}
+          blur: () => {
+            const currInput =
+              this.children.PasswordToField.children.input.getContent() as HTMLInputElement
+            this.validateHandler(currInput, this.children.PasswordToField)
+          }
         }
       })
     })
@@ -148,6 +176,13 @@ export class SignupForm extends Block {
     const filedName = (field.children.input.getContent() as HTMLInputElement)
       .name
 
+    // if(filedName === 'password-to') {
+    //   if(node.value.length && (this.children.PasswordField.children.input.getContent() as HTMLInputElement).value === node.value) {
+
+    //   } else {
+
+    //   }
+    // } else {
     const errorContainer = field
       .getContent()
       .querySelector('.field-group__error-message')
