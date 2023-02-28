@@ -8,31 +8,24 @@ import { ProfileAvatar } from '../../components/Profile/ProfileAvatar/profileAva
 import avatar from '../../../static/images/default-avatar-profile.jpg'
 import profileData from '../../markup/data/userProfile'
 import { ProfileInfo } from '../../components/Profile/ProfileInfo/profileInfo'
+import { Modal } from '../../components/UI/Modal/modal'
+import { FormEditProfile } from '../../components/Profile/FormEditInfo/formEditInfo'
+import { FormEditPassword } from '../../components/Profile/FormEditPassword/formEditPassword'
 
 export class ProfilePage extends Block {
-  /*
-        Кнопка назад
-        Хедер профиля
-        Блок инфо
-        Кнопки
-        Модальное окно редактирования данных профиля
-        Модальное окно изменения пароля
-    */
-
   protected init(): void {
-
     this.children.ProfileAvatar = new ProfileAvatar({ avatar })
-    
-    this.children.ProfileName = new ProfileName({name: 'Иван'})
 
-    this.children.ProfileInfo = new ProfileInfo({profileData})
+    this.children.ProfileName = new ProfileName({ name: 'Иван' })
+
+    this.children.ProfileInfo = new ProfileInfo({ profileData })
 
     this.children.EditProfileButton = new Button({
       label: 'Изменить данные',
       styles: 'btn btn_regular btn_secondary',
       events: {
         click: () => {
-          console.log('Edit profile btn click')
+          this.children.ModalProfile.show()
         }
       }
     })
@@ -41,7 +34,7 @@ export class ProfilePage extends Block {
       styles: 'btn btn_regular btn_secondary',
       events: {
         click: () => {
-          console.log('Edit password btn click')
+          this.children.ModalPassword.show()
         }
       }
     })
@@ -50,7 +43,7 @@ export class ProfilePage extends Block {
       styles: 'btn btn_regular btn_light',
       events: {
         click: () => {
-          console.log('Logout btn click')
+          renderDom('#root', 'signin')
         }
       }
     })
@@ -64,7 +57,25 @@ export class ProfilePage extends Block {
         }
       }
     })
-    
+
+    this.children.ModalProfile = new Modal({
+      title: 'Изменить данные',
+      body: new FormEditProfile({
+        profileData,
+        closeHandler: this.closeModal.bind(this)
+      })
+    })
+
+    this.children.ModalPassword = new Modal({
+      title: 'Изменить пароль',
+      body: new FormEditPassword({
+        closeHandler: this.closeModal.bind(this)
+      })
+    })
+  }
+
+  protected closeModal(modal: string) {
+    this.children[modal].hide()
   }
 
   protected render(): DocumentFragment {

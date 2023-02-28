@@ -1,5 +1,5 @@
-import { SigninForm } from '../../components/Signin/Form/signInForm.ts'
-import Block from '../../core/block.ts'
+import { SigninForm } from '../../components/Signin/Form/signInForm'
+import Block from '../../core/block'
 import template from './template.hbs'
 
 export class SigninPage extends Block {

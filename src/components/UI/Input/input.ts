@@ -3,17 +3,17 @@ import template from './template.hbs'
 
 interface IputProps {
   id?: string
-  styles: string
+  styles?: string
   type?: string
   name?: string
   value?: string
   placeholder?: string,
   events?: {
-    [key: string]: () => void
+    [key: string]: (e: Event | undefined) => void
   }
 }
 
-export class Input extends Block {
+export class Input extends Block<IputProps> {
   constructor(props: IputProps) {
     props = 'type' in props ? props : {...props, type: 'text'}
     super(props)

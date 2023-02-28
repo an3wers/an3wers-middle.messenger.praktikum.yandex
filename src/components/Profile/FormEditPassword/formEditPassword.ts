@@ -1,50 +1,46 @@
 import Block from '../../../core/block'
-import template from './temaplet.hbs'
-import { Button } from '../../UI/Button/button'
-import { TextField } from '../../UI/TextField/textField'
-import { Input } from '../../UI/Input/input'
-import { renderDom } from '../../../core/router'
-import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 import useValidate from '../../../core/validator'
+import { Button } from '../../UI/Button/button'
+import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
+import { Input } from '../../UI/Input/input'
+import { TextField } from '../../UI/TextField/textField'
+import template from './template.hbs'
 
-export class SigninForm extends Block {
+interface FormEditPasswordProps {
+  closeHandler: (value: string) => void
+}
+
+export class FormEditPassword extends Block<FormEditPasswordProps> {
   errors: { [key: string]: string }
-
-  constructor() {
-    super()
+  constructor(props: FormEditPasswordProps) {
+    super(props)
     this.errors = {}
   }
 
   protected init(): void {
-    this.children.LoginField = new TextField({
-      for: 'login-signin',
-      label: 'Логин',
+    this.children.PasswordOldField = new TextField({
+      for: 'password-old-profile-modal',
+      label: 'Старый пароль',
       input: new Input({
-        name: 'login',
-        id: 'login-signin',
+        name: 'password_old',
+        id: 'password-old-profile-modal',
         styles: 'form-element',
-        type: 'text',
-        placeholder: 'Введите ваш логин',
+        type: 'password',
+        placeholder: '••••••••••',
         events: {
-          focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
-          },
-          blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
-          }
+          focus: () => {},
+          blur: () => {}
         }
       }),
       error: new ErrorMessage({ text: null })
     })
 
     this.children.PasswordField = new TextField({
-      for: 'password-signin',
-      label: 'Пароль',
+      for: 'password-profile-modal',
+      label: 'Новый пароль',
       input: new Input({
         name: 'password',
-        id: 'password-signin',
+        id: 'password-profile-modal',
         styles: 'form-element',
         type: 'password',
         placeholder: '••••••••••',
@@ -68,20 +64,43 @@ export class SigninForm extends Block {
       error: new ErrorMessage({ text: null })
     })
 
-    this.children.AuthButton = new Button({
+    this.children.PasswordToField = new TextField({
+      for: 'password-to-profile-modal',
+      label: 'Пароль (еще раз)',
+      input: new Input({
+        name: 'password_to',
+        id: 'password-to-profile-modal',
+        styles: 'form-element',
+        type: 'password',
+        placeholder: '••••••••••',
+        events: {
+          focus: e => {
+            const name = (e.target as HTMLInputElement).name
+            this.validateHandler(
+              this.getValue(name),
+              this.children.PasswordToField
+            )
+          },
+          blur: e => {
+            const name = (e.target as HTMLInputElement).name
+            this.validateHandler(
+              this.getValue(name),
+              this.children.PasswordToField
+            )
+          }
+        }
+      }),
+      error: new ErrorMessage({ text: null })
+    })
+
+    this.children.SaveButton = new Button({
       styles: 'btn btn_regular btn_primary',
-      label: 'Авторизоваться',
+      label: 'Сохранить',
       type: 'submit',
       events: {
         click: (e: Event) => {
           e.preventDefault()
-
           const data = {}
-
-          // const login =
-          //   this.children.LoginField.children.input.getContent() as HTMLInputElement
-          // const password =
-          //   this.children.PasswordField.children.input.getContent() as HTMLInputElement
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
@@ -99,26 +118,13 @@ export class SigninForm extends Block {
             data[name] = value
           })
 
+          this.validatePasswordValues(data['password'], data['password_to'])
+
           if (!Object.keys(this.errors).length) {
             console.log(data)
-            filedsArray.forEach(
-              el =>
-                ((el[1].children.input.getContent() as HTMLInputElement).value =
-                  '')
-            )
-            // login.value = ''
-            // password.value = ''
+            this.props.closeHandler('ModalPassword')
           }
-        }
-      }
-    })
-    this.children.RegisterButton = new Button({
-      styles: 'btn btn_regular btn_link',
-      label: 'Нет аккаунта?',
-      type: 'button',
-      events: {
-        click: () => {
-          renderDom('#root', 'signup')
+
         }
       }
     })
@@ -140,6 +146,20 @@ export class SigninForm extends Block {
     } else {
       field.children.error.setProps({ text: null })
       delete this.errors[fieldName]
+    }
+  }
+
+  private validatePasswordValues(pswOne: string, pswTwo: string) {
+    if (pswOne !== pswTwo) {
+      this.errors['password_to'] = 'Пароли должны совпадать'
+      this.children.PasswordToField.children.error.setProps({
+        text: this.errors['password_to']
+      })
+    } else {
+      this.children.PasswordToField.children.error.setProps({
+        text: null
+      })
+      delete this.errors['password_to']
     }
   }
 

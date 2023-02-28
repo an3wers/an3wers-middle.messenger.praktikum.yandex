@@ -1,7 +1,7 @@
 {
     "env": {
       "browser": true,
-      "es2016": true,
+      "es2019": true,
       "node": true
     },
     "extends": ["airbnb-base", "prettier", "import/typescript"],

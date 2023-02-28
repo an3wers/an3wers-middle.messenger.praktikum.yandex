@@ -12,15 +12,11 @@ interface ButtonProps {
   icon?: Block
 }
 
-export class Button extends Block {
+export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     props = 'type' in props ? props : { ...props, type: 'button' }
     super(props)
   }
-
-  // protected componentDidMount(): void {
-  //     console.log(this.getContent)
-  // }
 
   protected render(): DocumentFragment {
     return this.compile(template, this.props)

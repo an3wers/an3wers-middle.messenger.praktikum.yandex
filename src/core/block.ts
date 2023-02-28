@@ -2,16 +2,15 @@ import { v4 as makeId } from 'uuid'
 import { TemplateDelegate } from 'handlebars'
 import { EventBus } from './eventBus'
 
-interface Props {
-  [key: string]: any
-}
+// interface Props {
+//   [key: string]: any
+// }
 
-interface Children{
+interface Children {
   [key: string]: Block
 }
 
-// abstract class Block<Props extends { [key: string]: any } = any> {
-abstract class Block {
+abstract class Block<P extends { [key: string]: any } = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -22,11 +21,10 @@ abstract class Block {
   private _element: HTMLElement | null = null
   public id: string
   public children: Children
-  protected props: Props
+  protected props: P
   private eventBus: () => EventBus
 
-  // constructor(propsAndChildren: { [key: string]: any } = {}) {
-  constructor(propsAndChildren: Props = {}) {
+  constructor(propsAndChildren: P = {} as P) {
     const eventBus = new EventBus()
     const { children, props } = this._getChildren(propsAndChildren)
 
@@ -43,7 +41,6 @@ abstract class Block {
   }
 
   private _removeEvent() {
-
     const { events = {} } = this.props
 
     Object.keys(events).forEach(eventName => {
@@ -65,7 +62,7 @@ abstract class Block {
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
   }
 
-  private _getChildren(propsAndChildren: Props) {
+  private _getChildren(propsAndChildren: P) {
     const children = {}
     const props = {}
 
@@ -88,7 +85,7 @@ abstract class Block {
 
   protected init() {}
   // (context: any) => string
-  protected compile(template: TemplateDelegate, context: Props) {
+  protected compile(template: TemplateDelegate, context: any) {
     // contextAndStubs пропсы и временные загушки
     // все это нужно для того чтобы сохранить события на элементах
     const contextAndStubs = { ...context } as { [key: string]: any }
@@ -138,7 +135,7 @@ abstract class Block {
     )
   }
 
-  private _componentDidUpdate(oldProps: Props, newProps: Props) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps)
     if (!response) {
       return
@@ -146,19 +143,18 @@ abstract class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
 
-  protected componentDidUpdate(oldProps: Props, newProps: Props) {
+  protected componentDidUpdate(oldProps: P, newProps: P) {
     return true
   }
 
-  public setProps = (nextProps: Props) => {
+  public setProps = (nextProps: P) => {
     if (!nextProps) {
       return
     }
     Object.assign(this.props, nextProps)
   }
 
-  public getProps = () =>  this.props
-  
+  public getProps = () => this.props
 
   get element() {
     return this._element
@@ -195,12 +191,12 @@ abstract class Block {
     return this.element
   }
 
-  private _makePropsProxy(props: Props) {
+  private _makePropsProxy(props: any) {
     // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this
 
     return new Proxy(props, {
-      get(target: Props, prop: string) {
+      get(target: P, prop: any) {
         const value = target[prop]
         return typeof value === 'function' ? value.bind(target) : value
       },
@@ -211,7 +207,7 @@ abstract class Block {
 
         const oldTarget = { ...target }
 
-        target[prop] = value
+        target[prop as keyof P] = value
 
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
         return true
@@ -219,7 +215,7 @@ abstract class Block {
       deleteProperty() {
         throw new Error('Отказано в доступе')
       }
-    }) as Props
+    }) as P
   }
 
   private _createDocumentElement(tagName: string) {

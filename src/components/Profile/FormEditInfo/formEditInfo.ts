@@ -1,30 +1,35 @@
 import Block from '../../../core/block'
-import { renderDom } from '../../../core/router'
+import useValidate from '../../../core/validator'
 import { Button } from '../../UI/Button/button'
+import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 import { Input } from '../../UI/Input/input'
 import { TextField } from '../../UI/TextField/textField'
+import { Profile } from '../types'
 import template from './template.hbs'
-import useValidate from '../../../core/validator'
-import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 
-export class SignupForm extends Block {
+interface FormEditProfileProps {
+  profileData: Profile[],
+  closeHandler: (value: string) => void
+}
+
+export class FormEditProfile extends Block<FormEditProfileProps> {
   errors: { [key: string]: string }
-
-  constructor() {
-    super()
+  constructor(props: FormEditProfileProps) {
+    super(props)
     this.errors = {}
   }
 
   protected init(): void {
     this.children.EmailField = new TextField({
-      for: 'email-signup',
+      for: 'email-profile-modal',
       label: 'Почта',
       input: new Input({
         name: 'email',
-        id: 'email-signup',
+        id: 'email-profile-modal',
         styles: 'form-element',
         type: 'email',
         placeholder: 'Введите вашу почту',
+        value: this.getValueByFiledName('email'),
         events: {
           focus: e => {
             const name = (e.target as HTMLInputElement).name
@@ -40,14 +45,15 @@ export class SignupForm extends Block {
     })
 
     this.children.LoginField = new TextField({
-      for: 'login-signup',
+      for: 'login-profile-modal',
       label: 'Логин',
       input: new Input({
         name: 'login',
-        id: 'login-signup',
+        id: 'login-profile-modal',
         styles: 'form-element',
         type: 'text',
         placeholder: 'Придумайте логин',
+        value: this.getValueByFiledName('login'),
         events: {
           focus: e => {
             const name = (e.target as HTMLInputElement).name
@@ -63,14 +69,15 @@ export class SignupForm extends Block {
     })
 
     this.children.FirstNameField = new TextField({
-      for: 'first-name-signup',
+      for: 'first-name-profile-modal',
       label: 'Имя',
       input: new Input({
         name: 'first_name',
-        id: 'first-name-signup',
+        id: 'first-name-profile-modal',
         styles: 'form-element',
         type: 'text',
         placeholder: 'Введите ваше имя',
+        value: this.getValueByFiledName('first_name'),
         events: {
           focus: e => {
             const name = (e.target as HTMLInputElement).name
@@ -92,14 +99,45 @@ export class SignupForm extends Block {
     })
 
     this.children.SecondNameField = new TextField({
-      for: 'second-name-signup',
+      for: 'second-name-profile-modal',
       label: 'Фамилия',
       input: new Input({
         name: 'second_name',
-        id: 'second-name-signup',
+        id: 'second-name-profile-modal',
         styles: 'form-element',
         type: 'text',
         placeholder: 'Введите вашу фамилию',
+        value: this.getValueByFiledName('second_name'),
+        events: {
+          focus: e => {
+            const name = (e.target as HTMLInputElement).name
+            this.validateHandler(
+              this.getValue(name),
+              this.children.SecondNameField
+            )
+          },
+          blur: e => {
+            const name = (e.target as HTMLInputElement).name
+            this.validateHandler(
+              this.getValue(name),
+              this.children.SecondNameField
+            )
+          }
+        }
+      }),
+      error: new ErrorMessage({ text: null })
+    })
+
+    this.children.DisplayNameField = new TextField({
+      for: 'display-name-profile-modal',
+      label: 'Имя в чате',
+      input: new Input({
+        name: 'display_name',
+        id: 'display-name-profile-modal',
+        styles: 'form-element',
+        type: 'text',
+        value: this.getValueByFiledName('display_name'),
+        placeholder: 'Введите ваше имя в чате',
         events: {
           focus: e => {
             const name = (e.target as HTMLInputElement).name
@@ -121,14 +159,15 @@ export class SignupForm extends Block {
     })
 
     this.children.PhoneField = new TextField({
-      for: 'phone-signup',
+      for: 'phone-profile-modal',
       label: 'Телефон',
       input: new Input({
         name: 'phone',
-        id: 'phone-signup',
+        id: 'phone-profile-modal',
         styles: 'form-element',
         type: 'tel',
         placeholder: 'Например: +7(999)123-45-67',
+        value: this.getValueByFiledName('phone'),
         events: {
           focus: e => {
             const name = (e.target as HTMLInputElement).name
@@ -143,71 +182,14 @@ export class SignupForm extends Block {
       error: new ErrorMessage({ text: null })
     })
 
-    this.children.PasswordField = new TextField({
-      for: 'password-signup',
-      label: 'Пароль',
-      input: new Input({
-        name: 'password',
-        id: 'password-signup',
-        styles: 'form-element',
-        type: 'password',
-        placeholder: '••••••••••',
-        events: {
-          focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordField
-            )
-          },
-          blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordField
-            )
-          }
-        }
-      }),
-      error: new ErrorMessage({ text: null })
-    })
-
-    this.children.PasswordToField = new TextField({
-      for: 'password-to-signup',
-      label: 'Пароль (еще раз)',
-      input: new Input({
-        name: 'password_to',
-        id: 'password-to-signup',
-        styles: 'form-element',
-        type: 'password',
-        placeholder: '••••••••••',
-        events: {
-          focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordToField
-            )
-          },
-          blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordToField
-            )
-          }
-        }
-      }),
-      error: new ErrorMessage({ text: null })
-    })
-
-    this.children.RigisterButton = new Button({
+    this.children.SaveButton = new Button({
       styles: 'btn btn_regular btn_primary',
-      label: 'Зарегистрироваться',
+      label: 'Сохранить',
       type: 'submit',
       events: {
         click: (e: Event) => {
           e.preventDefault()
+
           const data = {}
 
           const filedsArray = Object.entries(this.children).filter(el =>
@@ -226,29 +208,17 @@ export class SignupForm extends Block {
             data[name] = value
           })
 
-          this.validatePasswordValues(data['password'], data['password_to'])
-
           if (!Object.keys(this.errors).length) {
             console.log(data)
-            filedsArray.forEach(
-              el =>
-                ((el[1].children.input.getContent() as HTMLInputElement).value =
-                  '')
-            )
+            this.props.closeHandler('ModalProfile')
           }
         }
       }
     })
-    this.children.AuthButton = new Button({
-      styles: 'btn btn_regular btn_link',
-      label: 'Войти',
-      type: 'button',
-      events: {
-        click: () => {
-          renderDom('#root', 'signin')
-        }
-      }
-    })
+  }
+
+  private getValueByFiledName(name: string) {
+    return this.props.profileData.find(el => el.name === name).value ?? ''
   }
 
   private getValue(fieldName: string) {
@@ -267,20 +237,6 @@ export class SignupForm extends Block {
     } else {
       field.children.error.setProps({ text: null })
       delete this.errors[fieldName]
-    }
-  }
-
-  private validatePasswordValues(pswOne: string, pswTwo: string) {
-    if (pswOne !== pswTwo) {
-      this.errors['password_to'] = 'Пароли должны совпадать'
-      this.children.PasswordToField.children.error.setProps({
-        text: this.errors['password_to']
-      })
-    } else {
-      this.children.PasswordToField.children.error.setProps({
-        text: null
-      })
-      delete this.errors['password_to']
     }
   }
 
