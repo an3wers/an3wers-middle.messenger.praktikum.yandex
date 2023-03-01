@@ -6,7 +6,7 @@
     "dev": "parcel index.html --open",
     "build": "parcel build index.html",
     "start": "parcel build index.html && node server/server.js",
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint . --ext .js,.ts && stylelint src/style/**/*.css",
     "lint:fix": "eslint . --fix --ext .js,.ts"
   },
   "repository": {
