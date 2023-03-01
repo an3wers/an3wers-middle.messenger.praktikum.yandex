@@ -13,5 +13,6 @@
   "arrowParens": "avoid",
   "trailingComma": "none",
   "endOfLine": "auto",
+  "tabWidth": 2,
   "htmlFormatWrapAttributes": "force-aligned"
 }

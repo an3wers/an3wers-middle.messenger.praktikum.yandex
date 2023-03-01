@@ -1,0 +1,23 @@
+<main class="app-layout">
+  {{{Navigation}}}
+  <div class="app-layout__sidebar app-sidebar">
+    <div class="app-sidebar__profile">
+      {{{ProfileButton}}}
+    </div>
+    <div class="app-sidebar__search search-sidebar">
+      {{{IconSearch}}}
+      {{{SearchInput}}}
+    </div>
+      {{{ContactsList}}}
+    <div class="app-sidebar__new-chat">
+      {{{CreateChatButton}}}
+    </div>
+  </div>
+  <div class="app-layout__main app-main">
+    {{#if state}}
+      {{{ChatSelected}}}
+    {{else}}
+      {{{Empty}}}
+    {{/if}}
+  </div>
+</main>
