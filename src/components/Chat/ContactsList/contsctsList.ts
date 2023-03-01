@@ -6,7 +6,7 @@ interface ContactsListProps {
   data: Contact[]
 }
 
-export class ContactsList extends Block {
+export class ContactsList extends Block<ContactsListProps> {
   constructor(props: ContactsListProps) {
     super(props)
   }

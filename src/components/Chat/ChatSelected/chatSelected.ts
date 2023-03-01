@@ -9,7 +9,7 @@ interface ChatSelectedProps {
   img?: string
 }
 
-export class ChatSelected extends Block {
+export class ChatSelected extends Block<ChatSelectedProps> {
   constructor(props: ChatSelectedProps) {
     super(props)
   }

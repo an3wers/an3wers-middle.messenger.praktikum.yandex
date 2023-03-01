@@ -5,8 +5,7 @@ import template from './template.hbs'
 
 interface ModalProps {
   title: string
-  body: Block,
-
+  body: Block
 }
 
 export class Modal extends Block<ModalProps> {
@@ -20,7 +19,7 @@ export class Modal extends Block<ModalProps> {
       icon: new IconClose({ styles: 'btn-icon btn-icon_light' }),
       events: {
         click: () => {
-            this.hide()
+          this.hide()
         }
       }
     })

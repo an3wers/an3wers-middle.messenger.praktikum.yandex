@@ -5,7 +5,7 @@ interface IconLocationProps {
   styles?: string
 }
 
-export class IconLocation extends Block {
+export class IconLocation extends Block<IconLocationProps> {
   constructor(props: IconLocationProps) {
     super(props)
   }

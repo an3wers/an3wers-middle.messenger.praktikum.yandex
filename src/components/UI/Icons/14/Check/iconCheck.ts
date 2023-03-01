@@ -5,7 +5,7 @@ interface IconCheckProps {
   styles?: string
 }
 
-export class IconCheck extends Block {
+export class IconCheck extends Block<IconCheckProps> {
   constructor(props: IconCheckProps) {
     super(props)
   }

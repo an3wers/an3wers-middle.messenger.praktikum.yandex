@@ -5,7 +5,7 @@ interface IconSearchProps {
   styles?: string
 }
 
-export class IconSearch extends Block {
+export class IconSearch extends Block<IconSearchProps> {
   constructor(props: IconSearchProps) {
     super(props)
   }

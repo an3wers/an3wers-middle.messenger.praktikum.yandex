@@ -36,7 +36,6 @@ export class ChatSelectedFooter extends Block {
     })
 
     this.children.ChatForm = new ChatSelectedForm({})
-    
   }
 
   protected render(): DocumentFragment {

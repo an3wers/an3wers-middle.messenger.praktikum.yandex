@@ -2,10 +2,6 @@ import { v4 as makeId } from 'uuid'
 import { TemplateDelegate } from 'handlebars'
 import { EventBus } from './eventBus'
 
-// interface Props {
-//   [key: string]: any
-// }
-
 interface Children {
   [key: string]: Block
 }
@@ -64,7 +60,7 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
   private _getChildren(propsAndChildren: P) {
     const children = {} as Children
-    const props = {} as {[key: string]: any}
+    const props = {} as { [key: string]: any }
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {

@@ -7,7 +7,7 @@ interface IputProps {
   type?: string
   name?: string
   value?: string
-  placeholder?: string,
+  placeholder?: string
   events?: {
     [key: string]: (e: Event | undefined) => void
   }
@@ -15,7 +15,7 @@ interface IputProps {
 
 export class Input extends Block<IputProps> {
   constructor(props: IputProps) {
-    props = 'type' in props ? props : {...props, type: 'text'}
+    props = 'type' in props ? props : { ...props, type: 'text' }
     super(props)
   }
 

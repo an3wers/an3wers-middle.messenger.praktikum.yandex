@@ -5,7 +5,7 @@ interface IconArrowForwardProps {
   styles?: string
 }
 
-export class IconArrowForward extends Block {
+export class IconArrowForward extends Block<IconArrowForwardProps> {
   constructor(props: IconArrowForwardProps) {
     super(props)
   }

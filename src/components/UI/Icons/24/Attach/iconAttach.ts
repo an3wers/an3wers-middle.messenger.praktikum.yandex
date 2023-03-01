@@ -5,7 +5,7 @@ interface IconAttachProps {
   styles?: string
 }
 
-export class IconAttach extends Block {
+export class IconAttach extends Block<IconAttachProps> {
   constructor(props: IconAttachProps) {
     super(props)
   }

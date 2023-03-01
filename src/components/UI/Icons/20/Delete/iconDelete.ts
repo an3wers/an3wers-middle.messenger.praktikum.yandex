@@ -5,7 +5,7 @@ interface IconDeleteProps {
   styles?: string
 }
 
-export class IconDelete extends Block {
+export class IconDelete extends Block<IconDeleteProps> {
   constructor(props: IconDeleteProps) {
     super(props)
   }

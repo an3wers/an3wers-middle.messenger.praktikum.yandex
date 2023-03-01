@@ -5,7 +5,7 @@ interface IconFileProps {
   styles?: string
 }
 
-export class IconFile extends Block {
+export class IconFile extends Block<IconFileProps> {
   constructor(props: IconFileProps) {
     super(props)
   }
