@@ -1,10 +1,12 @@
 {
-    "extends": "stylelint-config-standard",
-    "customSyntax": "postcss-lit",
-    "rules": {
-      "color-hex-case": "lower"
-    },
-    "ignoreFiles": [
-      "dist/*"
-    ]
-  } 
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "no-descending-specificity": null,
+    "import-notation": null,
+    "rule-empty-line-before": null,
+    "length-zero-no-unit": null,
+    "alpha-value-notation": "number",
+    "color-function-notation": null,
+    "shorthand-property-no-redundant-values": null
+  }
+}
