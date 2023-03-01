@@ -23,6 +23,8 @@
     "prefer-destructuring": "off",
     "dot-notation":"off",
     "no-lonely-if": "off",
+    "arrow-body-style":"off",
+    "no-extra-boolean-cast": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
