@@ -4,7 +4,7 @@ import template from './temaplate.hbs'
 
 export class Navigation extends Block {
   protected componentDidMount(): void {
-    const linksNodes = this.element.querySelectorAll('[data-page]')
+    const linksNodes = this.element!.querySelectorAll('[data-page]')
     const links = Array.from(linksNodes)
     links.forEach(link => {
       link.addEventListener('click', this.handler)
@@ -14,9 +14,10 @@ export class Navigation extends Block {
   private handler(e: Event) {
     e.preventDefault()
     const page = (e.target as HTMLElement).getAttribute('data-page')
-    renderDom('#root', page)
+    if (page) {
+      renderDom('#root', page)
+    }
   }
-
 
   protected render(): DocumentFragment {
     return this.compile(template, {})

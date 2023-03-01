@@ -18,7 +18,8 @@ const ERROR_MESSAGES: { [key: string]: string } = {
   phone: 'Введите номер телефона правильно',
   email: 'Введите email правильно',
   display_name:
-    'Имя в чате должно быть от 3 до 20 символов на латинице или кириллице'
+    'Имя в чате должно быть от 3 до 20 символов на латинице или кириллице',
+  password_old: 'Поле не должно быть пустым'
 }
 
 export default function useValidate(values: ValidateValues) {
@@ -49,6 +50,7 @@ function validateValue(value: string, type: string) {
 
     case 'password':
     case 'password_to':
+    case 'password_old':
       return (
         /^[0-9a-zA-Z_-]{8,40}$/.test(value) &&
         (value.match(/[A-Z]/g) || []).length &&

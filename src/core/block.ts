@@ -44,14 +44,14 @@ abstract class Block<P extends { [key: string]: any } = any> {
     const { events = {} } = this.props
 
     Object.keys(events).forEach(eventName => {
-      this._element.removeEventListener(eventName, events[eventName])
+      this._element!.removeEventListener(eventName, events[eventName])
     })
   }
 
   private _addEvents() {
     const { events = {} } = this.props
     Object.keys(events).forEach(eventName => {
-      this._element.addEventListener(eventName, events[eventName])
+      this._element!.addEventListener(eventName, events[eventName])
     })
   }
 
@@ -63,8 +63,8 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   private _getChildren(propsAndChildren: P) {
-    const children = {}
-    const props = {}
+    const children = {} as Children
+    const props = {} as {[key: string]: any}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -109,7 +109,7 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
       child.getContent()?.append(...Array.from(stub.childNodes))
 
-      stub.replaceWith(child.getContent())
+      stub.replaceWith(child.getContent() as HTMLElement)
     })
 
     return temp.content
@@ -169,7 +169,7 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
     // Удалить старые события через removeEventListener
 
-    const firstEl = block.firstElementChild
+    const firstEl = block.firstElementChild as Element
 
     if (this._element) {
       this._element.replaceWith(firstEl)
@@ -226,11 +226,11 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   show() {
-    this.getContent().style.display = 'block'
+    this.getContent()!.style.display = 'block'
   }
 
   hide() {
-    this.getContent().style.display = 'none'
+    this.getContent()!.style.display = 'none'
   }
 }
 

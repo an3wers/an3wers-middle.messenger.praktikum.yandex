@@ -9,6 +9,7 @@ export class ChatSelectedForm extends Block {
     this.children.ChatInput = new Input({
       styles: 'form-element form-element_round-full',
       placeholder: 'Сообщение',
+      name: 'message',
       type: 'text'
     })
 
@@ -19,12 +20,22 @@ export class ChatSelectedForm extends Block {
       }),
       type: 'submut',
       events: {
-        click: (e: Event) => {
-            e.preventDefault()
-            console.log('send message')
+        click: e => {
+          e!.preventDefault()
+          if (this.getValue('message')) {
+            console.log({ message: this.getValue('message') })
+          } else {
+            console.error('Поле "message" не заполнено')
+          }
         }
       }
     })
+  }
+
+  private getValue(name: string) {
+    return (
+      this.element!.querySelector(`input[name=${name}]`) as HTMLInputElement
+    ).value
   }
 
   protected render(): DocumentFragment {

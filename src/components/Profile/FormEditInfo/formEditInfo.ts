@@ -8,7 +8,7 @@ import { Profile } from '../types'
 import template from './template.hbs'
 
 interface FormEditProfileProps {
-  profileData: Profile[],
+  profileData: Profile[]
   closeHandler: (value: string) => void
 }
 
@@ -32,12 +32,22 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         value: this.getValueByFiledName('email'),
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.EmailField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.EmailField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.EmailField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.EmailField
+              )
+            }
           }
         }
       }),
@@ -56,12 +66,22 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         value: this.getValueByFiledName('login'),
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.LoginField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.LoginField
+              )
+            }
           }
         }
       }),
@@ -80,18 +100,22 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         value: this.getValueByFiledName('first_name'),
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.FirstNameField
-            )
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.FirstNameField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.FirstNameField
-            )
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.FirstNameField
+              )
+            }
           }
         }
       }),
@@ -110,18 +134,22 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         value: this.getValueByFiledName('second_name'),
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.SecondNameField
-            )
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.SecondNameField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.SecondNameField
-            )
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.SecondNameField
+              )
+            }
           }
         }
       }),
@@ -140,18 +168,22 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         placeholder: 'Введите ваше имя в чате',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.SecondNameField
-            )
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.DisplayNameField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.SecondNameField
-            )
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.DisplayNameField
+              )
+            }
           }
         }
       }),
@@ -170,12 +202,22 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         value: this.getValueByFiledName('phone'),
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.PhoneField)
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PhoneField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.PhoneField)
+            if (e) {
+              const name = (e.target as HTMLInputElement).name
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PhoneField
+              )
+            }
           }
         }
       }),
@@ -187,10 +229,10 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
       label: 'Сохранить',
       type: 'submit',
       events: {
-        click: (e: Event) => {
-          e.preventDefault()
+        click: e => {
+          e!.preventDefault()
 
-          const data = {}
+          const data: { [key: string]: string } = {}
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
@@ -200,11 +242,10 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
             const value = (
               el[1].children.input.getContent() as HTMLInputElement
             ).value
-            const name = (el[1].children.input.getContent() as HTMLInputElement)
-              .name
+            const { name } =
+              el[1].children.input.getContent() as HTMLInputElement
 
             this.validateHandler(value, el[1])
-
             data[name] = value
           })
 
@@ -218,25 +259,29 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
   }
 
   private getValueByFiledName(name: string) {
-    return this.props.profileData.find(el => el.name === name).value ?? ''
+    if (Array.isArray(this.props.profileData)) {
+      const current = this.props.profileData.find(el => el.name === name)
+      return current?.value ?? ''
+    }
+    return ''
   }
 
-  private getValue(fieldName: string) {
+  private getValue(name: string) {
     return (
-      this.element.querySelector(`input[name=${fieldName}]`) as HTMLInputElement
+      this.element!.querySelector(`input[name=${name}]`) as HTMLInputElement
     ).value
   }
 
   private validateHandler(value: string, field: Block) {
-    const fieldName = (field.children.input.getContent() as HTMLInputElement)
-      .name
-    const error = useValidate({ value, type: fieldName })
+    const { name } = field.children.input.getContent() as HTMLInputElement
+
+    const error = useValidate({ value, type: name })
     if (Object.keys(error).length) {
-      this.errors[fieldName] = error[fieldName]
-      field.children.error.setProps({ text: error[fieldName] })
+      this.errors[name] = error[name]
+      field.children.error.setProps({ text: error[name] })
     } else {
       field.children.error.setProps({ text: null })
-      delete this.errors[fieldName]
+      delete this.errors[name]
     }
   }
 

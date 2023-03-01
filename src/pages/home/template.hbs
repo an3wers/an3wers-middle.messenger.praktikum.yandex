@@ -14,8 +14,10 @@
     </div>
   </div>
   <div class="app-layout__main app-main">
-    
-    {{{ChatSelected}}}
-    
+    {{#if state}}
+      {{{ChatSelected}}}
+    {{else}}
+      {{{Empty}}}
+    {{/if}}
   </div>
 </main>

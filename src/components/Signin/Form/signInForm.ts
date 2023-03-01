@@ -27,12 +27,22 @@ export class SigninForm extends Block {
         placeholder: 'Введите ваш логин',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.LoginField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.LoginField
+              )
+            }
           }
         }
       }),
@@ -50,18 +60,22 @@ export class SigninForm extends Block {
         placeholder: '••••••••••',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PasswordField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PasswordField
+              )
+            }
           }
         }
       }),
@@ -73,15 +87,10 @@ export class SigninForm extends Block {
       label: 'Авторизоваться',
       type: 'submit',
       events: {
-        click: (e: Event) => {
-          e.preventDefault()
+        click: e => {
+          e!.preventDefault()
 
-          const data = {}
-
-          // const login =
-          //   this.children.LoginField.children.input.getContent() as HTMLInputElement
-          // const password =
-          //   this.children.PasswordField.children.input.getContent() as HTMLInputElement
+          const data = {} as { [key: string]: string }
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
@@ -91,8 +100,8 @@ export class SigninForm extends Block {
             const value = (
               el[1].children.input.getContent() as HTMLInputElement
             ).value
-            const name = (el[1].children.input.getContent() as HTMLInputElement)
-              .name
+            const { name } =
+              el[1].children.input.getContent() as HTMLInputElement
 
             this.validateHandler(value, el[1])
 
@@ -101,13 +110,10 @@ export class SigninForm extends Block {
 
           if (!Object.keys(this.errors).length) {
             console.log(data)
-            filedsArray.forEach(
-              el =>
-                ((el[1].children.input.getContent() as HTMLInputElement).value =
-                  '')
-            )
-            // login.value = ''
-            // password.value = ''
+            filedsArray.forEach(el => {
+              ;(el[1].children.input.getContent() as HTMLInputElement).value =
+                ''
+            })
           }
         }
       }
@@ -124,22 +130,21 @@ export class SigninForm extends Block {
     })
   }
 
-  private getValue(fieldName: string) {
+  private getValue(name: string) {
     return (
-      this.element.querySelector(`input[name=${fieldName}]`) as HTMLInputElement
+      this.element!.querySelector(`input[name=${name}]`) as HTMLInputElement
     ).value
   }
 
   private validateHandler(value: string, field: Block) {
-    const fieldName = (field.children.input.getContent() as HTMLInputElement)
-      .name
-    const error = useValidate({ value, type: fieldName })
+    const { name } = field.children.input.getContent() as HTMLInputElement
+    const error = useValidate({ value, type: name })
     if (Object.keys(error).length) {
-      this.errors[fieldName] = error[fieldName]
-      field.children.error.setProps({ text: error[fieldName] })
+      this.errors[name] = error[name]
+      field.children.error.setProps({ text: error[name] })
     } else {
       field.children.error.setProps({ text: null })
-      delete this.errors[fieldName]
+      delete this.errors[name]
     }
   }
 

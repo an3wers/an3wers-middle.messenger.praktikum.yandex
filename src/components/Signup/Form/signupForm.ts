@@ -27,12 +27,22 @@ export class SignupForm extends Block {
         placeholder: 'Введите вашу почту',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.EmailField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.EmailField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.EmailField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.EmailField
+              )
+            }
           }
         }
       }),
@@ -50,12 +60,22 @@ export class SignupForm extends Block {
         placeholder: 'Придумайте логин',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.LoginField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.LoginField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.LoginField
+              )
+            }
           }
         }
       }),
@@ -73,18 +93,22 @@ export class SignupForm extends Block {
         placeholder: 'Введите ваше имя',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.FirstNameField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.FirstNameField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.FirstNameField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.FirstNameField
+              )
+            }
           }
         }
       }),
@@ -102,18 +126,22 @@ export class SignupForm extends Block {
         placeholder: 'Введите вашу фамилию',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.SecondNameField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.SecondNameField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.SecondNameField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.SecondNameField
+              )
+            }
           }
         }
       }),
@@ -131,12 +159,22 @@ export class SignupForm extends Block {
         placeholder: 'Например: +7(999)123-45-67',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.PhoneField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PhoneField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(this.getValue(name), this.children.PhoneField)
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PhoneField
+              )
+            }
           }
         }
       }),
@@ -154,18 +192,22 @@ export class SignupForm extends Block {
         placeholder: '••••••••••',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PasswordField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PasswordField
+              )
+            }
           }
         }
       }),
@@ -183,18 +225,22 @@ export class SignupForm extends Block {
         placeholder: '••••••••••',
         events: {
           focus: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordToField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PasswordToField
+              )
+            }
           },
           blur: e => {
-            const name = (e.target as HTMLInputElement).name
-            this.validateHandler(
-              this.getValue(name),
-              this.children.PasswordToField
-            )
+            if (e) {
+              const { name } = e.target as HTMLInputElement
+              this.validateHandler(
+                this.getValue(name),
+                this.children.PasswordToField
+              )
+            }
           }
         }
       }),
@@ -206,9 +252,9 @@ export class SignupForm extends Block {
       label: 'Зарегистрироваться',
       type: 'submit',
       events: {
-        click: (e: Event) => {
-          e.preventDefault()
-          const data = {}
+        click: e => {
+          e!.preventDefault()
+          const data = {} as { [key: string]: string }
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
@@ -218,8 +264,8 @@ export class SignupForm extends Block {
             const value = (
               el[1].children.input.getContent() as HTMLInputElement
             ).value
-            const name = (el[1].children.input.getContent() as HTMLInputElement)
-              .name
+            const { name } =
+              el[1].children.input.getContent() as HTMLInputElement
 
             this.validateHandler(value, el[1])
 
@@ -230,11 +276,10 @@ export class SignupForm extends Block {
 
           if (!Object.keys(this.errors).length) {
             console.log(data)
-            filedsArray.forEach(
-              el =>
-                ((el[1].children.input.getContent() as HTMLInputElement).value =
-                  '')
-            )
+            filedsArray.forEach(el => {
+              ;(el[1].children.input.getContent() as HTMLInputElement).value =
+                ''
+            })
           }
         }
       }
@@ -251,22 +296,21 @@ export class SignupForm extends Block {
     })
   }
 
-  private getValue(fieldName: string) {
+  private getValue(name: string) {
     return (
-      this.element.querySelector(`input[name=${fieldName}]`) as HTMLInputElement
+      this.element!.querySelector(`input[name=${name}]`) as HTMLInputElement
     ).value
   }
 
   private validateHandler(value: string, field: Block) {
-    const fieldName = (field.children.input.getContent() as HTMLInputElement)
-      .name
-    const error = useValidate({ value, type: fieldName })
+    const { name } = field.children.input.getContent() as HTMLInputElement
+    const error = useValidate({ value, type: name })
     if (Object.keys(error).length) {
-      this.errors[fieldName] = error[fieldName]
-      field.children.error.setProps({ text: error[fieldName] })
+      this.errors[name] = error[name]
+      field.children.error.setProps({ text: error[name] })
     } else {
       field.children.error.setProps({ text: null })
-      delete this.errors[fieldName]
+      delete this.errors[name]
     }
   }
 

@@ -1,4 +1,3 @@
-// type Callback<A extends any[] = unknown[]> = (...args: A[]) => void
 type Callback = (...args: any[]) => void
 type Event = string
 

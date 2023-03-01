@@ -6,14 +6,16 @@ import { renderDom } from '../../core/router'
 import { ProfileName } from '../../components/Profile/ProfileName/profileName'
 import { ProfileAvatar } from '../../components/Profile/ProfileAvatar/profileAvatar'
 import avatar from '../../../static/images/default-avatar-profile.jpg'
-import profileData from '../../markup/data/userProfile'
+import profileData from '../../markup/data/userProfile.js'
 import { ProfileInfo } from '../../components/Profile/ProfileInfo/profileInfo'
 import { Modal } from '../../components/UI/Modal/modal'
 import { FormEditProfile } from '../../components/Profile/FormEditInfo/formEditInfo'
 import { FormEditPassword } from '../../components/Profile/FormEditPassword/formEditPassword'
+import { Navigation } from '../../components/Navigation/navigation'
 
 export class ProfilePage extends Block {
   protected init(): void {
+    this.children.Navigation = new Navigation({})
     this.children.ProfileAvatar = new ProfileAvatar({ avatar })
 
     this.children.ProfileName = new ProfileName({ name: 'Иван' })
