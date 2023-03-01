@@ -6,12 +6,17 @@ const enum Methods {
   DELETE = 'DELETE'
 }
 
-interface Options {
+type Options = {
   headers?: { [key: string]: string }
   method?: Methods
   timeout?: number
   data?: any
 }
+
+type HTTPMethod = (
+  url: string,
+  options?: Omit<Options, 'method'>
+) => Promise<unknown>
 
 /**
  * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
@@ -29,22 +34,19 @@ function queryStringify(data: { [key: string]: any }) {
 }
 
 class HTTPTransport {
-  get = (
-    url: string,
-    options: Omit<Options, 'method'> = {}
-  ): Promise<XMLHttpRequest> => {
+  get: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: Methods.GET })
   }
 
-  post = (url: string, options: Omit<Options, 'method'> = {}) => {
+  post: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: Methods.POST })
   }
 
-  put = (url: string, options: Omit<Options, 'method'> = {}) => {
+  put: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: Methods.PUT })
   }
 
-  delete = (url: string, options: Omit<Options, 'method'> = {}) => {
+  delete: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: Methods.DELETE })
   }
 
