@@ -3,7 +3,7 @@ import template from './temaplet.hbs'
 import { Button } from '../../UI/Button/button'
 import { TextField } from '../../UI/TextField/textField'
 import { Input } from '../../UI/Input/input'
-import { renderDom } from '../../../core/router'
+import { renderDom } from '../../../core/renderDom'
 import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 import useValidate from '../../../core/validator'
 

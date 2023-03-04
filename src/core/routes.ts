@@ -10,11 +10,11 @@ interface Routes {
 }
 
 export const routes: Routes = {
-  home: () => new HomePage({ state: 'selected' }),
+  home: () => new HomePage(),
   profile: () => new ProfilePage(),
   signin: () => new SigninPage(),
   signup: () => new SignupPage(),
   not_found: () => new NotfoundPage(),
   server_error: () => new ServerErrorPage(),
-  empty: () => new HomePage({ state: 'empty' })
+  empty: () => new HomePage()
 }

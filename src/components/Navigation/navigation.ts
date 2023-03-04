@@ -1,5 +1,5 @@
 import Block from '../../core/block'
-import { renderDom } from '../../core/router'
+import { renderDom } from '../../core/renderDom'
 import template from './temaplate.hbs'
 
 export class Navigation extends Block {

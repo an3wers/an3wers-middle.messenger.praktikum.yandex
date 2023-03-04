@@ -8,17 +8,17 @@ import { IconPlus } from '../../components/UI/Icons/20/Plus/iconPlus'
 import { Button } from '../../components/UI/Button/button'
 import { ChatSelected } from '../../components/Chat/ChatSelected/chatSelected'
 import { Input } from '../../components/UI/Input/input'
-import { renderDom } from '../../core/router'
+import { renderDom } from '../../core/renderDom'
 import { Navigation } from '../../components/Navigation/navigation'
 import { ChatEmpty } from '../../components/Chat/ChatEmpty/chatEmpty'
 
-interface HomePageProps {
-  state: 'selected' | 'empty'
-}
+// interface HomePageProps {
+//   state: 'selected' | 'empty'
+// }
 
-export class HomePage extends Block<HomePageProps> {
-  constructor(props: HomePageProps) {
-    super(props)
+export class HomePage extends Block {
+  constructor() {
+    super()
   }
 
   protected init(): void {
@@ -60,6 +60,6 @@ export class HomePage extends Block<HomePageProps> {
   }
 
   protected render(): DocumentFragment {
-    return this.compile(template, { state: this.props.state === 'selected' })
+    return this.compile(template, { state: true })
   }
 }

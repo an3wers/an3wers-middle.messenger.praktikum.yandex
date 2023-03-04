@@ -1,6 +1,6 @@
 import { Button } from '../../components/UI/Button/button'
 import Block from '../../core/block'
-import { renderDom } from '../../core/router'
+import { renderDom } from '../../core/renderDom'
 import template from './template.hbs'
 
 export class ServerErrorPage extends Block {
