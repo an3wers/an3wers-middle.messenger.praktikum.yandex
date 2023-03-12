@@ -1,4 +1,4 @@
-import { routes } from './routes'
+// import { routes } from './routes'
 import Block from './block'
 
 /*
@@ -19,18 +19,17 @@ function render(query: string, block: Block) {
 
 */
 
-export function renderDom(query: string, block: string) {
-  const root = document.querySelector(query) as HTMLElement
+// export function renderDom(query: string, block: string) {
+//   const root = document.querySelector(query) as HTMLElement
 
-  root.innerHTML = ''
-  const route = routes[block]()
+//   root.innerHTML = ''
+//   const route = routes[block]()
 
-  root.appendChild(route.getContent())
-  route.dispatchComponentDidMount()
-}
+//   root.appendChild(route.getContent())
+//   route.dispatchComponentDidMount()
+// }
 
 export function render(query: string, block: Block) {
-  // query = '#root'
   const root = document.querySelector(query)
 
   if (root === null) {
@@ -40,6 +39,7 @@ export function render(query: string, block: Block) {
   root.innerHTML = ''
 
   root.append(block.getContent()!)
+  block.dispatchComponentDidMount()
 
   return root
 }

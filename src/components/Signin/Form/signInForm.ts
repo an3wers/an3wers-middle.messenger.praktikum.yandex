@@ -3,9 +3,12 @@ import template from './temaplet.hbs'
 import { Button } from '../../UI/Button/button'
 import { TextField } from '../../UI/TextField/textField'
 import { Input } from '../../UI/Input/input'
-import { renderDom } from '../../../core/renderDom'
+// import {  } from '../../../core/renderDom'
 import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 import useValidate from '../../../core/validator'
+import router from '../../../core/router/router'
+import { Link } from '../../UI/Link/link'
+import { Routes } from '../../../app'
 
 export class SigninForm extends Block {
   errors: { [key: string]: string }
@@ -118,15 +121,10 @@ export class SigninForm extends Block {
         }
       }
     })
-    this.children.RegisterButton = new Button({
+    this.children.RegisterButton = new Link({
       styles: 'btn btn_regular btn_link',
       label: 'Нет аккаунта?',
-      type: 'button',
-      events: {
-        click: () => {
-          renderDom('#root', 'signup')
-        }
-      }
+      to: Routes.Signup
     })
   }
 

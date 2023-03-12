@@ -10,7 +10,7 @@ import { ProfilePage } from './pages/profile/profile'
 // })
 
 // eslint-disable-next-line no-shadow
-const enum Routes {
+export const enum Routes {
   Index = '/',
   Signup = '/sign-up',
   Settings = '/settings',
