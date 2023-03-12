@@ -1,11 +1,15 @@
 import Block from '../../../core/block'
-import { renderDom } from '../../../core/renderDom'
+// import { renderDom } from '../../../core/renderDom'
 import { Button } from '../../UI/Button/button'
 import { Input } from '../../UI/Input/input'
 import { TextField } from '../../UI/TextField/textField'
 import template from './template.hbs'
 import useValidate from '../../../core/validator'
 import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
+import { Link } from '../../UI/Link/link'
+import { Routes } from '../../../app'
+import authController from '../../../controllers/authController'
+import { SignupData } from '../../../api/types/authTypes'
 
 export class SignupForm extends Block {
   errors: { [key: string]: string }
@@ -261,9 +265,9 @@ export class SignupForm extends Block {
           )
 
           filedsArray.forEach(el => {
-            const value = (
+            const {value} = (
               el[1].children.input.getContent() as HTMLInputElement
-            ).value
+            )
             const { name } =
               el[1].children.input.getContent() as HTMLInputElement
 
@@ -275,7 +279,12 @@ export class SignupForm extends Block {
           this.validatePasswordValues(data['password'], data['password_to'])
 
           if (!Object.keys(this.errors).length) {
-            console.log(data)
+            // eslint-disable-next-line camelcase
+            const { password_to, ...signupData } = data
+            // Вызываю контроллер
+            console.log(signupData)
+            // authController.signup(signupData as unknown as SignupData)
+            
             filedsArray.forEach(el => {
               ;(el[1].children.input.getContent() as HTMLInputElement).value =
                 ''
@@ -284,15 +293,10 @@ export class SignupForm extends Block {
         }
       }
     })
-    this.children.AuthButton = new Button({
+    this.children.AuthButton = new Link({
+      to: Routes.Index,
       styles: 'btn btn_regular btn_link',
-      label: 'Войти',
-      type: 'button',
-      events: {
-        click: () => {
-          renderDom('#root', 'signin')
-        }
-      }
+      label: 'Войти'
     })
   }
 

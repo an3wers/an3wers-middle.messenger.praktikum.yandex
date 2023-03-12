@@ -2,7 +2,7 @@ import { Button } from '../../components/UI/Button/button'
 import { IconArrowBack } from '../../components/UI/Icons/20/ArrowBack/iconArrowBack'
 import Block from '../../core/block'
 import template from './template.hbs'
-import { renderDom } from '../../core/renderDom'
+// import { renderDom } from '../../core/renderDom'
 import { ProfileName } from '../../components/Profile/ProfileName/profileName'
 import { ProfileAvatar } from '../../components/Profile/ProfileAvatar/profileAvatar'
 import avatar from '../../../static/images/default-avatar-profile.jpg'
@@ -12,8 +12,9 @@ import { Modal } from '../../components/UI/Modal/modal'
 import { FormEditProfile } from '../../components/Profile/FormEditInfo/formEditInfo'
 import { FormEditPassword } from '../../components/Profile/FormEditPassword/formEditPassword'
 import { Navigation } from '../../components/Navigation/navigation'
+import { withStore } from '../../core/store'
 
-export class ProfilePage extends Block {
+class ProfilePageBase extends Block {
   protected init(): void {
     this.children.Navigation = new Navigation({})
     this.children.ProfileAvatar = new ProfileAvatar({ avatar })
@@ -45,7 +46,7 @@ export class ProfilePage extends Block {
       styles: 'btn btn_regular btn_light',
       events: {
         click: () => {
-          renderDom('#root', 'signin')
+          // renderDom('#root', 'signin')
         }
       }
     })
@@ -55,7 +56,7 @@ export class ProfilePage extends Block {
       icon: new IconArrowBack({ styles: 'btn-icon btn-icon_white' }),
       events: {
         click: () => {
-          renderDom('#root', 'home')
+          // renderDom('#root', 'home')
         }
       }
     })
@@ -84,3 +85,6 @@ export class ProfilePage extends Block {
     return this.compile(template, {})
   }
 }
+
+const withUser = withStore(state => state.user.data || {})
+export const ProfilePage = withUser(ProfilePageBase)

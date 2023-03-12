@@ -1,4 +1,4 @@
-import isEqual from '../../utils/isEqual'
+import isEqual from '../../helpers/isEqual'
 import Block from '../block'
 import { render } from '../renderDom'
 
@@ -28,7 +28,7 @@ export class Route {
 
   leave() {
     if (this._block) {
-      this._block.hide()
+      this._block = null
     }
   }
 
@@ -40,9 +40,10 @@ export class Route {
     if (!this._block) {
       this._block = new this._blockClass({})
       render(this._props.rootQuery, this._block as Block)
+      // eslint-disable-next-line no-useless-return
       return
     }
 
-    this._block.show()
+    // this._block.show()
   }
 }

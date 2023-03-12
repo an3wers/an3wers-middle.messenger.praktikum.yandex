@@ -4,6 +4,7 @@ import { SigninPage } from './pages/signin/signin'
 import { SignupPage } from './pages/signup/signup'
 import { HomePage } from './pages/home/home'
 import { ProfilePage } from './pages/profile/profile'
+import authController from './controllers/authController'
 
 // window.addEventListener('DOMContentLoaded', () => {
 //   renderDom('#root', 'home')
@@ -17,11 +18,39 @@ export const enum Routes {
   Messenger = '/messenger'
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   Router.use(Routes.Index, SigninPage)
     .use(Routes.Signup, SignupPage)
     .use(Routes.Settings, ProfilePage)
     .use(Routes.Messenger, HomePage)
 
-  Router.start()
+  let isProtectedRoute = true
+
+  switch (window.location.pathname) {
+    case Routes.Index:
+    case Routes.Signup:
+      isProtectedRoute = false
+      break
+    default:
+      isProtectedRoute = true
+  }
+
+  try {
+
+    await authController.fetchUser()
+
+    Router.start()
+    
+    console.log(123)
+
+    if (!isProtectedRoute) {
+      Router.go(Routes.Settings)
+    }
+  } catch (error) {
+    Router.start()
+
+    // if (isProtectedRoute) {
+      Router.go(Routes.Index)
+    // }
+  }
 })

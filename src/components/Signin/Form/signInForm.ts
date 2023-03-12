@@ -3,12 +3,12 @@ import template from './temaplet.hbs'
 import { Button } from '../../UI/Button/button'
 import { TextField } from '../../UI/TextField/textField'
 import { Input } from '../../UI/Input/input'
-// import {  } from '../../../core/renderDom'
 import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 import useValidate from '../../../core/validator'
-import router from '../../../core/router/router'
 import { Link } from '../../UI/Link/link'
 import { Routes } from '../../../app'
+import authController from '../../../controllers/authController'
+import { SigninData } from '../../../api/types/authTypes'
 
 export class SigninForm extends Block {
   errors: { [key: string]: string }
@@ -93,26 +93,30 @@ export class SigninForm extends Block {
         click: e => {
           e!.preventDefault()
 
-          const data = {} as { [key: string]: string }
+          const data = {} as SigninData
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
           )
 
           filedsArray.forEach(el => {
-            const value = (
+            const { value } = (
               el[1].children.input.getContent() as HTMLInputElement
-            ).value
+            )
             const { name } =
               el[1].children.input.getContent() as HTMLInputElement
 
             this.validateHandler(value, el[1])
 
-            data[name] = value
+            data[name as keyof SigninData] = value
           })
 
           if (!Object.keys(this.errors).length) {
+            
+            // Вызываем контроллер, который будет дергать api
             console.log(data)
+            authController.singin(data)
+            
             filedsArray.forEach(el => {
               ;(el[1].children.input.getContent() as HTMLInputElement).value =
                 ''

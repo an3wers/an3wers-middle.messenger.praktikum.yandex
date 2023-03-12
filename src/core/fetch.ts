@@ -33,21 +33,30 @@ function queryStringify(data: { [key: string]: any }) {
   return `?${dataArray.map(el => el.join('=')).join('&')}`
 }
 
-class HTTPTransport {
+export default class HTTPTransport {
+
+  // baseUrl: string
+  endpoint: string
+
+  constructor(baseUrl: string, endpoint: string) {
+    // this.baseUrl = baseUrl
+    this.endpoint = baseUrl + endpoint
+  }
+
   get: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.GET })
+    return this.request(this.endpoint + url, { ...options, method: Methods.GET })
   }
 
   post: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.POST })
+    return this.request(this.endpoint + url, { ...options, method: Methods.POST })
   }
 
   put: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.PUT })
+    return this.request(this.endpoint + url, { ...options, method: Methods.PUT })
   }
 
   delete: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.DELETE })
+    return this.request(this.endpoint + url, { ...options, method: Methods.DELETE })
   }
 
   request = (url: string, options: Options = {}): Promise<XMLHttpRequest> => {

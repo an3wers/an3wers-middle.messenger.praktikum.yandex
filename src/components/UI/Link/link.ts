@@ -1,6 +1,5 @@
 import Block from '../../../core/block'
 import { PropsWithRouter, withRouter } from '../../../hocs/withRouter'
-// import router from '../../../core/router/router'
 import template from './template.hbs'
 
 interface LinkProps extends PropsWithRouter {
