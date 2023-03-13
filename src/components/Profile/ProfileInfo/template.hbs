@@ -1,8 +1,12 @@
 <ul class="profile-info__list">
-  {{#each profileData}}
+  <li class="profile-info__item">
+      <span class="profile-info__title"><strong>Почта</strong></span>
+      <span class="profile-info__value">{{{email}}}</span>
+    </li>
+  {{!-- {{#each user}}
     <li class="profile-info__item">
       <span class="profile-info__title"><strong>{{title}}</strong></span>
       <span class="profile-info__value">{{value}}</span>
     </li>
-  {{/each}}
+  {{/each}} --}}
 </ul>

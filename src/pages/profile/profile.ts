@@ -19,9 +19,9 @@ class ProfilePageBase extends Block {
     this.children.Navigation = new Navigation({})
     this.children.ProfileAvatar = new ProfileAvatar({ avatar })
 
-    this.children.ProfileName = new ProfileName({ name: 'Иван' })
+    this.children.ProfileName = new ProfileName({ name: this.props.data.first_name })
 
-    this.children.ProfileInfo = new ProfileInfo({ profileData })
+    this.children.ProfileInfo = new ProfileInfo({ user: this.props.data })
 
     this.children.EditProfileButton = new Button({
       label: 'Изменить данные',
@@ -86,5 +86,5 @@ class ProfilePageBase extends Block {
   }
 }
 
-const withUser = withStore(state => state.user.data || {})
+const withUser = withStore(state => state.user || {})
 export const ProfilePage = withUser(ProfilePageBase)

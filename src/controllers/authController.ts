@@ -16,7 +16,7 @@ class AuthController {
       const res = (await this.api.signup(data)) as XMLHttpRequest
 
       if (res.status >= 400) {
-        store.set('user.isError', JSON.parse(res.response).reason)
+        store.set('user.isError', res.response.reason)
       } else {
         await this.fetchUser()
         router.go(Routes.Settings)
@@ -27,9 +27,13 @@ class AuthController {
   }
   async singin(data: SigninData) {
     try {
-      await this.api.signin(data)
-      await this.fetchUser()
-      router.go(Routes.Settings)
+      const res = (await this.api.signin(data)) as XMLHttpRequest
+      if (res.status >= 400) {
+        store.set('user.isError', res.response.reason)
+      } else {
+        await this.fetchUser()
+        router.go(Routes.Settings)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -44,9 +48,15 @@ class AuthController {
     }
   }
   async fetchUser() {
-    const user = await this.api.getUser()
-    console.log('User', user)
-    store.set('user.data', user)
+    try {
+      const user = (await this.api.getUser()) as XMLHttpRequest
+      console.log('User', user.status)
+      store.set('user.data', user.response)
+      return user.response
+    } catch (error) {
+      console.log(error)
+      return error as Error
+    }
   }
 }
 

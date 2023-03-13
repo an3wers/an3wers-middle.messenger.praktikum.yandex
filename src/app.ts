@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 // import { renderDom, render } from './core/renderDom'
 import Router from './core/router/router'
 import { SigninPage } from './pages/signin/signin'
@@ -36,21 +37,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-
-    await authController.fetchUser()
+    const res = await authController.fetchUser()
+    console.log(res)
 
     Router.start()
-    
-    console.log(123)
+
+    // console.log(123)
 
     if (!isProtectedRoute) {
       Router.go(Routes.Settings)
     }
   } catch (error) {
+    console.log(error)
     Router.start()
 
-    // if (isProtectedRoute) {
+    if (isProtectedRoute) {
       Router.go(Routes.Index)
-    // }
+    }
   }
 })

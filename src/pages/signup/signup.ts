@@ -12,10 +12,12 @@ class SignupPageBase extends Block {
     this.children.Error = new ErrorBock({
       message: ''
     })
+    this.children.Error.setProps({ message: '' })
+    this.props.isError = null
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-    this.children.Error.setProps({message: newProps.isError})
+    this.children.Error.setProps({ message: newProps.isError })
     return true
   }
 
@@ -24,5 +26,5 @@ class SignupPageBase extends Block {
   }
 }
 
-const withUser = withStore(state => ({...state.user}))
+const withUser = withStore(state => ({ ...state.user }))
 export const SignupPage = withUser(SignupPageBase)

@@ -1,9 +1,9 @@
 import Block from '../../../core/block'
-import { Profile } from '../types'
+import { User } from '../types'
 import template from './template.hbs'
 
 interface ProfileInfoProps {
-  profileData: Profile[]
+  user: User[]
 }
 
 export class ProfileInfo extends Block<ProfileInfoProps> {
@@ -11,6 +11,6 @@ export class ProfileInfo extends Block<ProfileInfoProps> {
     super(props)
   }
   protected render(): DocumentFragment {
-    return this.compile(template, { profileData: this.props.profileData })
+    return this.compile(template, {...this.props})
   }
 }

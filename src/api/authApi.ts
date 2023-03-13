@@ -12,7 +12,7 @@ class AuthAPI extends BaseAPI {
   }
 
   signin(data: SigninData) {
-    return this.http.post('/signip', { data })
+    return this.http.post('/signin', { data })
   }
 
   logout() {
@@ -20,7 +20,7 @@ class AuthAPI extends BaseAPI {
   }
 
   getUser() {
-    return this.http.post('/user')
+    return this.http.get('/user')
   }
 
   create = undefined

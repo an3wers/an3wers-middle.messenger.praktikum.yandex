@@ -117,10 +117,10 @@ export class SigninForm extends Block {
             console.log(data)
             authController.singin(data)
             
-            filedsArray.forEach(el => {
-              ;(el[1].children.input.getContent() as HTMLInputElement).value =
-                ''
-            })
+            // filedsArray.forEach(el => {
+            //   ;(el[1].children.input.getContent() as HTMLInputElement).value =
+            //     ''
+            // })
           }
         }
       }

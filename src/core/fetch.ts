@@ -80,6 +80,9 @@ export default class HTTPTransport {
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key])
       })
+      
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
       xhr.onload = () => {
         resolve(xhr)
