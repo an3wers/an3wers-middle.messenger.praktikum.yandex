@@ -13,9 +13,14 @@ class AuthController {
 
   async signup(data: SignupData) {
     try {
-      await this.api.signup(data)
-      await this.fetchUser()
-      router.go(Routes.Settings)
+      const res = (await this.api.signup(data)) as XMLHttpRequest
+
+      if (res.status >= 400) {
+        store.set('user.isError', JSON.parse(res.response).reason)
+      } else {
+        await this.fetchUser()
+        router.go(Routes.Settings)
+      }
     } catch (error) {
       console.log(error)
     }

@@ -265,9 +265,8 @@ export class SignupForm extends Block {
           )
 
           filedsArray.forEach(el => {
-            const {value} = (
+            const { value } =
               el[1].children.input.getContent() as HTMLInputElement
-            )
             const { name } =
               el[1].children.input.getContent() as HTMLInputElement
 
@@ -282,13 +281,13 @@ export class SignupForm extends Block {
             // eslint-disable-next-line camelcase
             const { password_to, ...signupData } = data
             // Вызываю контроллер
-            console.log(signupData)
-            // authController.signup(signupData as unknown as SignupData)
-            
-            filedsArray.forEach(el => {
-              ;(el[1].children.input.getContent() as HTMLInputElement).value =
-                ''
-            })
+            // console.log(signupData)
+            authController.signup(signupData as unknown as SignupData)
+
+            // filedsArray.forEach(el => {
+            //   ;(el[1].children.input.getContent() as HTMLInputElement).value =
+            //     ''
+            // })
           }
         }
       }

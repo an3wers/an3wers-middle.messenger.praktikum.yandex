@@ -7,7 +7,11 @@ import Block from './block'
 import { EventBus } from './eventBus'
 
 interface State {
-  user?: User
+  // user?: User
+  user: {
+    data?: User
+    isError: null | string
+  }
 
   // chats?: Chat[]
   // selectedChatId?: number
@@ -20,7 +24,10 @@ export enum StoreEvents {
 
 export class Store extends EventBus {
   private state: State = {
-    user: undefined
+    user: {
+      data: undefined,
+      isError: null
+    }
   }
 
   public set(keypath: string, data: unknown) {
@@ -49,9 +56,9 @@ export function withStore(mapStateToProps: (state: any) => any) {
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState())
 
-          if (!isEqual(state, newState)) {
-            this.setProps({ ...newState })
-          }
+          // if (!isEqual(state, newState)) {
+          this.setProps({ ...newState })
+          // }
 
           state = newState
         })

@@ -95,7 +95,7 @@ export default class HTTPTransport {
       } else if (method === Methods.DELETE) {
         xhr.send()
       } else {
-        xhr.send(data)
+        xhr.send(JSON.stringify(data))
       }
     })
   }

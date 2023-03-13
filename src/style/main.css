@@ -56,3 +56,16 @@ h4 {
   align-self: center;
   text-align: center;
 }
+
+.error-block {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-bg-error);
+  text-align: left;
+  margin-bottom: 1rem;
+
+  &__message {
+    color: var(--color-text-red);
+    font-size: 0.825rem;
+  }
+}
