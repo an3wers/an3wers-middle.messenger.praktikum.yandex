@@ -50,12 +50,10 @@ class AuthController {
   async fetchUser() {
     try {
       const user = (await this.api.getUser()) as XMLHttpRequest
-      console.log('User', user.status)
+      console.log('User', user.response)
       store.set('user.data', user.response)
-      return user.response
     } catch (error) {
       console.log(error)
-      return error as Error
     }
   }
 }

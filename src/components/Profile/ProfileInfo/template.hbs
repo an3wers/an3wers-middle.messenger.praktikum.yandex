@@ -1,12 +1,32 @@
 <ul class="profile-info__list">
   <li class="profile-info__item">
-      <span class="profile-info__title"><strong>Почта</strong></span>
-      <span class="profile-info__value">{{{email}}}</span>
-    </li>
+    <span class="profile-info__title"><strong>Почта</strong></span>
+    <span class="profile-info__value">{{{user.email}}}</span>
+  </li>
+  <li class="profile-info__item">
+    <span class="profile-info__title"><strong>Логин</strong></span>
+    <span class="profile-info__value">{{{user.login}}}</span>
+  </li>
+  <li class="profile-info__item">
+    <span class="profile-info__title"><strong>Имя</strong></span>
+    <span class="profile-info__value">{{{user.first_name}}}</span>
+  </li>
+  <li class="profile-info__item">
+    <span class="profile-info__title"><strong>Фамилия</strong></span>
+    <span class="profile-info__value">{{{user.second_name}}}</span>
+  </li>
+  <li class="profile-info__item">
+    <span class="profile-info__title"><strong>Имя в чате</strong></span>
+    <span class="profile-info__value">{{{user.display_name}}}</span>
+  </li>
+  <li class="profile-info__item">
+    <span class="profile-info__title"><strong>Телефон</strong></span>
+    <span class="profile-info__value">{{{user.phone}}}</span>
+  </li>
   {{!-- {{#each user}}
-    <li class="profile-info__item">
-      <span class="profile-info__title"><strong>{{title}}</strong></span>
-      <span class="profile-info__value">{{value}}</span>
-    </li>
+  <li class="profile-info__item">
+    <span class="profile-info__title"><strong>{{title}}</strong></span>
+    <span class="profile-info__value">{{value}}</span>
+  </li>
   {{/each}} --}}
 </ul>

@@ -6,6 +6,7 @@ import { SignupPage } from './pages/signup/signup'
 import { HomePage } from './pages/home/home'
 import { ProfilePage } from './pages/profile/profile'
 import authController from './controllers/authController'
+import store from './core/store'
 
 // window.addEventListener('DOMContentLoaded', () => {
 //   renderDom('#root', 'home')
@@ -27,6 +28,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   let isProtectedRoute = true
 
+  const { user } = store.getState()
+
   switch (window.location.pathname) {
     case Routes.Index:
     case Routes.Signup:
@@ -36,23 +39,36 @@ window.addEventListener('DOMContentLoaded', async () => {
       isProtectedRoute = true
   }
 
-  try {
-    const res = await authController.fetchUser()
-    console.log(res)
+  await authController.fetchUser()
+  Router.start()
 
-    Router.start()
-
-    // console.log(123)
-
+  if (user.data) {
     if (!isProtectedRoute) {
       Router.go(Routes.Settings)
     }
-  } catch (error) {
-    console.log(error)
-    Router.start()
-
+  } else {
     if (isProtectedRoute) {
       Router.go(Routes.Index)
     }
   }
+
+  // try {
+  //   const res = await authController.fetchUser()
+  //   console.log(res)
+
+  //   Router.start()
+
+  //   // console.log(123)
+
+  //   if (!isProtectedRoute) {
+  //     Router.go(Routes.Settings)
+  //   }
+  // } catch (error) {
+  //   console.log(error)
+  //   Router.start()
+
+  //   if (isProtectedRoute) {
+  //     Router.go(Routes.Index)
+  //   }
+  // }
 })

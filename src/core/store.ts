@@ -7,15 +7,10 @@ import Block from './block'
 import { EventBus } from './eventBus'
 
 interface State {
-  // user?: User
   user: {
     data?: User
     isError: null | string
   }
-
-  // chats?: Chat[]
-  // selectedChatId?: number
-  // and more
 }
 
 export enum StoreEvents {
@@ -32,7 +27,6 @@ export class Store extends EventBus {
 
   public set(keypath: string, data: unknown) {
     set(this.state, keypath, data)
-
     this.emit(StoreEvents.Updated, this.getState())
   }
 

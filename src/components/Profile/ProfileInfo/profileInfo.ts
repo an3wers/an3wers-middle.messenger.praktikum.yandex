@@ -11,6 +11,7 @@ export class ProfileInfo extends Block<ProfileInfoProps> {
     super(props)
   }
   protected render(): DocumentFragment {
+    console.log(this.props)
     return this.compile(template, {...this.props})
   }
 }
