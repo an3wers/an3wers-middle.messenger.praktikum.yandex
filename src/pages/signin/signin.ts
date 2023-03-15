@@ -13,6 +13,7 @@ class SigninPageBase extends Block {
       message: ''
     })
     this.children.Error.setProps({ message: '' })
+    // TODO: правильно менять state
     this.props.isError = null
   }
 

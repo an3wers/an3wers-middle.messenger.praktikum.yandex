@@ -1,13 +1,17 @@
 <div style="display: none;" class="modal-wrapper">
-    <div id="modal_edit_profile" class="modal">
-        <div class="modal__header">
-            {{{CloseButton}}}
-            <h4>{{{title}}}</h4>
-        </div>
-        <div class="modal__body">
-            {{{body}}}
-        </div>
-
+  <div id="modal_edit_profile" class="modal">
+    <div class="modal__header">
+      {{{CloseButton}}}
+      <h4>{{{title}}}</h4>
     </div>
-    <div class="overlay"></div>
+    <div class="modal__body">
+      {{#if isSuccessState}}
+        {{{successBody}}}
+      {{else}}
+        {{{body}}}
+      {{/if}}
+    </div>
+
+  </div>
+  <div class="overlay"></div>
 </div>

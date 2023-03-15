@@ -34,7 +34,6 @@ function queryStringify(data: { [key: string]: any }) {
 }
 
 export default class HTTPTransport {
-
   // baseUrl: string
   endpoint: string
 
@@ -44,19 +43,31 @@ export default class HTTPTransport {
   }
 
   get: HTTPMethod = (url, options = {}) => {
-    return this.request(this.endpoint + url, { ...options, method: Methods.GET })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.GET
+    })
   }
 
   post: HTTPMethod = (url, options = {}) => {
-    return this.request(this.endpoint + url, { ...options, method: Methods.POST })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.POST
+    })
   }
 
   put: HTTPMethod = (url, options = {}) => {
-    return this.request(this.endpoint + url, { ...options, method: Methods.PUT })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.PUT
+    })
   }
 
   delete: HTTPMethod = (url, options = {}) => {
-    return this.request(this.endpoint + url, { ...options, method: Methods.DELETE })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.DELETE
+    })
   }
 
   request = (url: string, options: Options = {}): Promise<XMLHttpRequest> => {
@@ -80,9 +91,9 @@ export default class HTTPTransport {
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key])
       })
-      
-      xhr.withCredentials = true;
-      xhr.responseType = 'json';
+
+      xhr.withCredentials = true
+      xhr.responseType = 'json'
 
       xhr.onload = () => {
         resolve(xhr)
@@ -97,6 +108,8 @@ export default class HTTPTransport {
         xhr.send()
       } else if (method === Methods.DELETE) {
         xhr.send()
+      } else if (data instanceof FormData) {
+        xhr.send(data)
       } else {
         xhr.send(JSON.stringify(data))
       }

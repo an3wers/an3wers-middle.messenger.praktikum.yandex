@@ -69,3 +69,15 @@ h4 {
     font-size: 0.825rem;
   }
 }
+
+/* Success */
+
+.success-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  &__message {
+    text-align: center;
+  }
+}

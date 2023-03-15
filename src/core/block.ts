@@ -144,6 +144,7 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   public setProps = (nextProps: P) => {
+    // console.log('set props', nextProps)
     if (!nextProps) {
       return
     }

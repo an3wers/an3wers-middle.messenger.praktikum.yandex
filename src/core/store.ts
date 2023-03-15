@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-classes-per-file */
 import { User } from '../components/Profile/types'
-import isEqual from '../helpers/isEqual'
+// import isEqual from '../helpers/isEqual'
 import set from '../helpers/set'
 import Block from './block'
 import { EventBus } from './eventBus'
@@ -10,6 +10,7 @@ interface State {
   user: {
     data?: User
     isError: null | string
+    isLoading: boolean
   }
 }
 
@@ -21,7 +22,8 @@ export class Store extends EventBus {
   private state: State = {
     user: {
       data: undefined,
-      isError: null
+      isError: null,
+      isLoading: false
     }
   }
 
@@ -49,7 +51,6 @@ export function withStore(mapStateToProps: (state: any) => any) {
 
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState())
-
           // if (!isEqual(state, newState)) {
           this.setProps({ ...newState })
           // }

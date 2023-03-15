@@ -40,6 +40,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   await authController.fetchUser()
+
   Router.start()
 
   if (user.data) {
@@ -51,24 +52,4 @@ window.addEventListener('DOMContentLoaded', async () => {
       Router.go(Routes.Index)
     }
   }
-
-  // try {
-  //   const res = await authController.fetchUser()
-  //   console.log(res)
-
-  //   Router.start()
-
-  //   // console.log(123)
-
-  //   if (!isProtectedRoute) {
-  //     Router.go(Routes.Settings)
-  //   }
-  // } catch (error) {
-  //   console.log(error)
-  //   Router.start()
-
-  //   if (isProtectedRoute) {
-  //     Router.go(Routes.Index)
-  //   }
-  // }
 })

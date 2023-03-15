@@ -1,15 +1,18 @@
+import userController from '../../../controllers/userController'
 import Block from '../../../core/block'
 import useValidate from '../../../core/validator'
 import { Button } from '../../UI/Button/button'
 import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
 import { Input } from '../../UI/Input/input'
 import { TextField } from '../../UI/TextField/textField'
-import { Profile } from '../types'
+import { User } from '../types'
 import template from './template.hbs'
 
 interface FormEditProfileProps {
-  profileData: Profile[]
+  // profileData: Profile[],
+  user: User
   closeHandler: (value: string) => void
+  switchHadler: (value: string) => void
 }
 
 export class FormEditProfile extends Block<FormEditProfileProps> {
@@ -29,7 +32,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'email',
         placeholder: 'Введите вашу почту',
-        value: this.getValueByFiledName('email'),
+        value: this.props.user.email,
         events: {
           focus: e => {
             if (e) {
@@ -63,7 +66,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'text',
         placeholder: 'Придумайте логин',
-        value: this.getValueByFiledName('login'),
+        value: this.props.user.login,
         events: {
           focus: e => {
             if (e) {
@@ -97,7 +100,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'text',
         placeholder: 'Введите ваше имя',
-        value: this.getValueByFiledName('first_name'),
+        value: this.props.user.first_name,
         events: {
           focus: e => {
             if (e) {
@@ -131,7 +134,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'text',
         placeholder: 'Введите вашу фамилию',
-        value: this.getValueByFiledName('second_name'),
+        value: this.props.user.second_name,
         events: {
           focus: e => {
             if (e) {
@@ -164,7 +167,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         id: 'display-name-profile-modal',
         styles: 'form-element',
         type: 'text',
-        value: this.getValueByFiledName('display_name'),
+        value: this.props.user.display_name,
         placeholder: 'Введите ваше имя в чате',
         events: {
           focus: e => {
@@ -199,7 +202,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'tel',
         placeholder: 'Например: +7(999)123-45-67',
-        value: this.getValueByFiledName('phone'),
+        value: this.props.user.phone,
         events: {
           focus: e => {
             if (e) {
@@ -233,15 +236,16 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
           e!.preventDefault()
 
           const data: { [key: string]: string } = {}
+          // const data: User
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
           )
 
           filedsArray.forEach(el => {
-            const value = (
+            const {value} = (
               el[1].children.input.getContent() as HTMLInputElement
-            ).value
+            )
             const { name } =
               el[1].children.input.getContent() as HTMLInputElement
 
@@ -250,21 +254,27 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
           })
 
           if (!Object.keys(this.errors).length) {
+
+            // Request
+
             console.log(data)
-            this.props.closeHandler('ModalProfile')
+            userController.changeProfile(data as unknown as User)
+            this.props.switchHadler('ModalProfile')
+
+            // this.props.closeHandler('ModalProfile')
           }
         }
       }
     })
   }
 
-  private getValueByFiledName(name: string) {
-    if (Array.isArray(this.props.profileData)) {
-      const current = this.props.profileData.find(el => el.name === name)
-      return current?.value ?? ''
-    }
-    return ''
-  }
+  // private getValueByFiledName(name: string) {
+  //   if (Array.isArray(this.props.profileData)) {
+  //     const current = this.props.profileData.find(el => el.name === name)
+  //     return current?.value ?? ''
+  //   }
+  //   return ''
+  // }
 
   private getValue(name: string) {
     return (

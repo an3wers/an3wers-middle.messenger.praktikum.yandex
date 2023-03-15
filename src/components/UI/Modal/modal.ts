@@ -6,6 +6,8 @@ import template from './template.hbs'
 interface ModalProps {
   title: string
   body: Block
+  isSuccessState?: boolean
+  successBody?: Block | string
 }
 
 export class Modal extends Block<ModalProps> {

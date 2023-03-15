@@ -1,3 +1,4 @@
+import userController from '../../../controllers/userController'
 import Block from '../../../core/block'
 import useValidate from '../../../core/validator'
 import { Button } from '../../UI/Button/button'
@@ -8,6 +9,7 @@ import template from './template.hbs'
 
 interface FormEditPasswordProps {
   closeHandler: (value: string) => void
+  switchHadler: (value: string) => void
 }
 
 export class FormEditPassword extends Block<FormEditPasswordProps> {
@@ -124,6 +126,7 @@ export class FormEditPassword extends Block<FormEditPasswordProps> {
       events: {
         click: e => {
           e!.preventDefault()
+
           const data = {} as { [key: string]: string }
 
           const filedsArray = Object.entries(this.children).filter(el =>
@@ -145,8 +148,22 @@ export class FormEditPassword extends Block<FormEditPasswordProps> {
           this.validatePasswordValues(data['password'], data['password_to'])
 
           if (!Object.keys(this.errors).length) {
-            console.log(data)
-            this.props.closeHandler('ModalPassword')
+            // Тут делаю запрос на изменение пароля
+            // eslint-disable-next-line camelcase
+            const { password_to, ...reqData } = data
+            // console.log(reqData)
+            // this.props.closeHandler('ModalPassword')
+            userController.changePassword({
+              oldPassword: reqData.password_old,
+              newPassword: reqData.password
+            })
+            this.props.switchHadler('ModalPassword')
+
+            // Очищаю value
+            filedsArray.forEach(el => {
+              ;(el[1].children.input.getContent() as HTMLInputElement).value =
+                ''
+            })
           }
         }
       }
