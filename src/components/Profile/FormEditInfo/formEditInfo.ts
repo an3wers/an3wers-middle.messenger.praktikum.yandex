@@ -9,7 +9,6 @@ import { User } from '../types'
 import template from './template.hbs'
 
 interface FormEditProfileProps {
-  // profileData: Profile[],
   user: User
   closeHandler: (value: string) => void
   switchHadler: (value: string) => void

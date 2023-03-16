@@ -6,6 +6,7 @@ import template from './template.hbs'
 
 interface FormChangeAvatarProps {
   closeHandler: (value: string) => void
+  switchHadler: (value: string) => void
 }
 
 export class FormChangeAvatar extends Block<FormChangeAvatarProps> {
@@ -28,19 +29,20 @@ export class FormChangeAvatar extends Block<FormChangeAvatarProps> {
       events: {
         click: e => {
           e!.preventDefault()
-          const { files } =
-          this.children.InputFile.getContent() as HTMLInputElement
-          
+
+          const inputEL =
+            this.children.InputFile.getContent() as HTMLInputElement
+
+          const { files } = inputEL
+
           if (files?.length) {
-            console.log('form submit')
             this.sendForm(files[0])
+            this.props.switchHadler('ModalChangeAvatar')
+            inputEL.value = ''
           }
         }
       }
     })
-
-    
-
   }
 
   sendForm(file: File) {
@@ -48,7 +50,6 @@ export class FormChangeAvatar extends Block<FormChangeAvatarProps> {
     data.append('avatar', file)
 
     userController.changeAvatar(data)
-
   }
 
   protected render(): DocumentFragment {

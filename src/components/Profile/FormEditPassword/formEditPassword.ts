@@ -148,11 +148,8 @@ export class FormEditPassword extends Block<FormEditPasswordProps> {
           this.validatePasswordValues(data['password'], data['password_to'])
 
           if (!Object.keys(this.errors).length) {
-            // Тут делаю запрос на изменение пароля
             // eslint-disable-next-line camelcase
             const { password_to, ...reqData } = data
-            // console.log(reqData)
-            // this.props.closeHandler('ModalPassword')
             userController.changePassword({
               oldPassword: reqData.password_old,
               newPassword: reqData.password

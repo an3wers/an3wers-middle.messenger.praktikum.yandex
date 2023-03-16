@@ -39,8 +39,14 @@ class UserController {
 
   async changeAvatar(data: FormData) {
     try {
-      const res =  (await this.api.changeAvatar(data)) as XMLHttpRequest
+      const res = (await this.api.changeAvatar(data)) as XMLHttpRequest
       console.log('res avatar', res.response)
+
+      if (res.status >= 400) {
+        store.set('user.isError', res.response.reason)
+      } else {
+        store.set('user.data', res.response)
+      }
     } catch (error) {
       console.log(error)
     }

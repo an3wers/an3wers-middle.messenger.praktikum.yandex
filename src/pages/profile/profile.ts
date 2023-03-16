@@ -2,11 +2,8 @@ import { Button } from '../../components/UI/Button/button'
 import { IconArrowBack } from '../../components/UI/Icons/20/ArrowBack/iconArrowBack'
 import Block from '../../core/block'
 import template from './template.hbs'
-// import { renderDom } from '../../core/renderDom'
 import { ProfileName } from '../../components/Profile/ProfileName/profileName'
 import { ProfileAvatar } from '../../components/Profile/ProfileAvatar/profileAvatar'
-// import avatar from '../../../static/images/default-avatar-profile.jpg'
-// import profileData from '../../markup/data/userProfile.js'
 import { ProfileInfo } from '../../components/Profile/ProfileInfo/profileInfo'
 import { Modal } from '../../components/UI/Modal/modal'
 import { FormEditProfile } from '../../components/Profile/FormEditInfo/formEditInfo'
@@ -24,7 +21,6 @@ class ProfilePageBase extends Block {
     this.children.ProfileAvatar = new ProfileAvatar({
       events: {
         click: () => {
-          // console.log('open modal avatar')
           this.children.ModalChangeAvatar.show()
         }
       }
@@ -109,8 +105,15 @@ class ProfilePageBase extends Block {
     this.children.ModalChangeAvatar = new Modal({
       title: 'Загрузить файл',
       body: new FormChangeAvatar({
-        closeHandler: this.closeModal.bind(this)
-      })
+        closeHandler: this.closeModal.bind(this),
+        switchHadler: this.switchStateModal.bind(this)
+      }),
+      successBody: new SuccessBlock({
+        message: 'Файл успешно загружен',
+        context: 'ModalChangeAvatar',
+        handler: this.closeModal.bind(this)
+      }),
+      isSuccessState: false
     })
   }
 
@@ -122,13 +125,6 @@ class ProfilePageBase extends Block {
     this.children[modal].setProps({ isSuccessState: true })
     this.children[modal].show()
   }
-
-  // protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-  //   // console.log('update profile')
-  //   // this.children.ProfileInfo.setProps({ user: newProps.data })
-  //   // console.log('update profile', newProps, this.props)
-  //   return true
-  // }
 
   protected render(): DocumentFragment {
     return this.compile(template, this.props)

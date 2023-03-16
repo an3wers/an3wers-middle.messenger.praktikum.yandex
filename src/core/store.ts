@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-classes-per-file */
+import { Chat } from '../api/types/chatTypes'
 import { User } from '../components/Profile/types'
 // import isEqual from '../helpers/isEqual'
 import set from '../helpers/set'
@@ -12,6 +13,10 @@ interface State {
     isError: null | string
     isLoading: boolean
   }
+  chatList: {
+    data: Chat[]
+  }
+  selectedChat: number
 }
 
 export enum StoreEvents {
@@ -24,7 +29,11 @@ export class Store extends EventBus {
       data: undefined,
       isError: null,
       isLoading: false
-    }
+    },
+    chatList: {
+      data: []
+    },
+    selectedChat: 0
   }
 
   public set(keypath: string, data: unknown) {
@@ -39,15 +48,17 @@ export class Store extends EventBus {
 
 const store = new Store()
 
-export function withStore(mapStateToProps: (state: any) => any) {
-  return function wrap(Component: typeof Block) {
+export function withStore<T>(mapStateToProps: (state: any) => any) {
+  return function wrap<P extends { [key: string]: any }>(
+    Component: typeof Block<T & P>
+  ) {
     let state: any
 
     return class WithStore extends Component {
-      constructor(props: any) {
+      constructor(props: Omit<P, keyof T>) {
         state = mapStateToProps(store.getState())
 
-        super({ ...props, ...state })
+        super({ ...(props as P), ...state })
 
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState())

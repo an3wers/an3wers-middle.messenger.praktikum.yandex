@@ -4,7 +4,6 @@ import template from './template.hbs'
 
 class ProfileInfoBase extends Block {
   protected render(): DocumentFragment {
-    console.log('rerender profile info', this.props)
     return this.compile(template, this.props)
   }
 }

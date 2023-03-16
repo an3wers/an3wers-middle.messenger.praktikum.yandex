@@ -88,9 +88,11 @@ export default class HTTPTransport {
         xhr.open(method, url)
       }
 
-      Object.keys(headers).forEach(key => {
-        xhr.setRequestHeader(key, headers[key])
-      })
+      if (!(data instanceof FormData)) {
+        Object.keys(headers).forEach(key => {
+          xhr.setRequestHeader(key, headers[key])
+        })
+      }
 
       xhr.withCredentials = true
       xhr.responseType = 'json'
