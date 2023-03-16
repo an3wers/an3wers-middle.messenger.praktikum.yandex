@@ -16,3 +16,7 @@ export interface Chat {
     content: string
   }
 }
+
+export interface CreateChatData {
+  title: string
+}

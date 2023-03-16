@@ -134,6 +134,16 @@
       }
     }
   }
+  &__empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    span {
+      color: var(--color-text-lightgray);
+    }
+  }
 }
 
 .app-main {
@@ -195,15 +205,13 @@
 }
 
 .chat-footer {
-  
   &__form {
     display: flex;
     gap: 1rem;
     align-items: center;
     flex-grow: 1;
-
   }
-  
+
   &__input {
     flex-grow: 1;
   }
@@ -272,6 +280,6 @@
     }
   }
   &__icon-check {
-      fill: var(--color-orange);
+    fill: var(--color-orange);
   }
 }

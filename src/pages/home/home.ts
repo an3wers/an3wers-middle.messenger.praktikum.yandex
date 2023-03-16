@@ -11,9 +11,20 @@ import { Input } from '../../components/UI/Input/input'
 import { Navigation } from '../../components/Navigation/navigation'
 import { ChatEmpty } from '../../components/Chat/ChatEmpty/chatEmpty'
 import chatsController from '../../controllers/chatsController'
-// import { withStore } from '../../core/store'
+import { withStore } from '../../core/store'
+import { Modal } from '../../components/UI/Modal/modal'
+import { SuccessBlock } from '../../components/UI/SuccessBlock/successBlock'
+import { ChatCreateForm } from '../../components/Chat/ChatCreateForm/chatCreateForm'
 
-export class HomePage extends Block {
+interface HomePageProps {
+  isSelected: boolean
+}
+
+class HomePageBase extends Block<HomePageProps> {
+
+  constructor(props: HomePageProps) {
+    super(props)
+  }
 
   protected init(): void {
     this.children.Navigation = new Navigation({})
@@ -48,10 +59,25 @@ export class HomePage extends Block {
       label: 'Создать чат',
       events: {
         click: () => {
-          console.log('click create chat button')
+          // console.log('click create chat button')
         }
       }
     })
+
+    this.children.ModalCreateChat = new Modal({
+      title: 'Создать чат',
+      body: new ChatCreateForm({
+        closeHandler: this.closeModal.bind(this),
+        switchHadler: this.switchStateModal.bind(this)
+      }),
+      successBody: new SuccessBlock({
+        message: 'Чат успешно создан, теперь добавьте пользователей и загрузите аватарку',
+        context: 'ModalCreateChat',
+        handler: this.closeModal.bind(this)
+      }),
+      isSuccessState: false
+    })
+
     this.children.ChatSelected = new ChatSelected({})
     this.children.Empty = new ChatEmpty({})
 
@@ -60,10 +86,23 @@ export class HomePage extends Block {
 
   }
 
+  protected switchStateModal(modal: string) {
+    this.children[modal].setProps({ isSuccessState: true })
+    this.children[modal].show()
+  }
+
+  protected closeModal(modal: string) {
+    this.children[modal].hide()
+  }
+
   protected render(): DocumentFragment {
-    return this.compile(template, { state: true })
+    return this.compile(template, this.props)
   }
 }
 
-// const withChats = withStore(state => ({...state.chatList}))
-// export const HomePage = withChats(HomePageBase)
+const withChats = withStore(state => {
+  return {
+    isSelected: !!state.selectedChat
+  }
+})
+export const HomePage = withChats(HomePageBase)

@@ -14,7 +14,9 @@ interface State {
     isLoading: boolean
   }
   chatList: {
-    data: Chat[]
+    data: Chat[],
+    isError: null | string,
+    isLoading: boolean
   }
   selectedChat: number
 }
@@ -31,7 +33,9 @@ export class Store extends EventBus {
       isLoading: false
     },
     chatList: {
-      data: []
+      data: [],
+      isError: null,
+      isLoading: false
     },
     selectedChat: 0
   }
