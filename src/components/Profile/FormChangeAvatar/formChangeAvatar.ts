@@ -31,7 +31,7 @@ export class FormChangeAvatar extends Block<FormChangeAvatarProps> {
           e!.preventDefault()
 
           const inputEL =
-            this.children.InputFile.getContent() as HTMLInputElement
+            (this.children.InputFile as Block).getContent() as HTMLInputElement
 
           const { files } = inputEL
 

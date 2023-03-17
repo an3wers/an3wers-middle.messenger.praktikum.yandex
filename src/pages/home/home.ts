@@ -16,16 +16,12 @@ import { Modal } from '../../components/UI/Modal/modal'
 import { SuccessBlock } from '../../components/UI/SuccessBlock/successBlock'
 import { ChatCreateForm } from '../../components/Chat/ChatCreateForm/chatCreateForm'
 
-interface HomePageProps {
-  isSelected: boolean
-}
+// interface HomePageProps {
+//   isSelected: boolean
+// }
 
-class HomePageBase extends Block<HomePageProps> {
-
-  constructor(props: HomePageProps) {
-    super(props)
-  }
-
+class HomePageBase extends Block {
+  
   protected init(): void {
     this.children.Navigation = new Navigation({})
 
@@ -50,9 +46,9 @@ class HomePageBase extends Block<HomePageProps> {
       type: 'search',
       name: 'search'
     })
-    
+
     this.children.ContactsList = new ContactsList({})
-    
+
     this.children.CreateChatButton = new Button({
       styles: 'btn btn_small btn_light',
       icon: new IconPlus({ styles: 'btn-icon btn-icon_light' }),
@@ -60,6 +56,10 @@ class HomePageBase extends Block<HomePageProps> {
       events: {
         click: () => {
           // console.log('click create chat button')
+          if (!Array.isArray(this.children.ModalCreateChat)) {
+            this.children.ModalCreateChat.setProps({ isSuccessState: false })
+            this.children.ModalCreateChat.show()
+          }
         }
       }
     })
@@ -71,7 +71,8 @@ class HomePageBase extends Block<HomePageProps> {
         switchHadler: this.switchStateModal.bind(this)
       }),
       successBody: new SuccessBlock({
-        message: 'Чат успешно создан, теперь добавьте пользователей и загрузите аватарку',
+        message:
+          'Чат успешно создан, теперь добавьте пользователей и загрузите аватарку',
         context: 'ModalCreateChat',
         handler: this.closeModal.bind(this)
       }),
@@ -83,16 +84,15 @@ class HomePageBase extends Block<HomePageProps> {
 
     // get chats
     chatsController.getChats()
-
   }
 
   protected switchStateModal(modal: string) {
-    this.children[modal].setProps({ isSuccessState: true })
-    this.children[modal].show()
+    ;(this.children[modal] as Block).setProps({ isSuccessState: true })
+    ;(this.children[modal] as Block).show()
   }
 
   protected closeModal(modal: string) {
-    this.children[modal].hide()
+    ;(this.children[modal] as Block).hide()
   }
 
   protected render(): DocumentFragment {

@@ -40,15 +40,17 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   await authController.fetchUser()
-
-  Router.start()
-
+  
+  
   if (user.data) {
+    Router.start()
     if (!isProtectedRoute) {
       Router.go(Routes.Settings)
     }
   } else {
+    Router.start()
     if (isProtectedRoute) {
+      console.log(123)
       Router.go(Routes.Index)
     }
   }

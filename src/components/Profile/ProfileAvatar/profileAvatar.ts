@@ -24,7 +24,7 @@ export class ProfileAvatarBase extends Block<ProfileAvatarProps> {
 
 const withUserAvatar = withStore(state => {
   return {
-    avatar: state.user.data.avatar
+    avatar: state.user?.data?.avatar
       ? `https://ya-praktikum.tech/api/v2/resources${state.user.data.avatar}`
       : defaultAvatar
   }

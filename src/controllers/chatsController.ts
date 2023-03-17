@@ -25,13 +25,22 @@ class ChatsController {
 
   async createChat(data: CreateChatData) {
     try {
-      const res = await this.api.createChat(data) as XMLHttpRequest
-      console.log('Create chat', res)
+      const res = (await this.api.createChat(data)) as XMLHttpRequest
+
+      if (res.status >= 400) {
+        store.set('chatList.isError', res.response.reason)
+      } else {
+        console.log('Create chat', res)
+        await this.getChats()
+      }
     } catch (error) {
       console.log(error)
     }
   }
 
+  selectChat(id: number) {
+    store.set('selectedChat', id)
+  }
 }
 
 export default new ChatsController()

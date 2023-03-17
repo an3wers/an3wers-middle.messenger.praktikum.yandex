@@ -21,7 +21,9 @@ class ProfilePageBase extends Block {
     this.children.ProfileAvatar = new ProfileAvatar({
       events: {
         click: () => {
-          this.children.ModalChangeAvatar.show()
+          if(!Array.isArray(this.children.ModalChangeAvatar)) {
+            this.children.ModalChangeAvatar.show()
+          }
         }
       }
     })
@@ -37,8 +39,10 @@ class ProfilePageBase extends Block {
       styles: 'btn btn_regular btn_secondary',
       events: {
         click: () => {
-          this.children.ModalProfile.setProps({ isSuccessState: false })
-          this.children.ModalProfile.show()
+          if (!Array.isArray(this.children.ModalProfile)) {
+            this.children.ModalProfile.setProps({ isSuccessState: false })
+            this.children.ModalProfile.show()
+          }
         }
       }
     })
@@ -47,8 +51,10 @@ class ProfilePageBase extends Block {
       styles: 'btn btn_regular btn_secondary',
       events: {
         click: () => {
-          this.children.ModalPassword.setProps({ isSuccessState: false })
-          this.children.ModalPassword.show()
+          if (!Array.isArray(this.children.ModalPassword)) {
+            this.children.ModalPassword.setProps({ isSuccessState: false })
+            this.children.ModalPassword.show()
+          }
         }
       }
     })
@@ -118,12 +124,12 @@ class ProfilePageBase extends Block {
   }
 
   protected closeModal(modal: string) {
-    this.children[modal].hide()
+    ;(this.children[modal] as Block).hide()
   }
 
   protected switchStateModal(modal: string) {
-    this.children[modal].setProps({ isSuccessState: true })
-    this.children[modal].show()
+    ;(this.children[modal] as Block).setProps({ isSuccessState: true })
+    ;(this.children[modal] as Block).show()
   }
 
   protected render(): DocumentFragment {

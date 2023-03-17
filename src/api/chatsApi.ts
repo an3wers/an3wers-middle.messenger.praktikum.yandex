@@ -7,11 +7,11 @@ class ChatsAPI extends BaseAPI {
   }
 
   getChats() {
-    return this.http.get('')
+    return this.http.get('/')
   }
 
   createChat(data: CreateChatData) {
-    return this.http.post('', { data })
+    return this.http.post('/', { data })
   }
 
   create = undefined

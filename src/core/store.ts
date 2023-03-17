@@ -14,8 +14,8 @@ interface State {
     isLoading: boolean
   }
   chatList: {
-    data: Chat[],
-    isError: null | string,
+    data: Chat[]
+    isError: null | string
     isLoading: boolean
   }
   selectedChat: number
@@ -66,8 +66,11 @@ export function withStore<T>(mapStateToProps: (state: any) => any) {
 
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState())
+
+          // console.log('isEqual', isEqual(state, newState))
+
           // if (!isEqual(state, newState)) {
-          this.setProps({ ...newState })
+            this.setProps({ ...newState })
           // }
 
           state = newState

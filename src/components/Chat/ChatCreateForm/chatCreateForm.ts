@@ -1,3 +1,4 @@
+import chatsController from '../../../controllers/chatsController'
 import Block from '../../../core/block'
 import useValidate from '../../../core/validator'
 import { Button } from '../../UI/Button/button'
@@ -34,7 +35,7 @@ export class ChatCreateForm extends Block<ChatCreateFormProps> {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.ChatTitleField
+                this.children.ChatTitleField as Block
               )
             }
           }
@@ -51,18 +52,19 @@ export class ChatCreateForm extends Block<ChatCreateFormProps> {
           e!.preventDefault()
 
           const data = {} as { [key: string]: string }
-          const inputEl =
-            this.children.ChatTitleField.children.input.getContent() as HTMLInputElement
+          const inputEl = (
+            (this.children.ChatTitleField as Block).children.input as Block
+          ).getContent() as HTMLInputElement
 
           const { value, name } = inputEl
 
-          this.validateHandler(value, this.children.ChatTitleField)
+          this.validateHandler(value, this.children.ChatTitleField as Block)
           data[name] = value
 
           if (!Object.keys(this.errors).length) {
-            console.log(data)
-
-            // this.props.switchHadler('ModalCreateChat')
+            console.log('New chat', data)
+            chatsController.createChat({ title: data.chat_title })
+            this.props.switchHadler('ModalCreateChat')
 
             // Очищаю value
             inputEl.value = ''
@@ -79,14 +81,16 @@ export class ChatCreateForm extends Block<ChatCreateFormProps> {
   }
 
   private validateHandler(value: string, field: Block) {
-    const { name } = field.children.input.getContent() as HTMLInputElement
+    const { name } = (
+      field.children.input as Block
+    ).getContent() as HTMLInputElement
 
-    const error = useValidate({ value, type: name })
-    if (Object.keys(error).length) {
-      this.errors[name] = error[name]
-      field.children.error.setProps({ text: error[name] })
+    const err = useValidate({ value, type: name })
+    if (Object.keys(err).length) {
+      this.errors[name] = err[name]
+      ;(field.children.error as Block).setProps({ text: err[name] })
     } else {
-      field.children.error.setProps({ text: null })
+      ;(field.children.error as Block).setProps({ text: null })
       delete this.errors[name]
     }
   }

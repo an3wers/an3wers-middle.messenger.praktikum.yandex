@@ -31,14 +31,14 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'email',
         placeholder: 'Введите вашу почту',
-        value: this.props.user.email,
+        value: this.props?.user?.email,
         events: {
           focus: e => {
             if (e) {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.EmailField
+                this.children.EmailField as Block
               )
             }
           },
@@ -47,7 +47,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.EmailField
+                this.children.EmailField as Block
               )
             }
           }
@@ -65,14 +65,14 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'text',
         placeholder: 'Придумайте логин',
-        value: this.props.user.login,
+        value: this.props?.user?.login,
         events: {
           focus: e => {
             if (e) {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.LoginField
+                this.children.LoginField as Block
               )
             }
           },
@@ -81,7 +81,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.LoginField
+                this.children.LoginField as Block
               )
             }
           }
@@ -99,14 +99,14 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'text',
         placeholder: 'Введите ваше имя',
-        value: this.props.user.first_name,
+        value: this.props?.user?.first_name,
         events: {
           focus: e => {
             if (e) {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.FirstNameField
+                this.children.FirstNameField as Block
               )
             }
           },
@@ -115,7 +115,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.FirstNameField
+                this.children.FirstNameField as Block
               )
             }
           }
@@ -133,14 +133,14 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'text',
         placeholder: 'Введите вашу фамилию',
-        value: this.props.user.second_name,
+        value: this.props?.user?.second_name,
         events: {
           focus: e => {
             if (e) {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.SecondNameField
+                this.children.SecondNameField as Block
               )
             }
           },
@@ -149,7 +149,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.SecondNameField
+                this.children.SecondNameField as Block
               )
             }
           }
@@ -166,7 +166,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         id: 'display-name-profile-modal',
         styles: 'form-element',
         type: 'text',
-        value: this.props.user.display_name,
+        value: this.props?.user?.display_name,
         placeholder: 'Введите ваше имя в чате',
         events: {
           focus: e => {
@@ -174,7 +174,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.DisplayNameField
+                this.children.DisplayNameField as Block
               )
             }
           },
@@ -183,7 +183,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.DisplayNameField
+                this.children.DisplayNameField as Block
               )
             }
           }
@@ -201,14 +201,14 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
         styles: 'form-element',
         type: 'tel',
         placeholder: 'Например: +7(999)123-45-67',
-        value: this.props.user.phone,
+        value: this.props?.user?.phone,
         events: {
           focus: e => {
             if (e) {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.PhoneField
+                this.children.PhoneField as Block
               )
             }
           },
@@ -217,7 +217,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
               const name = (e.target as HTMLInputElement).name
               this.validateHandler(
                 this.getValue(name),
-                this.children.PhoneField
+                this.children.PhoneField as Block
               )
             }
           }
@@ -241,39 +241,28 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
             el[0].includes('Field')
           )
 
-          filedsArray.forEach(el => {
-            const {value} = (
-              el[1].children.input.getContent() as HTMLInputElement
-            )
-            const { name } =
-              el[1].children.input.getContent() as HTMLInputElement
+          filedsArray.forEach(([_, val]) => {
+            if (!Array.isArray(val)) {
+              const { value, name } = (
+                val.children.input as Block
+              ).getContent() as HTMLInputElement
 
-            this.validateHandler(value, el[1])
-            data[name] = value
+              this.validateHandler(value, val)
+              data[name] = value
+            }
           })
 
           if (!Object.keys(this.errors).length) {
-
             // Request
 
             console.log(data)
             userController.changeProfile(data as unknown as User)
             this.props.switchHadler('ModalProfile')
-
-            // this.props.closeHandler('ModalProfile')
           }
         }
       }
     })
   }
-
-  // private getValueByFiledName(name: string) {
-  //   if (Array.isArray(this.props.profileData)) {
-  //     const current = this.props.profileData.find(el => el.name === name)
-  //     return current?.value ?? ''
-  //   }
-  //   return ''
-  // }
 
   private getValue(name: string) {
     return (
@@ -282,14 +271,16 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
   }
 
   private validateHandler(value: string, field: Block) {
-    const { name } = field.children.input.getContent() as HTMLInputElement
+    const { name } = (
+      field.children.input as Block
+    ).getContent() as HTMLInputElement
 
-    const error = useValidate({ value, type: name })
-    if (Object.keys(error).length) {
-      this.errors[name] = error[name]
-      field.children.error.setProps({ text: error[name] })
+    const err = useValidate({ value, type: name })
+    if (Object.keys(err).length) {
+      this.errors[name] = err[name]
+      ;(field.children.error as Block).setProps({ text: err[name] })
     } else {
-      field.children.error.setProps({ text: null })
+      (field.children.error as Block).setProps({ text: null })
       delete this.errors[name]
     }
   }
