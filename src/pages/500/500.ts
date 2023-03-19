@@ -1,6 +1,6 @@
 import { Button } from '../../components/UI/Button/button'
 import Block from '../../core/block'
-import { renderDom } from '../../core/renderDom'
+// import { renderDom } from '../../core/renderDom'
 import template from './template.hbs'
 
 export class ServerErrorPage extends Block {
@@ -10,7 +10,7 @@ export class ServerErrorPage extends Block {
       label: 'Назад к чатам',
       events: {
         click: () => {
-          renderDom('#root', 'home')
+          // renderDom('#root', 'home')
         }
       }
     })

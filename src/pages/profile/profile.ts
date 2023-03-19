@@ -21,16 +21,14 @@ class ProfilePageBase extends Block {
     this.children.ProfileAvatar = new ProfileAvatar({
       events: {
         click: () => {
-          if(!Array.isArray(this.children.ModalChangeAvatar)) {
+          if (!Array.isArray(this.children.ModalChangeAvatar)) {
             this.children.ModalChangeAvatar.show()
           }
         }
       }
     })
 
-    this.children.ProfileName = new ProfileName({
-      name: this.props.data?.first_name
-    })
+    this.children.ProfileName = new ProfileName({})
 
     this.children.ProfileInfo = new ProfileInfo({})
 

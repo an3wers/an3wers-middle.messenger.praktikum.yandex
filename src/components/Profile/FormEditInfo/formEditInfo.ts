@@ -235,7 +235,6 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
           e!.preventDefault()
 
           const data: { [key: string]: string } = {}
-          // const data: User
 
           const filedsArray = Object.entries(this.children).filter(el =>
             el[0].includes('Field')
@@ -253,9 +252,6 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
           })
 
           if (!Object.keys(this.errors).length) {
-            // Request
-
-            console.log(data)
             userController.changeProfile(data as unknown as User)
             this.props.switchHadler('ModalProfile')
           }
@@ -280,7 +276,7 @@ export class FormEditProfile extends Block<FormEditProfileProps> {
       this.errors[name] = err[name]
       ;(field.children.error as Block).setProps({ text: err[name] })
     } else {
-      (field.children.error as Block).setProps({ text: null })
+      ;(field.children.error as Block).setProps({ text: null })
       delete this.errors[name]
     }
   }

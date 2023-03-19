@@ -1,23 +1,24 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable default-case */
-// import { renderDom, render } from './core/renderDom'
 import Router from './core/router/router'
 import { SigninPage } from './pages/signin/signin'
 import { SignupPage } from './pages/signup/signup'
 import { HomePage } from './pages/home/home'
 import { ProfilePage } from './pages/profile/profile'
 import authController from './controllers/authController'
-import store from './core/store'
+import { NotfoundPage } from './pages/400/400'
 
 // window.addEventListener('DOMContentLoaded', () => {
 //   renderDom('#root', 'home')
 // })
 
 // eslint-disable-next-line no-shadow
-export const enum Routes {
+export enum Routes {
   Index = '/',
   Signup = '/sign-up',
   Settings = '/settings',
-  Messenger = '/messenger'
+  Messenger = '/messenger',
+  NotFound = '/404'
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -25,32 +26,38 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Signup, SignupPage)
     .use(Routes.Settings, ProfilePage)
     .use(Routes.Messenger, HomePage)
+    .use(Routes.NotFound, NotfoundPage)
 
   let isProtectedRoute = true
 
-  const { user } = store.getState()
+  const path = window.location.pathname
 
-  switch (window.location.pathname) {
+  switch (path) {
     case Routes.Index:
     case Routes.Signup:
+    case Routes.NotFound:
       isProtectedRoute = false
       break
-    default:
+    case Routes.Messenger:
+    case Routes.Settings:
       isProtectedRoute = true
+      break
+    default:
+      Router.go(Routes.NotFound)
   }
 
-  await authController.fetchUser()
-  
-  
-  if (user.data) {
+  try {
+    await authController.fetchUser()
+
     Router.start()
+
     if (!isProtectedRoute) {
-      Router.go(Routes.Settings)
+      Router.go(Routes.Messenger)
     }
-  } else {
+  } catch (e) {
     Router.start()
+
     if (isProtectedRoute) {
-      console.log(123)
       Router.go(Routes.Index)
     }
   }

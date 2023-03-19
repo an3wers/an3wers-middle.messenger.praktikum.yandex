@@ -1,12 +1,11 @@
-import { Chat } from '../../../api/types/chatTypes'
 import Block from '../../../core/block'
-import { withStore } from '../../../core/store'
+import { useDateFormatter } from '../../../helpers/dateFormatter'
 import template from './template.hbs'
 
 interface ChatItemProps {
   id: number
-  title: string,
-  avatar: string,
+  title: string
+  avatar: string
   unread_count: number
   last_message: {
     user: {
@@ -20,24 +19,26 @@ interface ChatItemProps {
     time: string
     content: string
   }
-  itemSelected?: Chat
+  isActive?: boolean
   events: {
     click: () => void
   }
 }
 
-class ChatItemBase extends Block<ChatItemProps> {
+export class ChatItem extends Block<ChatItemProps> {
   constructor(props: ChatItemProps) {
     super(props)
   }
 
+  protected init(): void {
+    if (this.props.last_message) {
+      this.props.last_message.time = useDateFormatter(this.props.last_message.time)
+    }
+  }
+
   protected render(): DocumentFragment {
-    return this.compile(template, {...this.props, isActive: this.props.id === this.props.itemSelected?.id})
+    return this.compile(template, {
+      ...this.props,
+    })
   }
 }
-
-const withItem = withStore(state => {
-  return {itemSelected: state.chatList.data.find((el: Chat) => el.id === state.selectedChat) || {}}
-})
-
-export const ChatItem = withItem(ChatItemBase)

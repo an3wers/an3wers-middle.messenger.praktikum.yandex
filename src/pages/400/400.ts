@@ -1,18 +1,13 @@
-import { Button } from '../../components/UI/Button/button'
+import { Link } from '../../components/UI/Link/link'
 import Block from '../../core/block'
-import { renderDom } from '../../core/renderDom'
 import template from './template.hbs'
 
 export class NotfoundPage extends Block {
   protected init(): void {
-    this.children.BackButton = new Button({
+    this.children.BackButton = new Link({
       styles: 'btn btn_regular btn_secondary mt-4',
       label: 'Назад к чатам',
-      events: {
-        click: () => {
-          renderDom('#root', 'home')
-        }
-      }
+      to: '/messenger'
     })
   }
   protected render(): DocumentFragment {

@@ -1,5 +1,9 @@
 import BaseAPI from './baseApi'
-import { ChangePasswordData, ChangeProfileData } from './types/userTypes'
+import {
+  ChangePasswordData,
+  ChangeProfileData,
+  SearchUserData
+} from './types/userTypes'
 
 class UserAPI extends BaseAPI {
   constructor() {
@@ -16,6 +20,10 @@ class UserAPI extends BaseAPI {
 
   changePassword(data: ChangePasswordData) {
     return this.http.put('/password', { data })
+  }
+
+  searchUserByLogin(data: SearchUserData) {
+    return this.http.post('/search', { data })
   }
 
   create = undefined

@@ -63,19 +63,6 @@ abstract class Block<P extends { [key: string]: any } = any> {
     props: P
     children: Record<string, Block | Block[]>
   } {
-    // const children = {} as Children
-    // const props = {} as { [key: string]: any }
-
-    // Object.entries(propsAndChildren).forEach(([key, value]) => {
-    //   if (value instanceof Block) {
-    //     children[key] = value
-    //   } else {
-    //     props[key] = value
-    //   }
-    // })
-
-    // return { children, props }
-
     const props: Record<string, unknown> = {}
     const children: Record<string, Block | Block[]> = {}
 

@@ -48,24 +48,26 @@ class AuthController {
     }
   }
   async fetchUser() {
-    // const res = (await this.api.getUser()) as XMLHttpRequest
-    // if (res.status >= 400) {
-    //   store.set('user.isError', res.response.reason)
-    // } else {
-    //   store.set('user.data', res.response)
-    // }
-    try {
-      const user = (await this.api.getUser()) as XMLHttpRequest
+    const user = (await this.api.getUser()) as XMLHttpRequest
 
-      if (user.status >= 400) {
-        throw new Error(user.response.reason)
-      } else {
-        store.set('user.data', user.response)
-      }
-
-    } catch (error) {
-      console.log(error)
+    if (user.status >= 400) {
+      throw new Error(user.response.reason)
+    } else {
+      store.set('user.data', user.response)
     }
+
+    // store.set('user.data', user.response)
+    // try {
+    //   const user = (await this.api.getUser()) as XMLHttpRequest
+
+    //   if (user.status >= 400) {
+    //     throw new Error(user.response.reason)
+    //   } else {
+    //     store.set('user.data', user.response)
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 }
 

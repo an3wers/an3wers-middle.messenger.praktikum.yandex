@@ -99,27 +99,20 @@ export class SigninForm extends Block {
             el[0].includes('Field')
           )
 
-          filedsArray.forEach( ([_, val]) => {
-
-            if(!Array.isArray(val)) {
+          filedsArray.forEach(([_, val]) => {
+            if (!Array.isArray(val)) {
               const { value, name } = (
-              (val.children.input as Block).getContent() as HTMLInputElement
-            )
-           
-            this.validateHandler(value, val)
+                val.children.input as Block
+              ).getContent() as HTMLInputElement
 
-            data[name as keyof SigninData] = value
+              this.validateHandler(value, val)
+
+              data[name as keyof SigninData] = value
             }
-
-            
           })
 
           if (!Object.keys(this.errors).length) {
-            
-            // Вызываем контроллер, который будет дергать api
-            console.log(data)
             authController.singin(data)
-            
           }
         }
       }
@@ -138,7 +131,9 @@ export class SigninForm extends Block {
   }
 
   private validateHandler(value: string, field: Block) {
-    const { name } = (field.children.input as Block).getContent() as HTMLInputElement
+    const { name } = (
+      field.children.input as Block
+    ).getContent() as HTMLInputElement
     const err = useValidate({ value, type: name })
     if (Object.keys(err).length) {
       this.errors[name] = err[name]

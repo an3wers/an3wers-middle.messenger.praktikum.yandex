@@ -1,8 +1,9 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-classes-per-file */
 import { Chat } from '../api/types/chatTypes'
+import { MessageType } from '../api/types/messagesTypes'
 import { User } from '../components/Profile/types'
-// import isEqual from '../helpers/isEqual'
+import isEqual from '../helpers/isEqual'
 import set from '../helpers/set'
 import Block from './block'
 import { EventBus } from './eventBus'
@@ -19,6 +20,7 @@ interface State {
     isLoading: boolean
   }
   selectedChat: number
+  messages: { [key: number]: MessageType[] }
 }
 
 export enum StoreEvents {
@@ -37,7 +39,8 @@ export class Store extends EventBus {
       isError: null,
       isLoading: false
     },
-    selectedChat: 0
+    selectedChat: 0,
+    messages: {}
   }
 
   public set(keypath: string, data: unknown) {
@@ -51,6 +54,9 @@ export class Store extends EventBus {
 }
 
 const store = new Store()
+
+// @ts-ignore
+window.store = store
 
 export function withStore<T>(mapStateToProps: (state: any) => any) {
   return function wrap<P extends { [key: string]: any }>(
@@ -67,13 +73,14 @@ export function withStore<T>(mapStateToProps: (state: any) => any) {
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState())
 
+          // console.log('New and old',state, newState)
           // console.log('isEqual', isEqual(state, newState))
 
-          // if (!isEqual(state, newState)) {
+          if (!isEqual(state, newState)) {
             this.setProps({ ...newState })
-          // }
+          }
 
-          state = newState
+          // state = newState
         })
       }
     }

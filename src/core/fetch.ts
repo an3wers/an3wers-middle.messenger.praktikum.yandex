@@ -81,7 +81,8 @@ export default class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
 
-      if (method === Methods.GET || method === Methods.DELETE) {
+      // if (method === Methods.GET || method === Methods.DELETE) {
+      if (method === Methods.GET) {
         url = !!data ? `${url}${queryStringify(data)}` : url
         xhr.open(method, url)
       } else {
@@ -109,7 +110,7 @@ export default class HTTPTransport {
       if (method === Methods.GET) {
         xhr.send()
       } else if (method === Methods.DELETE) {
-        xhr.send()
+        xhr.send(JSON.stringify(data))
       } else if (data instanceof FormData) {
         xhr.send(data)
       } else {

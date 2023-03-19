@@ -1,4 +1,5 @@
 import { Chat } from '../../../api/types/chatTypes'
+import { MessageType } from '../../../api/types/messagesTypes'
 import chatsController from '../../../controllers/chatsController'
 import Block from '../../../core/block'
 import { withStore } from '../../../core/store'
@@ -6,13 +7,13 @@ import { ChatItem } from '../ChatItem/chatItem'
 // import { Contact } from '../types'
 import template from './temaplte.hbs'
 
-interface ContactsListProps {
-  // data: Contact[]
-  chatList?: Chat[]
+interface ChatsListProps {
+  chatList?: Chat[],
+  chatSelectedId?: number
 }
 
-class ContactsListBase extends Block<ContactsListProps> {
-  constructor(props: ContactsListProps) {
+class ChatsListBase extends Block<ChatsListProps> {
+  constructor(props: ChatsListProps) {
     super(props)
   }
 
@@ -20,14 +21,13 @@ class ContactsListBase extends Block<ContactsListProps> {
     this.children.Items = this.getChats(this.props)
   }
 
-  protected getChats(props: ContactsListProps) {
+  protected getChats(props: ChatsListProps) {
     return props.chatList!.map(item => {
-      console.log('itemItem', item)
       return new ChatItem({
         ...item,
+        isActive: props.chatSelectedId === item.id,
         events: {
           click: () => {
-            // console.log('Click item', item.id)
             chatsController.selectChat(item.id)
           }
         }
@@ -36,8 +36,8 @@ class ContactsListBase extends Block<ContactsListProps> {
   }
 
   protected componentDidUpdate(
-    oldProps: ContactsListProps,
-    newProps: ContactsListProps
+    oldProps: ChatsListProps,
+    newProps: ChatsListProps
   ): boolean {
     this.children.Items = this.getChats(newProps)
 
@@ -52,5 +52,5 @@ class ContactsListBase extends Block<ContactsListProps> {
   }
 }
 
-const withChats = withStore(state => ({ chatList: [...state.chatList.data] }))
-export const ContactsList = withChats(ContactsListBase)
+const withChats = withStore(state => ({chatSelectedId: state.selectedChat, chatList: [...state.chatList.data] }))
+export const ChatsList = withChats(ChatsListBase)

@@ -17,7 +17,7 @@ class SignupPageBase extends Block {
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-    this.children.Error.setProps({ message: newProps.isError })
+    (this.children.Error as Block).setProps({ message: newProps.isError })
     return true
   }
 

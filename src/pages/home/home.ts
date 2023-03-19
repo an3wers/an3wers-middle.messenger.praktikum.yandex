@@ -1,7 +1,6 @@
 import Block from '../../core/block'
 import template from './template.hbs'
-// import data from '../../markup/data/contacts.js'
-import { ContactsList } from '../../components/Chat/ContactsList/contsctsList'
+import { ChatsList } from '../../components/Chat/ChatsList/chatsList'
 import { IconSettings } from '../../components/UI/Icons/20/Settings/iconSettings'
 import { IconSearch } from '../../components/UI/Icons/20/Search/iconSearch'
 import { IconPlus } from '../../components/UI/Icons/20/Plus/iconPlus'
@@ -15,27 +14,21 @@ import { withStore } from '../../core/store'
 import { Modal } from '../../components/UI/Modal/modal'
 import { SuccessBlock } from '../../components/UI/SuccessBlock/successBlock'
 import { ChatCreateForm } from '../../components/Chat/ChatCreateForm/chatCreateForm'
-
-// interface HomePageProps {
-//   isSelected: boolean
-// }
+import { Link } from '../../components/UI/Link/link'
+import { Routes } from '../../app'
 
 class HomePageBase extends Block {
-  
   protected init(): void {
+
     this.children.Navigation = new Navigation({})
 
-    this.children.ProfileButton = new Button({
+    this.children.ProfileButton = new Link({
       styles: 'btn btn_small btn_light',
-      icon: new IconSettings({ styles: 'btn-icon btn-icon_light' }),
       label: 'Профиль',
-      events: {
-        click: () => {
-          // renderDom('#root', 'profile')
-          // router.go()
-        }
-      }
+      to: Routes.Settings,
+      icon: new IconSettings({ styles: 'btn-icon btn-icon_light' })
     })
+
     this.children.IconSearch = new IconSearch({
       styles: 'search-sidebar__icon'
     })
@@ -47,7 +40,7 @@ class HomePageBase extends Block {
       name: 'search'
     })
 
-    this.children.ContactsList = new ContactsList({})
+    this.children.ChatsList = new ChatsList({})
 
     this.children.CreateChatButton = new Button({
       styles: 'btn btn_small btn_light',
@@ -55,7 +48,6 @@ class HomePageBase extends Block {
       label: 'Создать чат',
       events: {
         click: () => {
-          // console.log('click create chat button')
           if (!Array.isArray(this.children.ModalCreateChat)) {
             this.children.ModalCreateChat.setProps({ isSuccessState: false })
             this.children.ModalCreateChat.show()
@@ -102,7 +94,7 @@ class HomePageBase extends Block {
 
 const withChats = withStore(state => {
   return {
-    isSelected: !!state.selectedChat
+    isSelected: state.selectedChat
   }
 })
 export const HomePage = withChats(HomePageBase)

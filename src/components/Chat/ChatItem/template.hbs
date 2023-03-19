@@ -1,5 +1,4 @@
 <div class="contacts-sidebar__item contacts-item {{#if isActive}}contacts-item_active{{/if}}">
-  
   <div class="contacts-item__icon">
     <span class="contacts-item__icon_default"></span>
   </div>
@@ -13,7 +12,9 @@
         {{!-- <span class="text-600 text-base contacts-item__isSelf contacts-item__isSelf_{{}}">Вы:</span> --}}
         {{last_message.content}}
       </div>
-      <div class="contacts-item__badge contacts-item__badge_">{{unread_count}}</div>
+      {{#if unread_count}}
+        <div class="contacts-item__badge contacts-item__badge_visible">{{unread_count}}</div>
+      {{/if}}
     </div>
   </div>
 </div>
