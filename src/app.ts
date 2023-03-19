@@ -8,10 +8,6 @@ import { ProfilePage } from './pages/profile/profile'
 import authController from './controllers/authController'
 import { NotfoundPage } from './pages/400/400'
 
-// window.addEventListener('DOMContentLoaded', () => {
-//   renderDom('#root', 'home')
-// })
-
 // eslint-disable-next-line no-shadow
 export enum Routes {
   Index = '/',

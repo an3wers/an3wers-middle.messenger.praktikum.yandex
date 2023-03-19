@@ -25,7 +25,6 @@ export class ChatSelectedFormBase extends Block {
         click: e => {
           e!.preventDefault()
           if (this.getValue('message')) {
-            // console.log({ message: this.getValue('message'), chatId: this.props.chatId })
             MessageController.sendMessage(
               this.props.chatId,
               this.getValue('message')

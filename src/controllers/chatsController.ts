@@ -1,7 +1,5 @@
 import ChatsAPI from '../api/chatsApi'
 import { Chat, CreateChatData } from '../api/types/chatTypes'
-// import { AddUsersData } from '../api/types/userTypes'
-// import { User } from '../components/Profile/types'
 import store from '../core/store'
 import userController from './userController'
 import MessagesController from './messagesController'

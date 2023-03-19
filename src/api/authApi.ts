@@ -1,6 +1,5 @@
 import BaseAPI from './baseApi'
 import { SigninData, SignupData } from './types/authTypes'
-// import { User } from '../components/Profile/types'
 
 class AuthAPI extends BaseAPI {
   constructor() {

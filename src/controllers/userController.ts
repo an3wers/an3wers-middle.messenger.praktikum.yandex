@@ -63,6 +63,10 @@ class UserController {
       return error as Error
     }
   }
+
+  clearUserError() {
+    store.set('user.isError', null)
+  }
 }
 
 export default new UserController()

@@ -56,7 +56,7 @@ export class Store extends EventBus {
 const store = new Store()
 
 // @ts-ignore
-window.store = store
+// window.store = store
 
 export function withStore<T>(mapStateToProps: (state: any) => any) {
   return function wrap<P extends { [key: string]: any }>(
@@ -73,14 +73,9 @@ export function withStore<T>(mapStateToProps: (state: any) => any) {
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState())
 
-          // console.log('New and old',state, newState)
-          // console.log('isEqual', isEqual(state, newState))
-
           if (!isEqual(state, newState)) {
             this.setProps({ ...newState })
           }
-
-          // state = newState
         })
       }
     }

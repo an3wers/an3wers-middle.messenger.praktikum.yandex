@@ -1,6 +1,7 @@
 import { Navigation } from '../../components/Navigation/navigation'
 import { SignupForm } from '../../components/Signup/Form/signupForm'
 import { ErrorBock } from '../../components/UI/ErrorBlock/errorBlock'
+import userController from '../../controllers/userController'
 import Block from '../../core/block'
 import { withStore } from '../../core/store'
 import template from './template.hbs'
@@ -14,6 +15,7 @@ class SignupPageBase extends Block {
     })
     this.children.Error.setProps({ message: '' })
     this.props.isError = null
+    userController.clearUserError()
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {

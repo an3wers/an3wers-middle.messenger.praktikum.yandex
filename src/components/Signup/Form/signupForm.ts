@@ -1,5 +1,4 @@
 import Block from '../../../core/block'
-// import { renderDom } from '../../../core/renderDom'
 import { Button } from '../../UI/Button/button'
 import { Input } from '../../UI/Input/input'
 import { TextField } from '../../UI/TextField/textField'

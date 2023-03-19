@@ -1,14 +1,12 @@
 import { Chat } from '../../../api/types/chatTypes'
-import { MessageType } from '../../../api/types/messagesTypes'
 import chatsController from '../../../controllers/chatsController'
 import Block from '../../../core/block'
 import { withStore } from '../../../core/store'
 import { ChatItem } from '../ChatItem/chatItem'
-// import { Contact } from '../types'
 import template from './temaplte.hbs'
 
 interface ChatsListProps {
-  chatList?: Chat[],
+  chatList?: Chat[]
   chatSelectedId?: number
 }
 
@@ -52,5 +50,8 @@ class ChatsListBase extends Block<ChatsListProps> {
   }
 }
 
-const withChats = withStore(state => ({chatSelectedId: state.selectedChat, chatList: [...state.chatList.data] }))
+const withChats = withStore(state => ({
+  chatSelectedId: state.selectedChat,
+  chatList: [...state.chatList.data]
+}))
 export const ChatsList = withChats(ChatsListBase)

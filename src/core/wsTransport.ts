@@ -1,79 +1,79 @@
 /* eslint-disable no-shadow */
-import { EventBus } from "./eventBus";
+import { EventBus } from './eventBus'
 
 export const enum WSTransportEvents {
   Connected = 'connected',
   Error = 'error',
   Message = 'message',
-  Close = 'close',
+  Close = 'close'
 }
 
 export default class WSTransport extends EventBus {
-  private socket: WebSocket | null = null;
-  private pingInterval: number = 0;
+  private socket: WebSocket | null = null
+  private pingInterval: number = 0
 
   constructor(private url: string) {
-    super();
+    super()
   }
 
   public send(data: unknown) {
     if (!this.socket) {
-      throw new Error('Socket is not connected');
+      throw new Error('Socket is not connected')
     }
 
     this.socket.send(JSON.stringify(data))
   }
 
   public connect(): Promise<void> {
-    this.socket = new WebSocket(this.url);
+    this.socket = new WebSocket(this.url)
 
-    this.subscribe(this.socket);
+    this.subscribe(this.socket)
 
-    this.setupPing();
+    this.setupPing()
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.on(WSTransportEvents.Connected, () => {
-        resolve();
-      });
-    });
+        resolve()
+      })
+    })
   }
 
   public close() {
-    this.socket?.close();
+    this.socket?.close()
   }
 
   private setupPing() {
     this.pingInterval = setInterval(() => {
-      this.send({ type: 'ping' });
+      this.send({ type: 'ping' })
     }, 5000)
 
     this.on(WSTransportEvents.Close, () => {
-      clearInterval(this.pingInterval);
+      clearInterval(this.pingInterval)
 
-      this.pingInterval = 0;
+      this.pingInterval = 0
     })
   }
 
   private subscribe(socket: WebSocket) {
     socket.addEventListener('open', () => {
       this.emit(WSTransportEvents.Connected)
-    });
+    })
     socket.addEventListener('close', () => {
       this.emit(WSTransportEvents.Close)
-    });
+    })
 
-    socket.addEventListener('error', (e) => {
+    socket.addEventListener('error', e => {
       this.emit(WSTransportEvents.Error, e)
-    });
+    })
 
-    socket.addEventListener('message', (message) => {
-      const data = JSON.parse(message.data);
+    socket.addEventListener('message', message => {
+      const data = JSON.parse(message.data)
 
       if (data.type && data.type === 'pong') {
-        return;
+        return
       }
 
       this.emit(WSTransportEvents.Message, data)
-    });
+    })
   }
 }

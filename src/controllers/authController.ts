@@ -19,7 +19,7 @@ class AuthController {
         store.set('user.isError', res.response.reason)
       } else {
         await this.fetchUser()
-        router.go(Routes.Settings)
+        router.go(Routes.Messenger)
       }
     } catch (error) {
       console.log(error)
@@ -32,7 +32,7 @@ class AuthController {
         store.set('user.isError', res.response.reason)
       } else {
         await this.fetchUser()
-        router.go(Routes.Settings)
+        router.go(Routes.Messenger)
       }
     } catch (error) {
       console.log(error)
