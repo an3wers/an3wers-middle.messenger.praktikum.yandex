@@ -7,7 +7,7 @@ import { IconPlus } from '../../components/UI/Icons/20/Plus/iconPlus'
 import { Button } from '../../components/UI/Button/button'
 import { ChatSelected } from '../../components/Chat/ChatSelected/chatSelected'
 import { Input } from '../../components/UI/Input/input'
-import { Navigation } from '../../components/Navigation/navigation'
+// import { Navigation } from '../../components/Navigation/navigation'
 import { ChatEmpty } from '../../components/Chat/ChatEmpty/chatEmpty'
 import chatsController from '../../controllers/chatsController'
 import { withStore } from '../../core/store'
@@ -20,7 +20,7 @@ import { Routes } from '../../app'
 class HomePageBase extends Block {
   protected init(): void {
 
-    this.children.Navigation = new Navigation({})
+    // this.children.Navigation = new Navigation({})
 
     this.children.ProfileButton = new Link({
       styles: 'btn btn_small btn_light',
