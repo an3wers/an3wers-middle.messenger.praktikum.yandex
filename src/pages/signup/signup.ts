@@ -1,4 +1,4 @@
-import { Navigation } from '../../components/Navigation/navigation'
+// import { Navigation } from '../../components/Navigation/navigation'
 import { SignupForm } from '../../components/Signup/Form/signupForm'
 import { ErrorBock } from '../../components/UI/ErrorBlock/errorBlock'
 import userController from '../../controllers/userController'
@@ -8,7 +8,7 @@ import template from './template.hbs'
 
 class SignupPageBase extends Block {
   protected init(): void {
-    this.children.Navigation = new Navigation({})
+    // this.children.Navigation = new Navigation({})
     this.children.Form = new SignupForm()
     this.children.Error = new ErrorBock({
       message: ''

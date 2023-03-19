@@ -8,7 +8,7 @@ import { ProfileInfo } from '../../components/Profile/ProfileInfo/profileInfo'
 import { Modal } from '../../components/UI/Modal/modal'
 import { FormEditProfile } from '../../components/Profile/FormEditInfo/formEditInfo'
 import { FormEditPassword } from '../../components/Profile/FormEditPassword/formEditPassword'
-import { Navigation } from '../../components/Navigation/navigation'
+// import { Navigation } from '../../components/Navigation/navigation'
 import { withStore } from '../../core/store'
 import router from '../../core/router/router'
 import authController from '../../controllers/authController'
@@ -17,7 +17,7 @@ import { FormChangeAvatar } from '../../components/Profile/FormChangeAvatar/form
 
 class ProfilePageBase extends Block {
   protected init(): void {
-    this.children.Navigation = new Navigation({})
+    // this.children.Navigation = new Navigation({})
     this.children.ProfileAvatar = new ProfileAvatar({
       events: {
         click: () => {
