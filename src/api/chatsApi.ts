@@ -1,6 +1,6 @@
 import BaseAPI from './baseApi'
 import { CreateChatData } from './types/chatTypes'
-import { AddUsersData, RemoveUsersData } from './types/userTypes'
+import { AddUsersData, RemoveChatData, RemoveUsersData } from './types/userTypes'
 
 class ChatsAPI extends BaseAPI {
   constructor() {
@@ -21,6 +21,10 @@ class ChatsAPI extends BaseAPI {
 
   removeUsersFromChat(data: RemoveUsersData) {
     return this.http.delete('/users', { data })
+  }
+
+  removeChat(data: RemoveChatData) {
+    return this.http.delete('/', { data })
   }
 
   getToken(id: number) {

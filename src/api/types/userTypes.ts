@@ -25,3 +25,7 @@ export interface RemoveUsersData {
   users: number[]
   chatId: number
 }
+
+export interface RemoveChatData {
+  chatId: number
+}

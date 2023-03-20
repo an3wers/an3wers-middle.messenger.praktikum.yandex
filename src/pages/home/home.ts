@@ -72,7 +72,7 @@ class HomePageBase extends Block {
     })
 
     this.children.ChatSelected = new ChatSelected({})
-    this.children.Empty = new ChatEmpty({})
+    // this.children.Empty = new ChatEmpty({})
 
     // get chats
     chatsController.getChats()
@@ -86,6 +86,7 @@ class HomePageBase extends Block {
   protected closeModal(modal: string) {
     ;(this.children[modal] as Block).hide()
   }
+
 
   protected render(): DocumentFragment {
     return this.compile(template, this.props)
