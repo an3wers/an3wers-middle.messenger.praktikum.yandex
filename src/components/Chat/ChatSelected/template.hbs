@@ -1,5 +1,5 @@
 <div class="app-main__selected">
-
+  {{#if selectedChat}}
   {{{ChatHeader}}}
 
   <div class="app-main__feed chat-feed">
@@ -9,5 +9,7 @@
   </div>
 
   {{{ChatFooter}}}
-
+  {{else}}
+    {{{Empty}}}
+  {{/if}}
 </div>

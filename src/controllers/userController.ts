@@ -23,7 +23,7 @@ class UserController {
         store.set('user.data', res.response)
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
 
@@ -34,7 +34,7 @@ class UserController {
         store.set('user.isError', res.response.reason)
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
 
@@ -47,7 +47,7 @@ class UserController {
         store.set('user.data', res.response)
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
 

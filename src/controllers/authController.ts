@@ -22,7 +22,7 @@ class AuthController {
         router.go(Routes.Messenger)
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
   async singin(data: SigninData) {
@@ -35,7 +35,7 @@ class AuthController {
         router.go(Routes.Messenger)
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
   async logout() {
@@ -44,7 +44,7 @@ class AuthController {
       store.set('user.data', undefined)
       router.go(Routes.Index)
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
   async fetchUser() {
@@ -55,19 +55,6 @@ class AuthController {
     } else {
       store.set('user.data', user.response)
     }
-
-    // store.set('user.data', user.response)
-    // try {
-    //   const user = (await this.api.getUser()) as XMLHttpRequest
-
-    //   if (user.status >= 400) {
-    //     throw new Error(user.response.reason)
-    //   } else {
-    //     store.set('user.data', user.response)
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    // }
   }
 }
 

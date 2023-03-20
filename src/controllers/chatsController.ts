@@ -27,7 +27,7 @@ class ChatsController {
         store.set('chatList.data', res.response)
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
     }
   }
 
@@ -41,7 +41,23 @@ class ChatsController {
         await this.getChats()
       }
     } catch (error) {
-      console.log(error)
+      console.error((error as Error).message)
+    }
+  }
+
+  async removeChat() {
+    try {
+      const chatId = store.getState().selectedChat
+      const res = (await this.api.removeChat({ chatId })) as XMLHttpRequest
+
+      if (res.status >= 400) {
+        throw new Error(res.response.reason)
+      } else {
+        store.set('selectedChat', 0)
+        await this.getChats()
+      }
+    } catch (error) {
+      console.error((error as Error).message)
     }
   }
 

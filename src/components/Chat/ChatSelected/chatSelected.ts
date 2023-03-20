@@ -5,11 +5,14 @@ import template from './template.hbs'
 import { withStore } from '../../../core/store'
 import { MessageType } from '../../../api/types/messagesTypes'
 import { Message } from '../Message/message'
+import { ChatEmpty } from '../ChatEmpty/chatEmpty'
+import { Chat } from '../../../api/types/chatTypes'
 
 interface ChatSelectedProps {
   selectedChat?: number | undefined
   messages?: MessageType[]
   userId?: number
+  chats?: Chat[]
 }
 
 class ChatSelectedBase extends Block<ChatSelectedProps> {
@@ -21,6 +24,7 @@ class ChatSelectedBase extends Block<ChatSelectedProps> {
     this.children.ChatHeader = new ChatSelectedHeader({})
     this.children.ChatFooter = new ChatSelectedFooter()
     this.children.Messeges = this.getMessages(this.props)
+    this.children.Empty = new ChatEmpty({})
   }
 
   protected getMessages(props: ChatSelectedProps) {
@@ -50,12 +54,18 @@ const withSelectedMesseges = withStore(state => {
   const selectedChatId = state.selectedChat
 
   if (!selectedChatId) {
-    return { messages: [], selectedChat: 0, userId: state.user?.data?.id }
+    return {
+      messages: [],
+      selectedChat: 0,
+      userId: state.user?.data?.id,
+      chats: state.chatList.data
+    }
   }
   return {
     messages: (state.messages || {})[selectedChatId] || [],
     selectedChat: state.selectedChat,
-    userId: state.user?.data?.id
+    userId: state.user?.data?.id,
+    chats: state.chatList.data
   }
 })
 

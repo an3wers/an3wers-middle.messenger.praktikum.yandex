@@ -1,6 +1,7 @@
 import { Chat } from '../../../api/types/chatTypes'
+import chatsController from '../../../controllers/chatsController'
 import Block from '../../../core/block'
-import { withStore } from '../../../core/store'
+import store, { withStore } from '../../../core/store'
 import { Button } from '../../UI/Button/button'
 import { IconDelete } from '../../UI/Icons/20/Delete/iconDelete'
 import { IconEdit } from '../../UI/Icons/20/Edit/iconEdit'
@@ -12,6 +13,7 @@ import { SuccessBlock } from '../../UI/SuccessBlock/successBlock'
 import { ChatAddUserForm } from '../ChatAddUserForm/chatAddUserForm'
 import { ChatRemoveUserForm } from '../ChatRemoveUserForm/chatRemoveUserForm'
 import template from './template.hbs'
+import defaultAvatar from '../../../../static/images/default-avatar-profile.jpg'
 
 interface ChatSelectedHeaderProps {
   name?: string
@@ -61,7 +63,13 @@ class ChatSelectedHeaderBase extends Block<ChatSelectedHeaderProps> {
     this.children.RemoveChat = new Button({
       styles: 'dropdown__item btn btn_small btn_link btn_danger',
       label: 'Удалить чат',
-      icon: new IconDelete({ styles: 'btn-icon btn-icon_danger' })
+      icon: new IconDelete({ styles: 'btn-icon btn-icon_danger' }),
+      events: {
+        click: () => {
+          // console.log('delete chat')
+          chatsController.removeChat()
+        }
+      }
     })
 
     this.children.ModalAddUser = new Modal({
@@ -89,6 +97,15 @@ class ChatSelectedHeaderBase extends Block<ChatSelectedHeaderProps> {
         handler: this.closeModal.bind(this)
       })
     })
+
+    this.children.ModalRemoveChat = new Modal({
+      title: 'Удаление чата',
+      body: new SuccessBlock({
+        message: 'Чат успешно удален',
+        context: 'ModalRemoveChat',
+        handler: this.closeModal.bind(this)
+      })
+    })
   }
 
   protected switchStateModal(modal: string) {
@@ -108,10 +125,13 @@ class ChatSelectedHeaderBase extends Block<ChatSelectedHeaderProps> {
 const withChatName = withStore(state => {
   const current = state.chatList.data.find(
     (el: Chat) => el.id === state.selectedChat
-  )
+  ) as Chat
 
   return {
-    name: current ? current.title : ''
+    name: current ? current.title : '',
+    avatar: current?.avatar
+      ? `https://ya-praktikum.tech/api/v2/resources${current.avatar}`
+      : defaultAvatar
   }
 })
 

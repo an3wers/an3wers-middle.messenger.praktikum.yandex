@@ -43,6 +43,8 @@ export default class HTTPTransport {
   }
 
   get: HTTPMethod = (url, options = {}) => {
+    const { data } = options
+    url = !!data ? `${url}${queryStringify(data)}` : url
     return this.request(this.endpoint + url, {
       ...options,
       method: Methods.GET
@@ -81,13 +83,14 @@ export default class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
 
-      // if (method === Methods.GET || method === Methods.DELETE) {
-      if (method === Methods.GET) {
-        url = !!data ? `${url}${queryStringify(data)}` : url
-        xhr.open(method, url)
-      } else {
-        xhr.open(method, url)
-      }
+      // if (method === Methods.GET) {
+      //   url = !!data ? `${url}${queryStringify(data)}` : url
+      //   xhr.open(method, url)
+      // } else {
+      //   xhr.open(method, url)
+      // }
+
+      xhr.open(method, url)
 
       if (!(data instanceof FormData)) {
         Object.keys(headers).forEach(key => {
