@@ -1,11 +1,12 @@
 import Block from '../../../core/block'
+import { withStore } from '../../../core/store'
 import template from './template.hbs'
 
 interface ProfileNameProps {
-  name: string
+  name?: string
 }
 
-export class ProfileName extends Block<ProfileNameProps> {
+class ProfileNameBase extends Block<ProfileNameProps> {
   constructor(props: ProfileNameProps) {
     super(props)
   }
@@ -14,3 +15,6 @@ export class ProfileName extends Block<ProfileNameProps> {
     return this.compile(template, this.props)
   }
 }
+
+const withName = withStore(state => ({ ...state.user.data }))
+export const ProfileName = withName(ProfileNameBase)

@@ -19,7 +19,8 @@ const ERROR_MESSAGES: { [key: string]: string } = {
   email: 'Введите email правильно',
   display_name:
     'Имя в чате должно быть от 3 до 20 символов на латинице или кириллице',
-  password_old: 'Поле не должно быть пустым'
+  password_old: 'Поле не должно быть пустым',
+  chat_title: 'Поле не должно быть пустым'
 }
 
 export default function useValidate(values: ValidateValues) {
@@ -70,6 +71,8 @@ function validateValue(value: string, type: string) {
     case 'display_name':
       return /^[0-9a-zA-Zа-яёА-ЯЁ_-]{3,20}$/.test(value)
 
+    case 'chat_title':
+      return !!value.length
     default:
       return true
   }

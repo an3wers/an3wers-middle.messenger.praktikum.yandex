@@ -10,8 +10,9 @@
 `npm run start` - запуск продакшен версии
 
 ## pull request
-[#1](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/1)
-[#2](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/2)
+[#1](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/1)\
+[#2](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/2)\
+[#3](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/3)
 
 
 ## Опубликованное приложение

@@ -1,38 +1,15 @@
 <div class="app-main__selected">
-
+  {{#if selectedChat}}
   {{{ChatHeader}}}
 
   <div class="app-main__feed chat-feed">
-    <div class="chat-feed__date">19 июня</div>
-    <div
-      class="chat-feed__item chat-feed__item_text chat-feed__item_contact feed-item"
-    >
-      <div class="feed-item__body">Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Aspernatur at ad quo voluptatum neque reprehenderit
-        deleniti molestias tenetur, pariatur laudantium totam tempore
-        accusantium eligendi praesentium ab maxime fugit corrupti
-        necessitatibus.</div>
-      <div class="feed-item__time">11:56</div>
-    </div>
-    <div
-      class="chat-feed__item chat-feed__item_img chat-feed__item_contact feed-item"
-    >
-      <div class="feed-item__body">
-        <img src="{{img}}" alt="mock-chat.jpg" />
-      </div>
-      <div class="feed-item__time">11:57</div>
-    </div>
-    <div
-      class="chat-feed__item chat-feed__item_text chat-feed__item_self feed-item"
-    >
-      <div class="feed-item__body">Круто!</div>
-      <div class="feed-item__time feed-item__time_self">
-        {{{CheckIcon}}}
-        12:00
-      </div>
-    </div>
+    {{#each Messeges}}
+      {{{this}}}
+    {{/each}}
   </div>
 
   {{{ChatFooter}}}
-
+  {{else}}
+    {{{Empty}}}
+  {{/if}}
 </div>

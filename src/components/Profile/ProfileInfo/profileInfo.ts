@@ -1,16 +1,12 @@
 import Block from '../../../core/block'
-import { Profile } from '../types'
+import { withStore } from '../../../core/store'
 import template from './template.hbs'
 
-interface ProfileInfoProps {
-  profileData: Profile[]
+class ProfileInfoBase extends Block {
+  protected render(): DocumentFragment {
+    return this.compile(template, this.props)
+  }
 }
 
-export class ProfileInfo extends Block<ProfileInfoProps> {
-  constructor(props: ProfileInfoProps) {
-    super(props)
-  }
-  protected render(): DocumentFragment {
-    return this.compile(template, { profileData: this.props.profileData })
-  }
-}
+const withUser = withStore(state => ({ ...state.user.data }))
+export const ProfileInfo = withUser(ProfileInfoBase)

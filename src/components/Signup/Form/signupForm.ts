@@ -1,11 +1,14 @@
 import Block from '../../../core/block'
-import { renderDom } from '../../../core/router'
 import { Button } from '../../UI/Button/button'
 import { Input } from '../../UI/Input/input'
 import { TextField } from '../../UI/TextField/textField'
 import template from './template.hbs'
 import useValidate from '../../../core/validator'
 import { ErrorMessage } from '../../UI/ErrorMessage/errorMessage'
+import { Link } from '../../UI/Link/link'
+import { Routes } from '../../../app'
+import authController from '../../../controllers/authController'
+import { SignupData } from '../../../api/types/authTypes'
 
 export class SignupForm extends Block {
   errors: { [key: string]: string }
@@ -31,7 +34,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.EmailField
+                this.children.EmailField as Block
               )
             }
           },
@@ -40,7 +43,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.EmailField
+                this.children.EmailField as Block
               )
             }
           }
@@ -64,7 +67,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.LoginField
+                this.children.LoginField as Block
               )
             }
           },
@@ -73,7 +76,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.LoginField
+                this.children.LoginField as Block
               )
             }
           }
@@ -97,7 +100,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.FirstNameField
+                this.children.FirstNameField as Block
               )
             }
           },
@@ -106,7 +109,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.FirstNameField
+                this.children.FirstNameField as Block
               )
             }
           }
@@ -130,7 +133,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.SecondNameField
+                this.children.SecondNameField as Block
               )
             }
           },
@@ -139,7 +142,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.SecondNameField
+                this.children.SecondNameField as Block
               )
             }
           }
@@ -163,7 +166,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.PhoneField
+                this.children.PhoneField as Block
               )
             }
           },
@@ -172,7 +175,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.PhoneField
+                this.children.PhoneField as Block
               )
             }
           }
@@ -196,7 +199,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.PasswordField
+                this.children.PasswordField as Block
               )
             }
           },
@@ -205,7 +208,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.PasswordField
+                this.children.PasswordField as Block
               )
             }
           }
@@ -229,7 +232,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.PasswordToField
+                this.children.PasswordToField as Block
               )
             }
           },
@@ -238,7 +241,7 @@ export class SignupForm extends Block {
               const { name } = e.target as HTMLInputElement
               this.validateHandler(
                 this.getValue(name),
-                this.children.PasswordToField
+                this.children.PasswordToField as Block
               )
             }
           }
@@ -260,39 +263,33 @@ export class SignupForm extends Block {
             el[0].includes('Field')
           )
 
-          filedsArray.forEach(el => {
-            const value = (
-              el[1].children.input.getContent() as HTMLInputElement
-            ).value
-            const { name } =
-              el[1].children.input.getContent() as HTMLInputElement
+          filedsArray.forEach(([_, val]) => {
+            if (!Array.isArray(val)) {
+              const { value, name } = (
+                val.children.input as Block
+              ).getContent() as HTMLInputElement
 
-            this.validateHandler(value, el[1])
+              this.validateHandler(value, val)
 
-            data[name] = value
+              data[name] = value
+            }
           })
 
           this.validatePasswordValues(data['password'], data['password_to'])
 
           if (!Object.keys(this.errors).length) {
-            console.log(data)
-            filedsArray.forEach(el => {
-              ;(el[1].children.input.getContent() as HTMLInputElement).value =
-                ''
-            })
+            // eslint-disable-next-line camelcase
+            const { password_to, ...signupData } = data
+
+            authController.signup(signupData as unknown as SignupData)
           }
         }
       }
     })
-    this.children.AuthButton = new Button({
+    this.children.AuthButton = new Link({
+      to: Routes.Index,
       styles: 'btn btn_regular btn_link',
-      label: 'Войти',
-      type: 'button',
-      events: {
-        click: () => {
-          renderDom('#root', 'signin')
-        }
-      }
+      label: 'Войти'
     })
   }
 
@@ -303,13 +300,16 @@ export class SignupForm extends Block {
   }
 
   private validateHandler(value: string, field: Block) {
-    const { name } = field.children.input.getContent() as HTMLInputElement
-    const error = useValidate({ value, type: name })
-    if (Object.keys(error).length) {
-      this.errors[name] = error[name]
-      field.children.error.setProps({ text: error[name] })
+    const { name } = (
+      field.children.input as Block
+    ).getContent() as HTMLInputElement
+
+    const err = useValidate({ value, type: name })
+    if (Object.keys(err).length) {
+      this.errors[name] = err[name]
+      ;(field.children.error as Block).setProps({ text: err[name] })
     } else {
-      field.children.error.setProps({ text: null })
+      ;(field.children.error as Block).setProps({ text: null })
       delete this.errors[name]
     }
   }
@@ -317,11 +317,15 @@ export class SignupForm extends Block {
   private validatePasswordValues(pswOne: string, pswTwo: string) {
     if (pswOne !== pswTwo) {
       this.errors['password_to'] = 'Пароли должны совпадать'
-      this.children.PasswordToField.children.error.setProps({
+      ;(
+        (this.children.PasswordToField as Block).children.error as Block
+      ).setProps({
         text: this.errors['password_to']
       })
     } else {
-      this.children.PasswordToField.children.error.setProps({
+      ;(
+        (this.children.PasswordToField as Block).children.error as Block
+      ).setProps({
         text: null
       })
       delete this.errors['password_to']

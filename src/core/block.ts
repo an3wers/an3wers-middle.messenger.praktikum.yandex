@@ -3,7 +3,7 @@ import { TemplateDelegate } from 'handlebars'
 import { EventBus } from './eventBus'
 
 interface Children {
-  [key: string]: Block
+  [key: string]: Block | Block[]
 }
 
 abstract class Block<P extends { [key: string]: any } = any> {
@@ -28,7 +28,8 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
     this.id = makeId()
 
-    this.props = this._makePropsProxy({ ...props, id: this.id })
+    // this.props = this._makePropsProxy({ ...props, id: this.id })
+    this.props = this._makePropsProxy(props)
 
     this.eventBus = () => eventBus
 
@@ -58,19 +59,28 @@ abstract class Block<P extends { [key: string]: any } = any> {
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
   }
 
-  private _getChildren(propsAndChildren: P) {
-    const children = {} as Children
-    const props = {} as { [key: string]: any }
+  private _getChildren(propsAndChildren: P): {
+    props: P
+    children: Record<string, Block | Block[]>
+  } {
+    const props: Record<string, unknown> = {}
+    const children: Record<string, Block | Block[]> = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
-        children[key] = value
+      if (
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value.every(v => v instanceof Block)
+      ) {
+        children[key as string] = value
+      } else if (value instanceof Block) {
+        children[key as string] = value
       } else {
         props[key] = value
       }
     })
 
-    return { children, props }
+    return { props: props as P, children }
   }
 
   private _init() {
@@ -87,7 +97,11 @@ abstract class Block<P extends { [key: string]: any } = any> {
     const contextAndStubs = { ...context } as { [key: string]: any }
 
     Object.entries(this.children).forEach(([key, child]) => {
-      contextAndStubs[key] = `<div data-id="${child.id}"></div>`
+      if (Array.isArray(child)) {
+        contextAndStubs[key] = child.map(el => `<div data-id="${el.id}"></div>`)
+      } else {
+        contextAndStubs[key] = `<div data-id="${child.id}"></div>`
+      }
     })
 
     const html = template(contextAndStubs)
@@ -96,21 +110,27 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
     temp.innerHTML = html
 
-    Object.values(this.children).forEach(child => {
-      const stub = temp.content.querySelector(`[data-id="${child.id}"]`)
+    const replaceStub = (component: Block) => {
+      const stub = temp.content.querySelector(`[data-id="${component.id}"]`)
 
       if (!stub) {
         return
       }
 
-      child.getContent()?.append(...Array.from(stub.childNodes))
+      component.getContent()?.append(...Array.from(stub.childNodes))
 
-      stub.replaceWith(child.getContent() as HTMLElement)
+      stub.replaceWith(component.getContent()!)
+    }
+
+    Object.entries(this.children).forEach(([_, child]) => {
+      if (Array.isArray(child)) {
+        child.forEach(replaceStub)
+      } else {
+        replaceStub(child)
+      }
     })
 
     return temp.content
-
-    // return html
   }
 
   private _componentDidMount() {
@@ -126,9 +146,13 @@ abstract class Block<P extends { [key: string]: any } = any> {
   // Вызываем снаружи когда компонент отобразился на странице
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
-    Object.values(this.children).forEach(child =>
-      child.dispatchComponentDidMount()
-    )
+    Object.values(this.children).forEach(child => {
+      if (Array.isArray(child)) {
+        child.forEach(el => el.dispatchComponentDidMount())
+      } else {
+        child.dispatchComponentDidMount()
+      }
+    })
   }
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
@@ -144,6 +168,7 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   public setProps = (nextProps: P) => {
+    // console.log('set props', nextProps)
     if (!nextProps) {
       return
     }

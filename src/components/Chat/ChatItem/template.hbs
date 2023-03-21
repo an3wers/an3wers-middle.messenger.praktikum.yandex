@@ -1,0 +1,21 @@
+<div class="contacts-sidebar__item contacts-item {{#if isActive}}contacts-item_active{{/if}}">
+  <div class="contacts-item__icon">
+    <img src="{{avatar}}" alt="chat-avatar">
+    {{!-- <span class="contacts-item__icon_default"></span> --}}
+  </div>
+  <div class="contacts-item__body">
+    <div class="contacts-item__header">
+      <div class="contacts-item__title">{{title}}</div>
+      <div class="contacts-item__date">{{last_message.time}}</div>
+    </div>
+    <div class="contacts-item__content">
+      <div class="contacts-item__text">
+        {{!-- <span class="text-600 text-base contacts-item__isSelf contacts-item__isSelf_{{}}">Вы:</span> --}}
+        {{last_message.content}}
+      </div>
+      {{#if unread_count}}
+        <div class="contacts-item__badge contacts-item__badge_visible">{{unread_count}}</div>
+      {{/if}}
+    </div>
+  </div>
+</div>

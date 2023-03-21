@@ -33,21 +33,43 @@ function queryStringify(data: { [key: string]: any }) {
   return `?${dataArray.map(el => el.join('=')).join('&')}`
 }
 
-class HTTPTransport {
+export default class HTTPTransport {
+  // baseUrl: string
+  endpoint: string
+
+  constructor(baseUrl: string, endpoint: string) {
+    // this.baseUrl = baseUrl
+    this.endpoint = baseUrl + endpoint
+  }
+
   get: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.GET })
+    const { data } = options
+    url = !!data ? `${url}${queryStringify(data)}` : url
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.GET
+    })
   }
 
   post: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.POST })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.POST
+    })
   }
 
   put: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.PUT })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.PUT
+    })
   }
 
   delete: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: Methods.DELETE })
+    return this.request(this.endpoint + url, {
+      ...options,
+      method: Methods.DELETE
+    })
   }
 
   request = (url: string, options: Options = {}): Promise<XMLHttpRequest> => {
@@ -61,16 +83,23 @@ class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
 
-      if (method === Methods.GET || method === Methods.DELETE) {
-        url = !!data ? `${url}${queryStringify(data)}` : url
-        xhr.open(method, url)
-      } else {
-        xhr.open(method, url)
+      // if (method === Methods.GET) {
+      //   url = !!data ? `${url}${queryStringify(data)}` : url
+      //   xhr.open(method, url)
+      // } else {
+      //   xhr.open(method, url)
+      // }
+
+      xhr.open(method, url)
+
+      if (!(data instanceof FormData)) {
+        Object.keys(headers).forEach(key => {
+          xhr.setRequestHeader(key, headers[key])
+        })
       }
 
-      Object.keys(headers).forEach(key => {
-        xhr.setRequestHeader(key, headers[key])
-      })
+      xhr.withCredentials = true
+      xhr.responseType = 'json'
 
       xhr.onload = () => {
         resolve(xhr)
@@ -84,9 +113,11 @@ class HTTPTransport {
       if (method === Methods.GET) {
         xhr.send()
       } else if (method === Methods.DELETE) {
-        xhr.send()
-      } else {
+        xhr.send(JSON.stringify(data))
+      } else if (data instanceof FormData) {
         xhr.send(data)
+      } else {
+        xhr.send(JSON.stringify(data))
       }
     })
   }

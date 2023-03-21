@@ -1,6 +1,7 @@
 <div class="app-main__header chat-header">
   <div class="chat-header__preview">
-    <span class="chat-header__icon chat-header__icon_default"></span>
+    <img src="{{avatar}}" alt="chat-avatar">
+    {{!-- <span class="chat-header__icon chat-header__icon_default"></span> --}}
   </div>
   <div class="chat-header__title">{{{name}}}</div>
   <div class="chat-header__edit">
@@ -8,9 +9,14 @@
       {{{MoreButton}}}
       <div class="dropdown__body dropdown__body_left dropdown__body_bottom">
         {{{AddUserButton}}}
-        {{{EditChat}}}
+        {{{RemoveUser}}}
+        {{!-- Функционал редактирования чата пока не сделан --}}
+        {{!-- {{{EditChat}}} --}}
         {{{RemoveChat}}}
       </div>
     </div>
   </div>
+  {{{ModalAddUser}}}
+  {{{ModalRemoverUser}}}
+  {{{ModalRemoveChat}}}
 </div>

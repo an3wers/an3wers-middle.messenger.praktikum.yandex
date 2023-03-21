@@ -1,0 +1,28 @@
+<div class="app-sidebar__contacts contacts-sidebar">
+  {{#if isChats}}
+  {{#each Items}}
+    {{{this}}}
+  {{!-- <div class="contacts-sidebar__item contacts-item contacts-item_">
+    <div class="contacts-item__icon">
+      <span class="contacts-item__icon_default"></span>
+    </div>
+    <div class="contacts-item__body">
+      <div class="contacts-item__header">
+        <div class="contacts-item__title">{{title}}</div>
+        <div class="contacts-item__date">{{last_message.time}}</div>
+      </div>
+      <div class="contacts-item__content">
+        <div class="contacts-item__text">
+          {{last_message.content}}
+        </div>
+        <div class="contacts-item__badge contacts-item__badge_">{{unread_count}}</div>
+      </div>
+    </div>
+  </div> --}}
+  {{/each}}
+  {{else}}
+  <div class="app-sidebar__empty-state">
+    <span>Чаты пока не добавлены</span>
+  </div>
+  {{/if}}
+</div>

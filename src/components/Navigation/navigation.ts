@@ -1,5 +1,5 @@
 import Block from '../../core/block'
-import { renderDom } from '../../core/router'
+// import { renderDom } from '../../core/renderDom'
 import template from './temaplate.hbs'
 
 export class Navigation extends Block {
@@ -15,7 +15,7 @@ export class Navigation extends Block {
     e.preventDefault()
     const page = (e.target as HTMLElement).getAttribute('data-page')
     if (page) {
-      renderDom('#root', page)
+      // renderDom('#root', page)
     }
   }
 
