@@ -7,6 +7,7 @@ import { HomePage } from './pages/home/home'
 import { ProfilePage } from './pages/profile/profile'
 import authController from './controllers/authController'
 import { NotfoundPage } from './pages/400/400'
+import './style/main.css'
 
 // eslint-disable-next-line no-shadow
 export enum Routes {
