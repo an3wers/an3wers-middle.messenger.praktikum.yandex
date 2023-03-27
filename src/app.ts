@@ -18,6 +18,8 @@ export enum Routes {
   NotFound = '/404'
 }
 
+var a = 0
+
 window.addEventListener('DOMContentLoaded', async () => {
   Router.use(Routes.Index, SigninPage)
     .use(Routes.Signup, SignupPage)
