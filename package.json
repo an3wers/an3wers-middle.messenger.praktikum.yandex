@@ -11,7 +11,8 @@
     "start:parcel": "parcel build index.html && node server/server.js",
     "lint": "eslint . --ext .js,.ts & stylelint src/style/**/*.css",
     "lint:fix": "eslint . --fix --ext .js,.ts",
-    "clean": "rm -rf node_modules/"
+    "clean": "rm -rf node_modules/",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -39,7 +40,7 @@
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
     "html-webpack-plugin": "5.5.0",
-    "husky": "8.0.3",
+    "husky": "^8.0.0",
     "mocha": "10.2.0",
     "parcel": "2.8.3",
     "postcss-import": "15.1.0",
@@ -63,11 +64,6 @@
     "handlebars": "4.7.7",
     "handlebars-loader": "1.7.3",
     "uuid": "9.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm lint && git add -A ."
-    }
   },
   "bugs": {
     "url": "https://github.com/an3wers/middle.messenger.praktikum.yandex/issues"
