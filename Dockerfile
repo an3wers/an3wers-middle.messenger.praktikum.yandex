@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-RUN apk add g++ make py3-pip
+#RUN apk add g++ make py3-pip
 
 RUN mkdir -p /home/app
 
