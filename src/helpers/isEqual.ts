@@ -41,9 +41,6 @@ function isEqual(lhs: PlainObject, rhs: PlainObject) {
     const rightValue = rhs[key]
 
     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-      // Здесь value и rightValue может быть только массивом или объектом
-      // и TypeScript это понимает с помощью Type Guard
-
       if (isEqual(value, rightValue)) {
         // eslint-disable-next-line no-continue
         continue

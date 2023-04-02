@@ -62,7 +62,6 @@ export class ChatCreateForm extends Block<ChatCreateFormProps> {
           data[name] = value
 
           if (!Object.keys(this.errors).length) {
-            console.log('New chat', data)
             chatsController.createChat({ title: data.chat_title })
             this.props.switchHadler('ModalCreateChat')
 
