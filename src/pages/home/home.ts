@@ -19,7 +19,6 @@ import { Routes } from '../../app'
 
 class HomePageBase extends Block {
   protected init(): void {
-
     // this.children.Navigation = new Navigation({})
 
     this.children.ProfileButton = new Link({
@@ -86,7 +85,6 @@ class HomePageBase extends Block {
   protected closeModal(modal: string) {
     ;(this.children[modal] as Block).hide()
   }
-
 
   protected render(): DocumentFragment {
     return this.compile(template, this.props)

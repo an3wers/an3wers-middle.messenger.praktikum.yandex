@@ -3,21 +3,11 @@
 import { describe, beforeEach, it } from 'mocha'
 import { expect } from 'chai'
 import proxyquire from 'proxyquire'
-// import sinon from 'sinon'
 import type BlockType from './block'
 import { EventBus } from './eventBus'
 
-// const eventBusMock = {
-//   on: sinon.stub(),
-//   emit: sinon.stub()
-// }
-
 const { default: Block } = proxyquire('./block', {
   './eventBus': {
-    // EventBus: class {
-    //   emit = eventBusMock.emit
-    //   on = eventBusMock.on
-    // }
     EventBus: class extends EventBus {}
   }
 }) as { default: typeof BlockType }
@@ -25,9 +15,6 @@ const { default: Block } = proxyquire('./block', {
 describe('Block', () => {
   let isCalled = false
   beforeEach(() => {
-    // eventBusMock.on.reset()
-    // eventBusMock.emit.reset()
-
     isCalled = false
   })
 
@@ -59,15 +46,12 @@ describe('Block', () => {
       // @ts-ignore
       componentDidUpdate(oldProps: any, newProps: any): boolean {
         isCalled = true
-
         return true
       }
     }
 
     const component = new ComponentMock({ key: 'value' })
-
     component.setProps({ key: 'newValue' })
-
     expect(isCalled).to.eql(true)
   })
 
