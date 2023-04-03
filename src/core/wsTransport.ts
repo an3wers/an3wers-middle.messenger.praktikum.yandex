@@ -10,7 +10,7 @@ export const enum WSTransportEvents {
 
 export default class WSTransport extends EventBus {
   private socket: WebSocket | null = null
-  private pingInterval: number = 0
+  private pingInterval: number | ReturnType<typeof setInterval> = 0
 
   constructor(private url: string) {
     super()
