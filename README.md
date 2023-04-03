@@ -12,7 +12,8 @@
 ## pull request
 [#1](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/1)\
 [#2](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/2)\
-[#3](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/3)
+[#3](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/3)\
+[#4](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/4)
 
 
 ## Опубликованное приложение
