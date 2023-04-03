@@ -12,8 +12,10 @@
 ## pull request
 [#1](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/1)\
 [#2](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/2)\
-[#3](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/3)
+[#3](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/3)\
+[#4](https://github.com/an3wers/middle.messenger.praktikum.yandex/pull/4)
 
 
 ## Опубликованное приложение
+Приложение задеплоеное через Yandex Cloud [https://bbajur3468qc7npaomn6.containers.yandexcloud.net](https://bbajur3468qc7npaomn6.containers.yandexcloud.net) \
 [Ссылка на netlify](https://famous-queijadas-5c87ae.netlify.app/)

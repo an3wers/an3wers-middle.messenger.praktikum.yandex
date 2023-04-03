@@ -28,7 +28,6 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
     this.id = makeId()
 
-    // this.props = this._makePropsProxy({ ...props, id: this.id })
     this.props = this._makePropsProxy(props)
 
     this.eventBus = () => eventBus
@@ -84,16 +83,13 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   private _init() {
-    // this._createResources();
     this.init()
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
 
   protected init() {}
-  // (context: any) => string
+
   protected compile(template: TemplateDelegate, context: any) {
-    // contextAndStubs пропсы и временные загушки
-    // все это нужно для того чтобы сохранить события на элементах
     const contextAndStubs = { ...context } as { [key: string]: any }
 
     Object.entries(this.children).forEach(([key, child]) => {
@@ -143,7 +139,6 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
   protected componentDidMount() {}
 
-  // Вызываем снаружи когда компонент отобразился на странице
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
     Object.values(this.children).forEach(child => {
@@ -162,13 +157,12 @@ abstract class Block<P extends { [key: string]: any } = any> {
     }
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
-
+  // @ts-ignore
   protected componentDidUpdate(oldProps: P, newProps: P) {
     return true
   }
 
   public setProps = (nextProps: P) => {
-    // console.log('set props', nextProps)
     if (!nextProps) {
       return
     }
@@ -183,13 +177,6 @@ abstract class Block<P extends { [key: string]: any } = any> {
 
   private _render() {
     const block = this.render()
-    // Это небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно компилировать не в строку (или делать это правильно),
-    // либо сразу превращать в DOM-элементы и возвращать из compile DOM-ноду
-
-    // Удалить старые события через removeEventListener
-
     const firstEl = block.firstElementChild as Element
 
     if (this._element) {
@@ -199,11 +186,8 @@ abstract class Block<P extends { [key: string]: any } = any> {
     this._element = firstEl as HTMLElement
     this._removeEvent()
     this._addEvents()
-
-    // Навесить новые события через addEventListener
   }
 
-  // Переопределяется пользователем. Необходимо вернуть разметку
   protected render() {
     return new DocumentFragment()
   }
@@ -213,7 +197,6 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   private _makePropsProxy(props: any) {
-    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this
 
     return new Proxy(props, {
@@ -240,7 +223,6 @@ abstract class Block<P extends { [key: string]: any } = any> {
   }
 
   private _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName)
     element.setAttribute('data-id', this.id)
     return element

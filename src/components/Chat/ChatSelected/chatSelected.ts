@@ -40,8 +40,7 @@ class ChatSelectedBase extends Block<ChatSelectedProps> {
     oldProps: ChatSelectedProps,
     newProps: ChatSelectedProps
   ): boolean {
-    this.children.Messeges = this.getMessages(newProps)
-
+    this.children.Messeges = this.getMessages(newProps)   
     return true
   }
 

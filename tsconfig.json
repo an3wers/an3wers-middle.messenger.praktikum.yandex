@@ -12,8 +12,10 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowUnreachableCode": false,
   },
+  "ts-node": { "files": true },
   "include": ["./src/**/*"],
   "exclude": ["./node_modules"]
 }

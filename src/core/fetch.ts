@@ -24,7 +24,6 @@ type HTTPMethod = (
  * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
  */
 function queryStringify(data: { [key: string]: any }) {
-  // Можно делать трансформацию GET-параметров в отдельной функции
   if (typeof data !== 'object') {
     throw new Error('Нужно передавать объект')
   }
@@ -34,11 +33,9 @@ function queryStringify(data: { [key: string]: any }) {
 }
 
 export default class HTTPTransport {
-  // baseUrl: string
   endpoint: string
 
   constructor(baseUrl: string, endpoint: string) {
-    // this.baseUrl = baseUrl
     this.endpoint = baseUrl + endpoint
   }
 
@@ -83,13 +80,6 @@ export default class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
 
-      // if (method === Methods.GET) {
-      //   url = !!data ? `${url}${queryStringify(data)}` : url
-      //   xhr.open(method, url)
-      // } else {
-      //   xhr.open(method, url)
-      // }
-
       xhr.open(method, url)
 
       if (!(data instanceof FormData)) {
@@ -114,9 +104,11 @@ export default class HTTPTransport {
         xhr.send()
       } else if (method === Methods.DELETE) {
         xhr.send(JSON.stringify(data))
-      } else if (data instanceof FormData) {
+      } 
+      else if (data instanceof FormData) {
         xhr.send(data)
-      } else {
+      } 
+      else {
         xhr.send(JSON.stringify(data))
       }
     })

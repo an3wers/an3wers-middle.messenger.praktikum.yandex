@@ -8,7 +8,7 @@ import { Button } from '../../components/UI/Button/button'
 import { ChatSelected } from '../../components/Chat/ChatSelected/chatSelected'
 import { Input } from '../../components/UI/Input/input'
 // import { Navigation } from '../../components/Navigation/navigation'
-import { ChatEmpty } from '../../components/Chat/ChatEmpty/chatEmpty'
+// import { ChatEmpty } from '../../components/Chat/ChatEmpty/chatEmpty'
 import chatsController from '../../controllers/chatsController'
 import { withStore } from '../../core/store'
 import { Modal } from '../../components/UI/Modal/modal'
@@ -19,7 +19,6 @@ import { Routes } from '../../app'
 
 class HomePageBase extends Block {
   protected init(): void {
-
     // this.children.Navigation = new Navigation({})
 
     this.children.ProfileButton = new Link({
@@ -86,7 +85,6 @@ class HomePageBase extends Block {
   protected closeModal(modal: string) {
     ;(this.children[modal] as Block).hide()
   }
-
 
   protected render(): DocumentFragment {
     return this.compile(template, this.props)

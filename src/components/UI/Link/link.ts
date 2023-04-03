@@ -12,7 +12,7 @@ interface LinkProps extends PropsWithRouter {
   }
 }
 
-class BaseLink extends Block<LinkProps> {
+export class BaseLink extends Block<LinkProps> {
   constructor(props: LinkProps) {
     super({
       ...props,
