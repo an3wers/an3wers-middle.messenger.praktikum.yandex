@@ -17,5 +17,4 @@
 
 
 ## Опубликованное приложение
-Приложение задеплоеное через Yandex Cloud [https://bbajur3468qc7npaomn6.containers.yandexcloud.net](https://bbajur3468qc7npaomn6.containers.yandexcloud.net) \
 [Ссылка на netlify](https://famous-queijadas-5c87ae.netlify.app/)
